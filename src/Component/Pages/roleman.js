@@ -13,6 +13,8 @@ import {
 	Radio,
 	Stack,
 	CircularProgress,
+	Alert,
+	AlertTitle,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -40,6 +42,28 @@ function RoleManagement() {
 	}, []);
 
 	const [Loading, setLoading] = useState(false);
+	const [AlertLoading, setAlertLoading] = useState(false);
+	const [AlertMessage, setAlertMessage] = useState("");
+	const [ResStat, RetresStat] = useState("");
+	const ShowAlert = (Stat) => {
+		return AlertLoading ? (
+			<>
+				<Alert
+					severity={ResStat === 200 ? "success" : "error"}
+					sx={{
+						position: "fixed",
+						transform: "translate(-50%,-50%)",
+						top: "50%",
+						left: "50%",
+						zIndex: "3",
+					}}
+				>
+					<AlertTitle>{ResStat === 200 ? "sucess" : "Error"}</AlertTitle>
+					<strong>{AlertMessage}</strong>
+				</Alert>
+			</>
+		) : null;
+	};
 
 	const DisplayPage = "Role Management";
 
@@ -95,13 +119,34 @@ function RoleManagement() {
 					}
 				)
 				.then((response) => {
-					console.log(response);
-
+					setAlertMessage(response.data.message);
+					setAlertLoading(true);
+					RetresStat(response.status);
+					ShowAlert(response.data.status);
+					setTimeout(() => {
+						setAlertLoading(false);
+						RetresStat("");
+					}, 1500);
 					fetchdata();
-					// window.location.reload(false);
 				});
 		} catch (error) {
-			console.log(error);
+			if (error.response) {
+				if (error.response.data.status === 401) {
+					setAlertMessage(error.response.data.Message);
+					setAlertLoading(true);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						logoutf();
+					}, 1500);
+				} else {
+					setAlertMessage(error.response.data.Message);
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				}
+			}
 		}
 	};
 
@@ -117,10 +162,32 @@ function RoleManagement() {
 					}
 				)
 				.then((response) => {
+					setAlertMessage(response.data.message);
+					setAlertLoading(true);
+					ShowAlert(response.data.status);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
 					fetchdata();
 				});
 		} catch (error) {
-			console.log(error);
+			if (error.response) {
+				if (error.response.data.status === 401) {
+					setAlertMessage(error.response.data.Message);
+					setAlertLoading(true);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						logoutf();
+					}, 1500);
+				} else {
+					setAlertMessage(error.response.data.Message);
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				}
+			}
 		}
 	};
 
@@ -138,96 +205,120 @@ function RoleManagement() {
 				}}
 				onClose={toggleDrawer}
 			>
-				<List>
-					<ListItem button onClick={() => navigate("/NewCustomer")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>New Customer</Typography>
-					</ListItem>
+				{localStorage.getItem("role") === "ROLE_ADMIN" ? (
+					<List>
+						<ListItem button onClick={() => navigate("/NewCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>New Customer</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/ExistingCustomer")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Existing Customer</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Existing Customer</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/AddUser")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Add User</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/AddUser")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Add User</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/RoleMagement")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Role Magement</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/RoleMagement")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Role Magement</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/CodeActivation")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Code Activation Expiry </Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/CodeActivation")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Code Activation Expiry </Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => logoutf()}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>LogOut </Typography>
-					</ListItem>
-				</List>
+						<ListItem button onClick={() => logoutf()}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>LogOut </Typography>
+						</ListItem>
+					</List>
+				) : (
+					<List>
+						<ListItem button onClick={() => navigate("/NewCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>New Customer</Typography>
+						</ListItem>
+
+						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Existing Customer</Typography>
+						</ListItem>
+
+						<ListItem button onClick={() => logoutf()}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>LogOut </Typography>
+						</ListItem>
+					</List>
+				)}
 			</Drawer>
 
+			<AppBar
+				position="fixed"
+				sx={{
+					backgroundColor: "#0091FF",
+				}}
+			>
+				<Toolbar variant="dense">
+					<IconButton
+						edge="start"
+						color="inherit"
+						aria-label="menu"
+						sx={{ mr: 2 }}
+						onClick={toggleDrawer}
+					>
+						<MenuIcon color="primary" onc />
+					</IconButton>
+					<Typography variant="h6" color="primary" component="div">
+						{DisplayPage}
+					</Typography>
+				</Toolbar>
+			</AppBar>
+
+			{AlertLoading ? <ShowAlert /> : null}
+
 			<Box
+				mt={5}
 				sx={{
 					width: "clamp(400px, 100%, 1980px)",
-					blur: "20px",
-					height: "clamp(400px, 100%, 1080px)",
-					backdropFilter: "blur(3px)",
 					backgroundColor: "rgba(255, 255, 255, 0.02)",
-					WebkitBackdropFilter: "blur(3px)",
-					borderRadius: "0",
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
 				}}
 			>
-				<AppBar
-					position="static"
-					sx={{
-						backgroundColor: "#0091FF",
-					}}
-				>
-					<Toolbar variant="dense">
-						<IconButton
-							edge="start"
-							color="inherit"
-							aria-label="menu"
-							sx={{ mr: 2 }}
-							onClick={toggleDrawer}
-						>
-							<MenuIcon color="primary" onc />
-						</IconButton>
-						<Typography variant="h6" color="primary" component="div">
-							{DisplayPage}
-						</Typography>
-					</Toolbar>
-				</AppBar>
-
 				{Loading ? (
 					<Grid
 						container
 						sx={{
 							justifyContent: "center",
-							position: "absolute",
+							position: "fixed",
 							transform: "translate(-50%,-50%)",
-							top: "450px",
+							top: "50%",
 							left: "50%",
+							zIndex: "2",
 						}}
 					>
 						<CircularProgress color="secondary" />
@@ -404,7 +495,9 @@ function RoleManagement() {
 												container
 												paddingX={WindowWidth <= 600 ? 2 : 3}
 												direction="row"
-												sx={{ justifyContent: "space-between" }}
+												sx={{
+													justifyContent: "space-between",
+												}}
 											>
 												<Grid md={2}>
 													<Typography>{e.username}</Typography>

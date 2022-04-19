@@ -107,49 +107,74 @@ function CodeActivation() {
 				}}
 				onClose={toggleDrawer}
 			>
-				<List>
-					<ListItem button onClick={() => navigate("/NewCustomer")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>New Customer</Typography>
-					</ListItem>
+				{localStorage.getItem("role") === "ROLE_ADMIN" ? (
+					<List>
+						<ListItem button onClick={() => navigate("/NewCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>New Customer</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/ExistingCustomer")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Existing Customer</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Existing Customer</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/AddUser")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Add User</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/AddUser")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Add User</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/RoleMagement")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Role Magement</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/RoleMagement")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Role Magement</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/CodeActivation")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Code Activation Expiry </Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/CodeActivation")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Code Activation Expiry </Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => logoutf()}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>LogOut </Typography>
-					</ListItem>
-				</List>
+						<ListItem button onClick={() => logoutf()}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>LogOut </Typography>
+						</ListItem>
+					</List>
+				) : (
+					<List>
+						<ListItem button onClick={() => navigate("/NewCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>New Customer</Typography>
+						</ListItem>
+
+						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Existing Customer</Typography>
+						</ListItem>
+
+						<ListItem button onClick={() => logoutf()}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>LogOut </Typography>
+						</ListItem>
+					</List>
+				)}
 			</Drawer>
 			<Box
 				sx={{

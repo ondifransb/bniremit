@@ -21,6 +21,8 @@ import {
 	Stack,
 	Slider,
 	CircularProgress,
+	Alert,
+	AlertTitle,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -48,6 +50,28 @@ function AddUser() {
 	}, []);
 
 	const [Loading, setLoading] = useState(false);
+	const [AlertLoading, setAlertLoading] = useState(false);
+	const [AlertMessage, setAlertMessage] = useState("");
+	const [ResStat, RetresStat] = useState("");
+	const ShowAlert = (Stat) => {
+		return AlertLoading ? (
+			<>
+				<Alert
+					severity={ResStat === 200 ? "success" : "error"}
+					sx={{
+						position: "fixed",
+						transform: "translate(-50%,-50%)",
+						top: "50%",
+						left: "50%",
+						zIndex: "3",
+					}}
+				>
+					<AlertTitle>{ResStat === 200 ? "sucess" : "Error"}</AlertTitle>
+					<strong>{AlertMessage}</strong>
+				</Alert>
+			</>
+		) : null;
+	};
 
 	const navigate = useNavigate();
 	const logoutf = () => {
@@ -94,6 +118,14 @@ function AddUser() {
 					setLoading(true)
 				)
 				.then((response) => {
+					setAlertMessage(response.data.message);
+					setAlertLoading(true);
+					RetresStat(response.status);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						RetresStat("");
+					}, 1500);
 					setLoading(false);
 					setusername("");
 					setpassword("");
@@ -104,7 +136,24 @@ function AddUser() {
 					setStatus("");
 				});
 		} catch (error) {
-			console.log(error);
+			setLoading(false);
+			if (error.response) {
+				if (error.response.data.status === 401) {
+					setAlertMessage(error.response.data.Message);
+					setAlertLoading(true);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						logoutf();
+					}, 1500);
+				} else {
+					setAlertMessage(error.response.data.Message);
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				}
+			}
 		}
 	};
 
@@ -121,49 +170,74 @@ function AddUser() {
 				}}
 				onClose={toggleDrawer}
 			>
-				<List>
-					<ListItem button onClick={() => navigate("/NewCustomer")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>New Customer</Typography>
-					</ListItem>
+				{localStorage.getItem("role") === "ROLE_ADMIN" ? (
+					<List>
+						<ListItem button onClick={() => navigate("/NewCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>New Customer</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/ExistingCustomer")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Existing Customer</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Existing Customer</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/AddUser")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Add User</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/AddUser")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Add User</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/RoleMagement")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Role Magement</Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/RoleMagement")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Role Magement</Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => navigate("/CodeActivation")}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>Code Activation Expiry </Typography>
-					</ListItem>
+						<ListItem button onClick={() => navigate("/CodeActivation")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Code Activation Expiry </Typography>
+						</ListItem>
 
-					<ListItem button onClick={() => logoutf()}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<Typography>LogOut </Typography>
-					</ListItem>
-				</List>
+						<ListItem button onClick={() => logoutf()}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>LogOut </Typography>
+						</ListItem>
+					</List>
+				) : (
+					<List>
+						<ListItem button onClick={() => navigate("/NewCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>New Customer</Typography>
+						</ListItem>
+
+						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>Existing Customer</Typography>
+						</ListItem>
+
+						<ListItem button onClick={() => logoutf()}>
+							<ListItemIcon>
+								<InboxIcon />
+							</ListItemIcon>
+							<Typography>LogOut </Typography>
+						</ListItem>
+					</List>
+				)}
 			</Drawer>
 
 			<Box
@@ -202,15 +276,18 @@ function AddUser() {
 					</Toolbar>
 				</AppBar>
 
+				{AlertLoading ? <ShowAlert /> : null}
+
 				{Loading ? (
 					<Grid
 						container
 						sx={{
 							justifyContent: "center",
-							position: "absolute",
-							top: "100%",
-							left: "50%",
+							position: "fixed",
 							transform: "translate(-50%,-50%)",
+							top: "50%",
+							left: "50%",
+							zIndex: "3",
 						}}
 					>
 						<CircularProgress color="secondary" />

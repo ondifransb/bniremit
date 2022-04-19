@@ -30,12 +30,12 @@ export const Wrapper = styled(Container)({
 	margin: "0",
 	padding: "0",
 	boxSizing: "border-box",
-	height: "100vh",
-	width: "100vw",
+
+	overflow: "hidden",
+
 	display: "flex",
-	justifyContent: "center",
+	flexDirection: "column",
 	alignItems: "center",
-	overflow: "scroll",
 });
 
 export const BootstrapButton = styled(Button)({

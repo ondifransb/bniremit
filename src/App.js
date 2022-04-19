@@ -1,12 +1,3 @@
-//EXPLORE ALL NEEDED COMPONENT
-
-//GOTTA KNOW HOW MUI (EASY APPLY FOR NEXT TASK)
-//=> THEME => CREATETHEME
-//=> STYLE => CREATESTYLE
-//=>CUSTOM COMPONENT => USING BOTH THEME AND STYLE
-
-//DEPLOY TO PERSONAL GIT
-
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./Component/LoginPage";
