@@ -29,6 +29,13 @@ import React, { useEffect, useState } from "react";
 import { Theme, Wrapper } from "./styles";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import AddReactionIcon from "@mui/icons-material/AddReaction";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import TimelapseOutlinedIcon from "@mui/icons-material/TimelapseOutlined";
+import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
+
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
@@ -61,7 +68,7 @@ function AddUser() {
 					sx={{
 						position: "fixed",
 						transform: "translate(-50%,-50%)",
-						top: "50%",
+						top: "100%",
 						left: "50%",
 						zIndex: "3",
 					}}
@@ -174,42 +181,42 @@ function AddUser() {
 					<List>
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentIndIcon />
 							</ListItemIcon>
 							<Typography>New Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentTurnedInIcon />
 							</ListItemIcon>
 							<Typography>Existing Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/AddUser")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AddReactionIcon />
 							</ListItemIcon>
 							<Typography>Add User</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/RoleMagement")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ManageAccountsIcon />
 							</ListItemIcon>
 							<Typography>Role Magement</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/CodeActivation")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<TimelapseOutlinedIcon />
 							</ListItemIcon>
 							<Typography>Code Activation Expiry </Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => logoutf()}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ExitToAppRoundedIcon />
 							</ListItemIcon>
 							<Typography>LogOut </Typography>
 						</ListItem>
@@ -218,21 +225,21 @@ function AddUser() {
 					<List>
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentIndIcon />
 							</ListItemIcon>
 							<Typography>New Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentTurnedInIcon />
 							</ListItemIcon>
 							<Typography>Existing Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => logoutf()}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ExitToAppRoundedIcon />
 							</ListItemIcon>
 							<Typography>LogOut </Typography>
 						</ListItem>
@@ -285,7 +292,7 @@ function AddUser() {
 							justifyContent: "center",
 							position: "fixed",
 							transform: "translate(-50%,-50%)",
-							top: "50%",
+							top: "100%",
 							left: "50%",
 							zIndex: "3",
 						}}
@@ -298,6 +305,7 @@ function AddUser() {
 					container
 					paddingX={2}
 					marginTop={2}
+					marginLeft={2}
 					direction="column"
 					columns={28}
 					sx={{
@@ -325,7 +333,7 @@ function AddUser() {
 							margin="dense"
 							required
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							size="small"
 							label="Username"
@@ -345,7 +353,7 @@ function AddUser() {
 							margin="dense"
 							required
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							size="small"
 							label="Name"
@@ -365,7 +373,7 @@ function AddUser() {
 							margin="dense"
 							required
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							size="small"
 							label="Email"
@@ -385,7 +393,7 @@ function AddUser() {
 								label="dense"
 								color="secondary"
 								sx={{
-									width: WindowWidth <= 600 ? "100%" : "30%",
+									width: WindowWidth <= 750 ? "100%" : "30%",
 								}}
 								size="small"
 								value={Status}
@@ -407,7 +415,7 @@ function AddUser() {
 							margin="dense"
 							required
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							size="small"
 							label="password"
@@ -425,7 +433,7 @@ function AddUser() {
 						type="submit"
 						variant="outlined"
 						sx={{
-							width: WindowWidth <= 600 ? "100%" : "10%",
+							width: WindowWidth <= 750 ? "100%" : "10%",
 							color: "black",
 							marginTop: "10px",
 						}}

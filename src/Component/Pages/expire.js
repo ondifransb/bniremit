@@ -17,6 +17,13 @@ import React, { useEffect, useState } from "react";
 import { Theme, Wrapper } from "./styles";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import AddReactionIcon from "@mui/icons-material/AddReaction";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import TimelapseOutlinedIcon from "@mui/icons-material/TimelapseOutlined";
+import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
+
 import List from "@mui/material/List";
 
 import ListItem from "@mui/material/ListItem";
@@ -111,42 +118,42 @@ function CodeActivation() {
 					<List>
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentIndIcon />
 							</ListItemIcon>
 							<Typography>New Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentTurnedInIcon />
 							</ListItemIcon>
 							<Typography>Existing Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/AddUser")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AddReactionIcon />
 							</ListItemIcon>
 							<Typography>Add User</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/RoleMagement")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ManageAccountsIcon />
 							</ListItemIcon>
 							<Typography>Role Magement</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/CodeActivation")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<TimelapseOutlinedIcon />
 							</ListItemIcon>
 							<Typography>Code Activation Expiry </Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => logoutf()}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ExitToAppRoundedIcon />
 							</ListItemIcon>
 							<Typography>LogOut </Typography>
 						</ListItem>
@@ -155,27 +162,28 @@ function CodeActivation() {
 					<List>
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentIndIcon />
 							</ListItemIcon>
 							<Typography>New Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentTurnedInIcon />
 							</ListItemIcon>
 							<Typography>Existing Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => logoutf()}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ExitToAppRoundedIcon />
 							</ListItemIcon>
 							<Typography>LogOut </Typography>
 						</ListItem>
 					</List>
 				)}
 			</Drawer>
+
 			<Box
 				sx={{
 					width: "clamp(400px, 100%, 1980px)",
@@ -213,9 +221,9 @@ function CodeActivation() {
 				</AppBar>
 				<Grid
 					container
-					paddingX={WindowWidth <= 600 ? 2 : 3}
+					paddingX={WindowWidth <= 750 ? 2 : 3}
 					sx={{
-						width: WindowWidth <= 600 ? "100%" : "clamp(350px, 40%, 1000px)",
+						width: WindowWidth <= 750 ? "100%" : "clamp(350px, 40%, 1000px)",
 						alignSelf: "flex-start",
 					}}
 					marginTop={5}

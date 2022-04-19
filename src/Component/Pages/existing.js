@@ -32,11 +32,21 @@ import {
 	Alert,
 	AlertTitle,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Buffer } from "buffer";
 
 import { Theme, Wrapper } from "./styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import DeleteIcon from "@mui/icons-material/Delete";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import InputAdornment from "@mui/material/InputAdornment";
+
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import AddReactionIcon from "@mui/icons-material/AddReaction";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import TimelapseOutlinedIcon from "@mui/icons-material/TimelapseOutlined";
+import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
@@ -49,6 +59,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { spacing } from "@mui/system";
 import { MoreVert } from "@mui/icons-material";
+import ReactToPrint from "react-to-print";
+
+window.Buffer = window.Buffer || require("buffer").Buffer;
 
 function ExistingCustomer() {
 	const navigate = useNavigate();
@@ -59,6 +72,12 @@ function ExistingCustomer() {
 		localStorage.removeItem("token");
 		localStorage.removeItem("role");
 	};
+
+	//PRINT FUNCTION START
+
+	const componentRef = useRef(null);
+
+	//PRINT FUNCTION END
 
 	//WINDOW SIZE AREA START
 	const [WindowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -179,7 +198,7 @@ function ExistingCustomer() {
 	let [Dateob, setDateob] = useState("");
 	let [Address, setAddress] = useState("");
 	let [refNum, setrefNum] = useState("");
-	let Today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+	let Today = new Date(Date.now() - new Date().getTimezoneOffset() * 75000)
 		.toISOString()
 		.substr(0, 10);
 
@@ -295,11 +314,57 @@ function ExistingCustomer() {
 		FetchData();
 	}, []);
 
-	// function ButtonItem(e) {
-	// 	return (
+	// DOWNLOAD FUNCTION AREA START
+	const DownloadData = async () => {
+		try {
+			await axios
+				.get(
+					"url",
+					{
+						responseType: "blob",
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("token")}`,
+						},
+					},
+					{}
+				)
+				.then((response) => {
+					console.log(response.data);
+					let blob = new Blob([response.data], {
+							type: "image/png, image/jpg",
+						}),
+						url = window.URL.createObjectURL(blob);
+					window.open(url);
+				});
+		} catch (error) {
+			if (error.response) {
+				if (error.response.data.status === 401) {
+					setAlertMessage(error.response.data.Errors);
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+						logoutf();
+					}, 1500);
+				} else {
+					setAlertMessage(error.response.data.Errors);
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				}
+			}
+		}
+	};
 
-	// 	)
-	// }
+	const downloadIt = async (source) => {
+		source = Buffer.from(source, "base64");
+		let blob = new Blob([source], { type: "image/png;base64" }),
+			url = window.URL.createObjectURL(blob);
+		window.open(url);
+	};
+	//DOWNLOAD FUNCTION AREA END
 
 	function BenItem({ k, m }) {
 		return (
@@ -319,7 +384,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -327,9 +392,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiary Name"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.long_name}
@@ -341,7 +406,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -349,9 +414,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiary Address"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.address1 + " " + k?.address2 + " " + k?.address3}
@@ -363,7 +428,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -371,9 +436,9 @@ function ExistingCustomer() {
 							required
 							label="Source Fund"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.sourceoffund}
@@ -395,7 +460,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -403,9 +468,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery Residence"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.resident}
@@ -417,7 +482,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -425,9 +490,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery Date Created"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.datecreate}
@@ -439,7 +504,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -447,9 +512,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery Date Updated"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.dateupdate}
@@ -471,7 +536,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -479,9 +544,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery Remitance Card Numbers"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.remitcardno}
@@ -493,7 +558,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -501,9 +566,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery ID Type"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.idtype}
@@ -515,7 +580,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -523,9 +588,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery ID Number"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.idtypeno}
@@ -547,7 +612,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -555,9 +620,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery Service Type"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.service_type}
@@ -569,7 +634,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -577,9 +642,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery Bank Name"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.service_type}
@@ -591,7 +656,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -599,9 +664,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiery Bank Account Number"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.accountnum}
@@ -623,7 +688,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -631,9 +696,9 @@ function ExistingCustomer() {
 							required
 							label="Transaction Purpose"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.trxpurpose}
@@ -645,7 +710,7 @@ function ExistingCustomer() {
 							xs={4}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
@@ -653,9 +718,9 @@ function ExistingCustomer() {
 							required
 							label="Beneficiary Email"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
+							fullWidth={WindowWidth <= 750 ? true : false}
 							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
+								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							color="secondary"
 							defaultValue={k?.email}
@@ -669,6 +734,7 @@ function ExistingCustomer() {
 	function DialogItem({ e, i }) {
 		return (
 			<Dialog
+				key={i}
 				fullWidth
 				sx={{
 					"& .MuiPaper-root": {
@@ -685,207 +751,704 @@ function ExistingCustomer() {
 				open={OpenIt}
 				onClose={closeHandle}
 			>
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.referenceNumber ? (
-						<TextField
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Registration Reference Number"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.referenceNumber}
-						/>
-					) : null}
-
-					{e.registrationDate ? (
-						<TextField
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Registration Date"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.registrationDate}
-						/>
-					) : null}
-
-					<TextField
-						InputProps={{
-							readOnly: true,
-							style: { fontSize: 13 },
+				<Grid key={i} container ref={componentRef}>
+					<Grid
+						key={i}
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
 						}}
-						variant="standard"
-						margin="dense"
-						size="small"
-						required
-						label="Activation Code"
-						autoFocus
-						fullWidth={WindowWidth <= 600 ? true : false}
-						sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-						color="secondary"
-						defaultValue={"nanti"}
-					/>
-				</Grid>
+						paddingX={2}
+					>
+						{e.referenceNumber ? (
+							<TextField
+								key={i}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Registration Reference Number"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.referenceNumber}
+							/>
+						) : null}
 
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.long_name ? (
+						{e.registrationDate ? (
+							<TextField
+								key={i}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Registration Date"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.registrationDate}
+							/>
+						) : null}
+
 						<TextField
-							xs={4}
+							key={i}
 							InputProps={{
 								readOnly: true,
-								style: { fontSize: 13 },
+								style: { fontSize: "13px" },
 							}}
 							variant="standard"
 							margin="dense"
 							size="small"
 							required
-							label="Name"
+							label="Activation Code"
 							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
+							fullWidth={WindowWidth <= 750 ? true : false}
+							sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
 							color="secondary"
-							defaultValue={e.long_name}
+							defaultValue={"nanti"}
 						/>
-					) : null}
+					</Grid>
 
-					{e.birthdate ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Date of Birth"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.birthdate}
-						/>
-					) : null}
-
-					{e.sex ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Sex"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.sex}
-						/>
-					) : null}
-				</Grid>
-
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.nationality ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Nationality"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.nationality}
-						/>
-					) : null}
-
-					{e.email ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Email"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.email}
-						/>
-					) : null}
-
-					<TextField
-						xs={4}
-						InputProps={{
-							readOnly: true,
-							style: { fontSize: 13 },
+					<Grid
+						key={i}
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
 						}}
-						variant="standard"
-						margin="dense"
-						size="small"
-						required
-						label="Signature"
-						autoFocus
-						fullWidth={WindowWidth <= 600 ? true : false}
-						sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-						color="secondary"
-						defaultValue={"nanti"}
-					/>
+						paddingX={2}
+					>
+						{e.long_name ? (
+							<TextField
+								key={i}
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Name"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.long_name}
+							/>
+						) : null}
+
+						{e.birthdate ? (
+							<TextField
+								key={i}
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Date of Birth"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.birthdate}
+							/>
+						) : null}
+
+						{e.sex ? (
+							<TextField
+								key={i}
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Sex"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.sex}
+							/>
+						) : null}
+					</Grid>
+
+					<Grid
+						key={i}
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+						paddingX={2}
+					>
+						{e.nationality ? (
+							<TextField
+								key={i}
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Nationality"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.nationality}
+							/>
+						) : null}
+
+						{e.email ? (
+							<TextField
+								key={i}
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Email"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.email}
+							/>
+						) : null}
+
+						<Box key={i} sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								key={i}
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								// label="Signature Image"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={"Signature Image"}
+								InputProps={{
+									endAdornment: (
+										<InputAdornment key={i} position="start">
+											<IconButton
+												key={i}
+												onClick={() => {
+													downloadIt(e.ttd_doc);
+												}}
+											>
+												<FileDownloadOutlinedIcon key={i} />
+											</IconButton>
+										</InputAdornment>
+									),
+								}}
+							/>
+						</Box>
+					</Grid>
+
+					<Grid
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+						paddingX={2}
+					>
+						{e.idNumber1 ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="First ID Number"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.idNumber1}
+							/>
+						) : null}
+
+						{e.idType1 ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="First ID Type"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.idType1}
+							/>
+						) : null}
+
+						{e.idExpire1 ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="First ID Expiry Date"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.idExpire1}
+							/>
+						) : null}
+					</Grid>
+
+					<Grid
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+						paddingX={2}
+					>
+						{e.idNumber2 ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Second ID Number"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.idNumber2}
+							/>
+						) : null}
+
+						{e.idType2 ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Second ID Type"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.idType2}
+							/>
+						) : null}
+
+						{e.idExpire2 ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Second ID Expiry"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.idExpire2}
+							/>
+						) : null}
+					</Grid>
+
+					<Grid
+						container
+						direction="row"
+						marginTop={2}
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+						paddingX={2}
+					>
+						{e.address1 && e.address2 && e.address3 ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Home Address"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.address1 + " " + e.address2 + " " + e.address3}
+							/>
+						) : null}
+
+						{e.postcode ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Zip Code"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.postcode}
+							/>
+						) : null}
+
+						{e.phone_number ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Phone Number"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.phone_number}
+							/>
+						) : null}
+					</Grid>
+
+					<Grid
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+						paddingX={2}
+					>
+						{e.mobile ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Mobile Phone"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.mobile}
+							/>
+						) : null}
+
+						{e.fax ? (
+							<TextField
+								xs={4}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Fax Number"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.fax}
+							/>
+						) : null}
+
+						{e.occupation ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Occupation"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.occupation}
+							/>
+						) : null}
+					</Grid>
+
+					<Grid
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+						paddingX={2}
+					>
+						{e.company_name ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Office Name"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.company_name}
+							/>
+						) : null}
+
+						{e.company_address1 && e.company_address2 && e.company_address3 ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Office Address"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={
+									e.company_address1 +
+									" " +
+									e.company_address2 +
+									" " +
+									e.company_address3
+								}
+							/>
+						) : null}
+
+						{e.company_phone ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Office Phone Number"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.company_phone}
+							/>
+						) : null}
+					</Grid>
+
+					<Grid
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+						paddingX={2}
+					>
+						{e.company_fax ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Office Fax Number"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.company_fax}
+							/>
+						) : null}
+
+						{e.freqPerYear ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Estimated Remitance Frequency/year"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.freqPerYear}
+							/>
+						) : null}
+
+						{e.estimateyeartrx ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Estimated Remitance Amount/year(YEN)"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+								color="secondary"
+								defaultValue={e.estimateyeartrx}
+							/>
+						) : null}
+					</Grid>
+
+					{/* BENEFICIARY START */}
+					{e
+						? e.beneficiaryCustomers.map((k, m) => {
+								return (
+									<>
+										<BenItem k={k} m={m} />
+									</>
+								);
+						  })
+						: null}
+
+					{/* BENEFICIARY END */}
+					<Grid
+						container
+						direction="row"
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+						paddingX={2}
+					>
+						{e.statusRegister ? (
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Status"
+								autoFocus
+								fullWidth={WindowWidth <= 750 ? true : false}
+								sx={{
+									width: WindowWidth <= 750 ? "100%" : "30%",
+									marginTop: "20px",
+								}}
+								color="secondary"
+								defaultValue={e.statusRegister}
+							/>
+						) : null}
+					</Grid>
 				</Grid>
 
 				<Grid
@@ -896,479 +1459,11 @@ function ExistingCustomer() {
 						justifyContent: "space-between",
 					}}
 					paddingX={2}
-				>
-					{e.idNumber1 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="First ID Number"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.idNumber1}
-						/>
-					) : null}
-
-					{e.idType1 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="First ID Type"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.idType1}
-						/>
-					) : null}
-
-					{e.idExpire1 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="First ID Expiry Date"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.idExpire1}
-						/>
-					) : null}
-				</Grid>
-
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.idNumber2 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Second ID Number"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.idNumber2}
-						/>
-					) : null}
-
-					{e.idType2 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Second ID Type"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.idType2}
-						/>
-					) : null}
-
-					{e.idExpire2 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Second ID Expiry"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.idExpire2}
-						/>
-					) : null}
-				</Grid>
-
-				<Grid
-					container
-					direction="row"
-					marginTop={2}
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.address1 && e.address2 && e.address3 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Home Address"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.address1 + " " + e.address2 + " " + e.address3}
-						/>
-					) : null}
-
-					{e.postcode ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Zip Code"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.postcode}
-						/>
-					) : null}
-
-					{e.phone_number ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Phone Number"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.phone_number}
-						/>
-					) : null}
-				</Grid>
-
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.mobile ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Mobile Phone"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.mobile}
-						/>
-					) : null}
-
-					{e.fax ? (
-						<TextField
-							xs={4}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Fax Number"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.fax}
-						/>
-					) : null}
-
-					{e.occupation ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Occupation"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.occupation}
-						/>
-					) : null}
-				</Grid>
-
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.company_name ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Office Name"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.company_name}
-						/>
-					) : null}
-
-					{e.company_address1 && e.company_address2 && e.company_address3 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Office Address"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={
-								e.company_address1 +
-								" " +
-								e.company_address2 +
-								" " +
-								e.company_address3
-							}
-						/>
-					) : null}
-
-					{e.company_phone ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Office Phone Number"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.company_phone}
-						/>
-					) : null}
-				</Grid>
-
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.company_fax ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Office Fax Number"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.company_fax}
-						/>
-					) : null}
-
-					{e.freqPerYear ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Estimated Remitance Frequency/year"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.freqPerYear}
-						/>
-					) : null}
-
-					{e.estimateyeartrx ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Estimated Remitance Amount/year(YEN)"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{ width: WindowWidth <= 600 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={e.estimateyeartrx}
-						/>
-					) : null}
-				</Grid>
-
-				{/* BENEFICIARY START */}
-				{e
-					? e.beneficiaryCustomers.map((k, m) => {
-							return (
-								<>
-									<BenItem k={k} m={m} />
-								</>
-							);
-					  })
-					: null}
-
-				{/* BENEFICIARY END */}
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-				>
-					{e.statusRegister ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: 13 },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Status"
-							autoFocus
-							fullWidth={WindowWidth <= 600 ? true : false}
-							sx={{
-								width: WindowWidth <= 600 ? "100%" : "30%",
-								marginTop: "20px",
-							}}
-							color="secondary"
-							defaultValue={e.statusRegister}
-						/>
-					) : null}
-				</Grid>
-
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-					mt={WindowWidth <= 600 ? 0 : 2}
+					mt={WindowWidth <= 750 ? 0 : 2}
 				>
 					<TextField
 						InputProps={{
-							style: { fontSize: 13 },
+							style: { fontSize: "13px" },
 						}}
 						variant="standard"
 						// margin="dense"
@@ -1387,8 +1482,8 @@ function ExistingCustomer() {
 				<Grid
 					container
 					direction="row"
-					paddingX={WindowWidth <= 600 ? 1 : 2}
-					mt={WindowWidth <= 600 ? 0.5 : 1.5}
+					paddingX={WindowWidth <= 750 ? 1 : 2}
+					mt={WindowWidth <= 750 ? 0.5 : 1.5}
 				>
 					<Stack
 						direction="row"
@@ -1396,13 +1491,13 @@ function ExistingCustomer() {
 							display: "flex",
 							justifyContent: "space-between",
 						}}
-						spacing={WindowWidth <= 600 ? 0 : 2}
+						spacing={WindowWidth <= 750 ? 0 : 2}
 					>
 						<Button
 							variant="contained"
 							size="small"
 							color="success"
-							sx={{ transform: WindowWidth <= 600 ? "scale(0.8)" : "scale(1)" }}
+							sx={{ transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)" }}
 							onClick={() => {
 								PutData(1);
 							}}
@@ -1414,7 +1509,7 @@ function ExistingCustomer() {
 							variant="contained"
 							size="small"
 							color="error"
-							sx={{ transform: WindowWidth <= 600 ? "scale(0.8)" : "scale(1)" }}
+							sx={{ transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)" }}
 							onClick={() => {
 								PutData(2);
 							}}
@@ -1426,7 +1521,7 @@ function ExistingCustomer() {
 							variant="contained"
 							size="small"
 							color="info"
-							sx={{ transform: WindowWidth <= 600 ? "scale(0.8)" : "scale(1)" }}
+							sx={{ transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)" }}
 							onClick={() => {
 								PutData(3);
 							}}
@@ -1437,7 +1532,7 @@ function ExistingCustomer() {
 						<Button
 							variant="contained"
 							size="small"
-							sx={{ transform: WindowWidth <= 600 ? "scale(0.8)" : "scale(1)" }}
+							sx={{ transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)" }}
 							onClick={() => {
 								PutData(4);
 							}}
@@ -1445,6 +1540,23 @@ function ExistingCustomer() {
 							Cancel
 						</Button>
 					</Stack>
+					<ReactToPrint
+						trigger={() => (
+							<Button
+								variant="outlined"
+								size="small"
+								fullWidth
+								color="text"
+								sx={{
+									transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)",
+									marginTop: "10px",
+								}}
+							>
+								PRINT
+							</Button>
+						)}
+						content={() => componentRef.current}
+					/>
 				</Grid>
 			</Dialog>
 		);
@@ -1453,36 +1565,39 @@ function ExistingCustomer() {
 	function AllItem({ e, i }) {
 		return (
 			<>
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.registrationDate}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.registrationDate}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.referenceNumber ? e.referenceNumber : "-"}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>
+						{e.referenceNumber ? e.referenceNumber : "-"}
+					</Typography>
 				</Grid>
 
-				<Grid md={1} marginBottom={1.5}>
-					<Typography>{e.name}</Typography>
+				<Grid key={i} md={1} marginBottom={1.5}>
+					<Typography key={i}>{e.name}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.idNumber1}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.idNumber1}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.birthdate}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.birthdate}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.address3}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.address3}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.statusRegister}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.statusRegister}</Typography>
 				</Grid>
 
-				<Grid md={1} marginBottom={1.5}>
+				<Grid key={i} md={1} marginBottom={1.5}>
 					<MoreVert
+						key={i}
 						onClick={() => {
 							openHandle(e, i);
 						}}
@@ -1492,24 +1607,6 @@ function ExistingCustomer() {
 						}}
 					/>
 				</Grid>
-
-				{Loading ? (
-					<Grid
-						container
-						mt={2}
-						spacing={2}
-						paddingX={2}
-						sx={{
-							justifyContent: "center",
-							position: "absolute",
-							transform: "translate(-50%,-100%)",
-							top: "100%",
-							left: "50%",
-						}}
-					>
-						<CircularProgress color="secondary" />
-					</Grid>
-				) : null}
 
 				{OpenIt === true && SelectedIndex === i ? (
 					<DialogItem e={e} i={i} />
@@ -1532,7 +1629,7 @@ function ExistingCustomer() {
 					? dataRemit.map((e, i) => {
 							return (
 								<>
-									<AllItem key={i} e={e} i={i} />
+									<AllItem e={e} i={i} />
 								</>
 							);
 					  })
@@ -1555,42 +1652,42 @@ function ExistingCustomer() {
 					<List>
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentIndIcon />
 							</ListItemIcon>
 							<Typography>New Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentTurnedInIcon />
 							</ListItemIcon>
 							<Typography>Existing Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/AddUser")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AddReactionIcon />
 							</ListItemIcon>
 							<Typography>Add User</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/RoleMagement")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ManageAccountsIcon />
 							</ListItemIcon>
 							<Typography>Role Magement</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/CodeActivation")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<TimelapseOutlinedIcon />
 							</ListItemIcon>
 							<Typography>Code Activation Expiry </Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => logoutf()}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ExitToAppRoundedIcon />
 							</ListItemIcon>
 							<Typography>LogOut </Typography>
 						</ListItem>
@@ -1599,21 +1696,21 @@ function ExistingCustomer() {
 					<List>
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentIndIcon />
 							</ListItemIcon>
 							<Typography>New Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/ExistingCustomer")}>
 							<ListItemIcon>
-								<InboxIcon />
+								<AssignmentTurnedInIcon />
 							</ListItemIcon>
 							<Typography>Existing Customer</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => logoutf()}>
 							<ListItemIcon>
-								<InboxIcon />
+								<ExitToAppRoundedIcon />
 							</ListItemIcon>
 							<Typography>LogOut </Typography>
 						</ListItem>
@@ -1642,6 +1739,25 @@ function ExistingCustomer() {
 					</Typography>
 				</Toolbar>
 			</AppBar>
+
+			{Loading ? (
+				<Grid
+					container
+					mt={2}
+					spacing={2}
+					paddingX={2}
+					sx={{
+						justifyContent: "center",
+						position: "fixed",
+						transform: "translate(-50%,-50%)",
+						top: "50%",
+						left: "50%",
+						zIndex: "3",
+					}}
+				>
+					<CircularProgress color="secondary" />
+				</Grid>
+			) : null}
 
 			{AlertLoading ? <ShowAlert /> : null}
 
@@ -1764,9 +1880,6 @@ function ExistingCustomer() {
 								<MenuItem value={"REJECTED"}>Rejected</MenuItem>
 								<MenuItem value={"CANCELED"}>Canceled</MenuItem>
 								<MenuItem value={"VERIFIED"}>Verified</MenuItem>
-								{/* <IconButton>
-									<DeleteIcon />
-								</IconButton> */}
 							</Select>
 						</FormControl>
 					</Grid>
@@ -1803,7 +1916,7 @@ function ExistingCustomer() {
 					</Grid>
 				</Grid>
 
-				{WindowWidth <= 600 ? (
+				{WindowWidth <= 750 ? (
 					<Grid container spacing={1} paddingX={3} marginTop={1}>
 						{dataRemit
 							? dataRemit.map((e, i) => {
@@ -1814,88 +1927,99 @@ function ExistingCustomer() {
 												direction="column"
 												spacing={1}
 												marginTop={0.1}
+												key={i}
 											>
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Registration Date</Typography>
-														<Typography>{e.registrationDate}</Typography>
+														<Typography key={i}>Registration Date</Typography>
+														<Typography key={i}>
+															{e.registrationDate}
+														</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Reg Ref Number</Typography>
-														<Typography>
+														<Typography key={i}>Reg Ref Number</Typography>
+														<Typography key={i}>
 															{e.referenceNumber ? e.referenceNumber : "-"}
 														</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Name</Typography>
-														<Typography>{e.name}</Typography>
+														<Typography key={i}>Name</Typography>
+														<Typography key={i}>{e.name}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>ID Number</Typography>
-														<Typography>{e.idNumber1}</Typography>
+														<Typography key={i}>ID Number</Typography>
+														<Typography key={i}>{e.idNumber1}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Date of Birth</Typography>
-														<Typography>{e.birthdate}</Typography>
+														<Typography key={i}>Date of Birth</Typography>
+														<Typography key={i}>{e.birthdate}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Home Address</Typography>
-														<Typography>{e.address3}</Typography>
+														<Typography key={i}>Home Address</Typography>
+														<Typography key={i}>{e.address3}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Status</Typography>
-														<Typography>{e.statusRegister}</Typography>
+														<Typography key={i}>Status</Typography>
+														<Typography key={i}>{e.statusRegister}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{
 															justifyContent: "space-between",
@@ -1903,8 +2027,9 @@ function ExistingCustomer() {
 														}}
 														mb={0.5}
 													>
-														<Typography>Actions</Typography>
+														<Typography key={i}>Actions</Typography>
 														<MoreVert
+															key={i}
 															onClick={() => {
 																openHandle(e, i);
 															}}
@@ -1917,26 +2042,8 @@ function ExistingCustomer() {
 												</Grid>
 											</Grid>
 
-											{Loading ? (
-												<Grid
-													container
-													mt={2}
-													spacing={2}
-													paddingX={2}
-													sx={{
-														justifyContent: "center",
-														position: "absolute",
-														transform: "translate(-50%,-25%)",
-														top: "25%",
-														left: "50%",
-													}}
-												>
-													<CircularProgress color="secondary" />
-												</Grid>
-											) : null}
-
 											{OpenIt === true && SelectedIndex === i ? (
-												<DialogItem e={e} />
+												<DialogItem e={e} key={i} />
 											) : null}
 										</>
 									);

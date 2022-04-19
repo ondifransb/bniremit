@@ -6,7 +6,6 @@ import ExistingCustomer from "./Component/Pages/existing";
 import CodeActivation from "./Component/Pages/expire";
 import Newcustomer from "./Component/Pages/newcustomer";
 import RoleManagement from "./Component/Pages/roleman";
-import Testing from "./Component/Pages/testing";
 
 function App() {
 	return (
@@ -17,7 +16,6 @@ function App() {
 			<Route path="AddUser" element={<AddUser />} />
 			<Route path="RoleMagement" element={<RoleManagement />} />
 			<Route path="CodeActivation" element={<CodeActivation />} />
-			<Route path="Testing" element={<Testing />} />
 		</Routes>
 	);
 }
