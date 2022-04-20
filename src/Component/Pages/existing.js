@@ -40,6 +40,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
+import PersonIcon from "@mui/icons-material/Person";
 
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
@@ -1650,6 +1651,22 @@ function ExistingCustomer() {
 			>
 				{localStorage.getItem("role") === "ROLE_ADMIN" ? (
 					<List>
+						<ListItem
+							sx={{
+								paddingBottom: "30px",
+								marginBottom: "10px",
+								borderBottom: "0.5px solid grey",
+							}}
+						>
+							<ListItemIcon>
+								<PersonIcon />
+							</ListItemIcon>
+							<Typography>
+								<h3>{localStorage.getItem("name")}</h3>
+								<p>{localStorage.getItem("username")}</p>
+							</Typography>
+						</ListItem>
+
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
 								<AssignmentIndIcon />
@@ -1685,7 +1702,11 @@ function ExistingCustomer() {
 							<Typography>Code Activation Expiry </Typography>
 						</ListItem>
 
-						<ListItem button onClick={() => logoutf()}>
+						<ListItem
+							button
+							onClick={() => logoutf()}
+							sx={{ marginTop: "20px" }}
+						>
 							<ListItemIcon>
 								<ExitToAppRoundedIcon />
 							</ListItemIcon>
@@ -1708,7 +1729,11 @@ function ExistingCustomer() {
 							<Typography>Existing Customer</Typography>
 						</ListItem>
 
-						<ListItem button onClick={() => logoutf()}>
+						<ListItem
+							button
+							onClick={() => logoutf()}
+							sx={{ marginTop: "20px" }}
+						>
 							<ListItemIcon>
 								<ExitToAppRoundedIcon />
 							</ListItemIcon>

@@ -47,6 +47,7 @@ import AddReactionIcon from "@mui/icons-material/AddReaction";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import TimelapseOutlinedIcon from "@mui/icons-material/TimelapseOutlined";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
+import PersonIcon from "@mui/icons-material/Person";
 
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
@@ -1650,6 +1651,22 @@ function Newcustomer() {
 			>
 				{localStorage.getItem("role") === "ROLE_ADMIN" ? (
 					<List>
+						<ListItem
+							sx={{
+								paddingBottom: "30px",
+								marginBottom: "10px",
+								borderBottom: "0.5px solid grey",
+							}}
+						>
+							<ListItemIcon>
+								<PersonIcon />
+							</ListItemIcon>
+							<Typography>
+								<h3>{localStorage.getItem("name")}</h3>
+								<p>{localStorage.getItem("username")}</p>
+							</Typography>
+						</ListItem>
+
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
 								<AssignmentIndIcon />
@@ -1685,7 +1702,11 @@ function Newcustomer() {
 							<Typography>Code Activation Expiry </Typography>
 						</ListItem>
 
-						<ListItem button onClick={() => logoutf()}>
+						<ListItem
+							button
+							onClick={() => logoutf()}
+							sx={{ marginTop: "20px" }}
+						>
 							<ListItemIcon>
 								<ExitToAppRoundedIcon />
 							</ListItemIcon>
@@ -1708,7 +1729,11 @@ function Newcustomer() {
 							<Typography>Existing Customer</Typography>
 						</ListItem>
 
-						<ListItem button onClick={() => logoutf()}>
+						<ListItem
+							button
+							onClick={() => logoutf()}
+							sx={{ marginTop: "20px" }}
+						>
 							<ListItemIcon>
 								<ExitToAppRoundedIcon />
 							</ListItemIcon>
