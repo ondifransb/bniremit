@@ -367,7 +367,7 @@ function ExistingCustomer() {
 
 		XLSX.utils.book_append_sheet(wb, ws, "beneficieryData");
 
-		XLSX.writeFile(wb, "MyExcel.xlsx");
+		XLSX.writeFile(wb, "BeneficiaryData.xlsx");
 	};
 
 	function BenItem({ k, m }) {
@@ -958,17 +958,6 @@ function ExistingCustomer() {
 								InputProps={{
 									readOnly: true,
 									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								// label="Signature Image"
-								autoFocus
-								fullWidth
-								color="secondary"
-								defaultValue={"Signature Image"}
-								InputProps={{
 									endAdornment: (
 										<InputAdornment key={i} position="start">
 											<IconButton
@@ -982,6 +971,15 @@ function ExistingCustomer() {
 										</InputAdornment>
 									),
 								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Signature Image"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={"Signature Image"}
 							/>
 						</Box>
 					</Grid>

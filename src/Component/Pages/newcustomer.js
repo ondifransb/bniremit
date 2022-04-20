@@ -367,7 +367,7 @@ function Newcustomer() {
 
 		XLSX.utils.book_append_sheet(wb, ws, "beneficieryData");
 
-		XLSX.writeFile(wb, "MyExcel.xlsx");
+		XLSX.writeFile(wb, "BeneficiaryData.xlsx");
 	};
 
 	function BenItem({ k, m }) {
@@ -384,69 +384,68 @@ function Newcustomer() {
 					paddingX={2}
 				>
 					{k?.long_name ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiary Name"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.long_name}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiary Name"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.long_name}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.address1 && k?.address2 && k?.address3 ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiary Address"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.address1 + " " + k?.address2 + " " + k?.address3}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiary Address"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={
+									k?.address1 + " " + k?.address2 + " " + k?.address3
+								}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.sourceoffund ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Source Fund"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.sourceoffund}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Source Fund"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.sourceoffund}
+							/>
+						</Grid>
 					) : null}
 				</Grid>
 
@@ -460,69 +459,66 @@ function Newcustomer() {
 					paddingX={2}
 				>
 					{k?.resident ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery Residence"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.resident}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery Residence"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.resident}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.datecreate ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery Date Created"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.datecreate}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery Date Created"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.datecreate}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.dateupdate ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery Date Updated"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.dateupdate}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery Date Updated"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.dateupdate}
+							/>
+						</Grid>
 					) : null}
 				</Grid>
 
@@ -536,69 +532,66 @@ function Newcustomer() {
 					paddingX={2}
 				>
 					{k?.remitcardno ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery Remitance Card Numbers"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.remitcardno}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery Remitance Card Numbers"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.remitcardno}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.idtype ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery ID Type"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.idtype}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery ID Type"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.idtype}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.idtypeno ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery ID Number"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.idtypeno}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery ID Number"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.idtypeno}
+							/>
+						</Grid>
 					) : null}
 				</Grid>
 
@@ -612,69 +605,66 @@ function Newcustomer() {
 					paddingX={2}
 				>
 					{k?.service_type ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery Service Type"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.service_type}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery Service Type"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.service_type}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.service_type ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery Bank Name"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.service_type}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery Bank Name"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.service_type}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.accountnum ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiery Bank Account Number"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.accountnum}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery Bank Account Number"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.accountnum}
+							/>
+						</Grid>
 					) : null}
 				</Grid>
 
@@ -688,47 +678,45 @@ function Newcustomer() {
 					paddingX={2}
 				>
 					{k?.trxpurpose ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Transaction Purpose"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.trxpurpose}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Transaction Purpose"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.trxpurpose}
+							/>
+						</Grid>
 					) : null}
 
 					{k?.email ? (
-						<TextField
-							xs={4}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Beneficiary Email"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{
-								width: WindowWidth <= 750 ? "100%" : "30%",
-							}}
-							color="secondary"
-							defaultValue={k?.email}
-						/>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiary Email"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.email}
+							/>
+						</Grid>
 					) : null}
 				</Grid>
 			</>
@@ -767,43 +755,47 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.referenceNumber ? (
-							<TextField
-								key={i}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Registration Reference Number"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.referenceNumber}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									key={i}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Registration Reference Number"
+									autoFocus
+									fullWidth={WindowWidth <= 750 ? true : false}
+									sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+									color="secondary"
+									defaultValue={e.referenceNumber}
+								/>
+							</Grid>
 						) : null}
 
 						{e.registrationDate ? (
-							<TextField
-								key={i}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Registration Date"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.registrationDate}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									key={i}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Registration Date"
+									autoFocus
+									fullWidth={WindowWidth <= 750 ? true : false}
+									sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+									color="secondary"
+									defaultValue={e.registrationDate}
+								/>
+							</Grid>
 						) : null}
 
 						<TextField
@@ -836,66 +828,69 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.long_name ? (
-							<TextField
-								key={i}
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Name"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.long_name}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									key={i}
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Name"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.long_name}
+								/>
+							</Grid>
 						) : null}
 
 						{e.birthdate ? (
-							<TextField
-								key={i}
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Date of Birth"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.birthdate}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									key={i}
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Date of Birth"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.birthdate}
+								/>
+							</Grid>
 						) : null}
 
 						{e.sex ? (
-							<TextField
-								key={i}
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Sex"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.sex}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									key={i}
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Sex"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.sex}
+								/>
+							</Grid>
 						) : null}
 					</Grid>
 
@@ -910,80 +905,80 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.nationality ? (
-							<TextField
-								key={i}
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Nationality"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.nationality}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									key={i}
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Nationality"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.nationality}
+								/>
+							</Grid>
 						) : null}
 
 						{e.email ? (
-							<TextField
-								key={i}
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Email"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.email}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									key={i}
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Email"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.email}
+								/>
+							</Grid>
 						) : null}
 
-						<Box key={i} sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
 							<TextField
 								key={i}
 								xs={4}
 								InputProps={{
 									readOnly: true,
 									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								// label="Signature Image"
-								autoFocus
-								fullWidth
-								color="secondary"
-								defaultValue={"Signature Image"}
-								InputProps={{
 									endAdornment: (
 										<InputAdornment key={i} position="start">
-											<IconButton
+											<FileDownloadOutlinedIcon
 												key={i}
+												size="small"
 												onClick={() => {
 													downloadIt(e.ttd_doc);
 												}}
-											>
-												<FileDownloadOutlinedIcon key={i} />
-											</IconButton>
+											/>
 										</InputAdornment>
 									),
 								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Signature Image"
+								label="Signature Image"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={""}
 							/>
-						</Box>
+						</Grid>
 					</Grid>
 
 					<Grid
@@ -996,63 +991,66 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.idNumber1 ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="First ID Number"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.idNumber1}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="First ID Number"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.idNumber1}
+								/>
+							</Grid>
 						) : null}
 
 						{e.idType1 ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="First ID Type"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.idType1}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="First ID Type"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.idType1}
+								/>
+							</Grid>
 						) : null}
 
 						{e.idExpire1 ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="First ID Expiry Date"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.idExpire1}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="First ID Expiry Date"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.idExpire1}
+								/>
+							</Grid>
 						) : null}
 					</Grid>
 
@@ -1066,63 +1064,66 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.idNumber2 ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Second ID Number"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.idNumber2}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Second ID Number"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.idNumber2}
+								/>
+							</Grid>
 						) : null}
 
 						{e.idType2 ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Second ID Type"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.idType2}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Second ID Type"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.idType2}
+								/>
+							</Grid>
 						) : null}
 
 						{e.idExpire2 ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Second ID Expiry"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.idExpire2}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Second ID Expiry"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.idExpire2}
+								/>
+							</Grid>
 						) : null}
 					</Grid>
 
@@ -1137,63 +1138,68 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.address1 && e.address2 && e.address3 ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Home Address"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.address1 + " " + e.address2 + " " + e.address3}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Home Address"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={
+										e.address1 + " " + e.address2 + " " + e.address3
+									}
+								/>
+							</Grid>
 						) : null}
 
 						{e.postcode ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Zip Code"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.postcode}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Zip Code"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.postcode}
+								/>
+							</Grid>
 						) : null}
 
 						{e.phone_number ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Phone Number"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.phone_number}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Phone Number"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.phone_number}
+								/>
+							</Grid>
 						) : null}
 					</Grid>
 
@@ -1207,59 +1213,62 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.mobile ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Mobile Phone"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.mobile}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Mobile Phone"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.mobile}
+								/>
+							</Grid>
 						) : null}
 
 						{e.fax ? (
-							<TextField
-								xs={4}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Fax Number"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.fax}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Fax Number"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.fax}
+								/>
+							</Grid>
 						) : null}
 
 						{e.occupation ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Occupation"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.occupation}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Occupation"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.occupation}
+								/>
+							</Grid>
 						) : null}
 					</Grid>
 
@@ -1273,69 +1282,72 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.company_name ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Office Name"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.company_name}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Office Name"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.company_name}
+								/>
+							</Grid>
 						) : null}
 
 						{e.company_address1 && e.company_address2 && e.company_address3 ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Office Address"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={
-									e.company_address1 +
-									" " +
-									e.company_address2 +
-									" " +
-									e.company_address3
-								}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Office Address"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={
+										e.company_address1 +
+										" " +
+										e.company_address2 +
+										" " +
+										e.company_address3
+									}
+								/>
+							</Grid>
 						) : null}
 
 						{e.company_phone ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Office Phone Number"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.company_phone}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Office Phone Number"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.company_phone}
+								/>
+							</Grid>
 						) : null}
 					</Grid>
 
@@ -1349,63 +1361,66 @@ function Newcustomer() {
 						paddingX={2}
 					>
 						{e.company_fax ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Office Fax Number"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.company_fax}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Office Fax Number"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.company_fax}
+								/>
+							</Grid>
 						) : null}
 
 						{e.freqPerYear ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Estimated Remitance Frequency/year"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.freqPerYear}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Estimated Remitance Frequency/year"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.freqPerYear}
+								/>
+							</Grid>
 						) : null}
 
 						{e.estimateyeartrx ? (
-							<TextField
-								xs={4}
-								InputProps={{
-									readOnly: true,
-									style: { fontSize: "13px" },
-								}}
-								variant="standard"
-								margin="dense"
-								size="small"
-								required
-								label="Estimated Remitance Amount/year(YEN)"
-								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
-								sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-								color="secondary"
-								defaultValue={e.estimateyeartrx}
-							/>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+								<TextField
+									xs={4}
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Estimated Remitance Amount/year(YEN)"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.estimateyeartrx}
+								/>
+							</Grid>
 						) : null}
 					</Grid>
 
