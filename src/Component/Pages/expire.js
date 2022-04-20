@@ -181,6 +181,22 @@ function CodeActivation() {
 					</List>
 				) : (
 					<List>
+						<ListItem
+							sx={{
+								paddingBottom: "30px",
+								marginBottom: "10px",
+								borderBottom: "0.5px solid grey",
+							}}
+						>
+							<ListItemIcon>
+								<PersonIcon />
+							</ListItemIcon>
+							<Typography>
+								<h3>{localStorage.getItem("name")}</h3>
+								<p>{localStorage.getItem("username")}</p>
+							</Typography>
+						</ListItem>
+
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
 								<AssignmentIndIcon />
