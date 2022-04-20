@@ -1,11 +1,3 @@
-//TAMBAHIN FITUR DIALOG (FOR MESSAGE) DI SEMUA ROUTE..
-//LANJUT PRINT DAN EXPORT
-//GANTI ICON SIDE MENU
-//kalau data ben tidak ada, jgn di tampilin
-//TAMBAHIN scope per roles => HANYA ADMIN YANG BISA AKSES SEMUA
-//BUAT SNACKBAR UNTUK ERROR (cari kondisi jika token habis)
-//kuasain pernak pernik, kayak web dashboard
-
 import {
 	ThemeProvider,
 	AppBar,
@@ -61,6 +53,8 @@ import { useNavigate } from "react-router-dom";
 import { spacing } from "@mui/system";
 import { MoreVert } from "@mui/icons-material";
 import ReactToPrint from "react-to-print";
+
+import * as XLSX from "xlsx";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -366,6 +360,15 @@ function ExistingCustomer() {
 		window.open(url);
 	};
 	//DOWNLOAD FUNCTION AREA END
+
+	const excelDownload = () => {
+		var wb = XLSX.utils.book_new(),
+			ws = XLSX.utils.json_to_sheet(dataRemit);
+
+		XLSX.utils.book_append_sheet(wb, ws, "beneficieryData");
+
+		XLSX.writeFile(wb, "MyExcel.xlsx");
+	};
 
 	function BenItem({ k, m }) {
 		return (
@@ -1715,22 +1718,6 @@ function ExistingCustomer() {
 					</List>
 				) : (
 					<List>
-						<ListItem
-							sx={{
-								paddingBottom: "30px",
-								marginBottom: "10px",
-								borderBottom: "0.5px solid grey",
-							}}
-						>
-							<ListItemIcon>
-								<PersonIcon />
-							</ListItemIcon>
-							<Typography>
-								<h3>{localStorage.getItem("name")}</h3>
-								<p>{localStorage.getItem("username")}</p>
-							</Typography>
-						</ListItem>
-
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
 								<AssignmentIndIcon />
@@ -1937,6 +1924,7 @@ function ExistingCustomer() {
 								Filter
 							</Button>
 							<Button
+								onClick={excelDownload}
 								size="small"
 								variant="contained"
 								size="medium"

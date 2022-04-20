@@ -1,11 +1,3 @@
-//TAMBAHIN FITUR DIALOG (FOR MESSAGE) DI SEMUA ROUTE..
-//LANJUT PRINT DAN EXPORT
-//GANTI ICON SIDE MENU
-//kalau data ben tidak ada, jgn di tampilin
-//TAMBAHIN scope per roles => HANYA ADMIN YANG BISA AKSES SEMUA
-//BUAT SNACKBAR UNTUK ERROR (cari kondisi jika token habis)
-//kuasain pernak pernik, kayak web dashboard
-
 import {
 	ThemeProvider,
 	AppBar,
@@ -40,6 +32,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
+import PersonIcon from "@mui/icons-material/Person";
 
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
@@ -47,7 +40,6 @@ import AddReactionIcon from "@mui/icons-material/AddReaction";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import TimelapseOutlinedIcon from "@mui/icons-material/TimelapseOutlined";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
-import PersonIcon from "@mui/icons-material/Person";
 
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
@@ -62,7 +54,7 @@ import { spacing } from "@mui/system";
 import { MoreVert } from "@mui/icons-material";
 import ReactToPrint from "react-to-print";
 
-import { CSVLink } from "react-csv";
+import * as XLSX from "xlsx";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -368,6 +360,15 @@ function Newcustomer() {
 		window.open(url);
 	};
 	//DOWNLOAD FUNCTION AREA END
+
+	const excelDownload = () => {
+		var wb = XLSX.utils.book_new(),
+			ws = XLSX.utils.json_to_sheet(dataRemit);
+
+		XLSX.utils.book_append_sheet(wb, ws, "beneficieryData");
+
+		XLSX.writeFile(wb, "MyExcel.xlsx");
+	};
 
 	function BenItem({ k, m }) {
 		return (
@@ -737,6 +738,7 @@ function Newcustomer() {
 	function DialogItem({ e, i }) {
 		return (
 			<Dialog
+				key={i}
 				fullWidth
 				sx={{
 					"& .MuiPaper-root": {
@@ -753,8 +755,9 @@ function Newcustomer() {
 				open={OpenIt}
 				onClose={closeHandle}
 			>
-				<Grid container ref={componentRef}>
+				<Grid key={i} container ref={componentRef}>
 					<Grid
+						key={i}
 						container
 						direction="row"
 						sx={{
@@ -765,6 +768,7 @@ function Newcustomer() {
 					>
 						{e.referenceNumber ? (
 							<TextField
+								key={i}
 								InputProps={{
 									readOnly: true,
 									style: { fontSize: "13px" },
@@ -784,6 +788,7 @@ function Newcustomer() {
 
 						{e.registrationDate ? (
 							<TextField
+								key={i}
 								InputProps={{
 									readOnly: true,
 									style: { fontSize: "13px" },
@@ -802,6 +807,7 @@ function Newcustomer() {
 						) : null}
 
 						<TextField
+							key={i}
 							InputProps={{
 								readOnly: true,
 								style: { fontSize: "13px" },
@@ -820,6 +826,7 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
+						key={i}
 						container
 						direction="row"
 						sx={{
@@ -830,6 +837,7 @@ function Newcustomer() {
 					>
 						{e.long_name ? (
 							<TextField
+								key={i}
 								xs={4}
 								InputProps={{
 									readOnly: true,
@@ -850,6 +858,7 @@ function Newcustomer() {
 
 						{e.birthdate ? (
 							<TextField
+								key={i}
 								xs={4}
 								InputProps={{
 									readOnly: true,
@@ -870,6 +879,7 @@ function Newcustomer() {
 
 						{e.sex ? (
 							<TextField
+								key={i}
 								xs={4}
 								InputProps={{
 									readOnly: true,
@@ -890,6 +900,7 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
+						key={i}
 						container
 						direction="row"
 						sx={{
@@ -900,6 +911,7 @@ function Newcustomer() {
 					>
 						{e.nationality ? (
 							<TextField
+								key={i}
 								xs={4}
 								InputProps={{
 									readOnly: true,
@@ -920,6 +932,7 @@ function Newcustomer() {
 
 						{e.email ? (
 							<TextField
+								key={i}
 								xs={4}
 								InputProps={{
 									readOnly: true,
@@ -938,8 +951,9 @@ function Newcustomer() {
 							/>
 						) : null}
 
-						<Box sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Box key={i} sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
 							<TextField
+								key={i}
 								xs={4}
 								InputProps={{
 									readOnly: true,
@@ -956,13 +970,14 @@ function Newcustomer() {
 								defaultValue={"Signature Image"}
 								InputProps={{
 									endAdornment: (
-										<InputAdornment position="start">
+										<InputAdornment key={i} position="start">
 											<IconButton
+												key={i}
 												onClick={() => {
 													downloadIt(e.ttd_doc);
 												}}
 											>
-												<FileDownloadOutlinedIcon />
+												<FileDownloadOutlinedIcon key={i} />
 											</IconButton>
 										</InputAdornment>
 									),
@@ -1554,36 +1569,39 @@ function Newcustomer() {
 	function AllItem({ e, i }) {
 		return (
 			<>
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.registrationDate}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.registrationDate}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.referenceNumber ? e.referenceNumber : "-"}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>
+						{e.referenceNumber ? e.referenceNumber : "-"}
+					</Typography>
 				</Grid>
 
-				<Grid md={1} marginBottom={1.5}>
-					<Typography>{e.name}</Typography>
+				<Grid key={i} md={1} marginBottom={1.5}>
+					<Typography key={i}>{e.name}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.idNumber1}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.idNumber1}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.birthdate}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.birthdate}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.address3}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.address3}</Typography>
 				</Grid>
 
-				<Grid md={1.5} marginBottom={1.5}>
-					<Typography>{e.statusRegister}</Typography>
+				<Grid key={i} md={1.5} marginBottom={1.5}>
+					<Typography key={i}>{e.statusRegister}</Typography>
 				</Grid>
 
-				<Grid md={1} marginBottom={1.5}>
+				<Grid key={i} md={1} marginBottom={1.5}>
 					<MoreVert
+						key={i}
 						onClick={() => {
 							openHandle(e, i);
 						}}
@@ -1623,16 +1641,6 @@ function Newcustomer() {
 			</Grid>
 		);
 	}
-
-	let [Headers, setHeaders] = useState("");
-	let [ExcelData, setExcelData] = useState("");
-	const ExportData = () => {
-		dataRemit.map((e, i) => {
-			console.log({ e });
-			setHeaders(Object.keys(e));
-			setExcelData(Object.values(e));
-		});
-	};
 
 	return (
 		<ThemeProvider theme={Theme}>
@@ -1710,22 +1718,6 @@ function Newcustomer() {
 					</List>
 				) : (
 					<List>
-						<ListItem
-							sx={{
-								paddingBottom: "30px",
-								marginBottom: "10px",
-								borderBottom: "0.5px solid grey",
-							}}
-						>
-							<ListItemIcon>
-								<PersonIcon />
-							</ListItemIcon>
-							<Typography>
-								<h3>{localStorage.getItem("name")}</h3>
-								<p>{localStorage.getItem("username")}</p>
-							</Typography>
-						</ListItem>
-
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
 								<AssignmentIndIcon />
@@ -1932,25 +1924,13 @@ function Newcustomer() {
 								Filter
 							</Button>
 							<Button
+								onClick={excelDownload}
 								size="small"
 								variant="contained"
 								size="medium"
 								margin="normal"
-								onClick={ExportData}
 							>
-								<CSVLink
-									data={dataRemit}
-									headers={Headers}
-									separator=";"
-									filename="Remitancedata.csv"
-									style={{
-										textDecoration: "none",
-										color: "black",
-										fontWeight: "normal",
-									}}
-								>
-									Export
-								</CSVLink>
+								Export
 							</Button>
 							<Button
 								size="small"
@@ -1976,88 +1956,99 @@ function Newcustomer() {
 												direction="column"
 												spacing={1}
 												marginTop={0.1}
+												key={i}
 											>
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Registration Date</Typography>
-														<Typography>{e.registrationDate}</Typography>
+														<Typography key={i}>Registration Date</Typography>
+														<Typography key={i}>
+															{e.registrationDate}
+														</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Reg Ref Number</Typography>
-														<Typography>
+														<Typography key={i}>Reg Ref Number</Typography>
+														<Typography key={i}>
 															{e.referenceNumber ? e.referenceNumber : "-"}
 														</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Name</Typography>
-														<Typography>{e.name}</Typography>
+														<Typography key={i}>Name</Typography>
+														<Typography key={i}>{e.name}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>ID Number</Typography>
-														<Typography>{e.idNumber1}</Typography>
+														<Typography key={i}>ID Number</Typography>
+														<Typography key={i}>{e.idNumber1}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Date of Birth</Typography>
-														<Typography>{e.birthdate}</Typography>
+														<Typography key={i}>Date of Birth</Typography>
+														<Typography key={i}>{e.birthdate}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Home Address</Typography>
-														<Typography>{e.address3}</Typography>
+														<Typography key={i}>Home Address</Typography>
+														<Typography key={i}>{e.address3}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Status</Typography>
-														<Typography>{e.statusRegister}</Typography>
+														<Typography key={i}>Status</Typography>
+														<Typography key={i}>{e.statusRegister}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid item sx={{ flexDirection: "row" }}>
+												<Grid key={i} item sx={{ flexDirection: "row" }}>
 													<Grid
+														key={i}
 														container
 														sx={{
 															justifyContent: "space-between",
@@ -2065,8 +2056,9 @@ function Newcustomer() {
 														}}
 														mb={0.5}
 													>
-														<Typography>Actions</Typography>
+														<Typography key={i}>Actions</Typography>
 														<MoreVert
+															key={i}
 															onClick={() => {
 																openHandle(e, i);
 															}}
@@ -2080,7 +2072,7 @@ function Newcustomer() {
 											</Grid>
 
 											{OpenIt === true && SelectedIndex === i ? (
-												<DialogItem e={e} />
+												<DialogItem e={e} key={i} />
 											) : null}
 										</>
 									);
