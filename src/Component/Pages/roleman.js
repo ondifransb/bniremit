@@ -397,7 +397,7 @@ function RoleManagement() {
 												container
 												direction="column"
 												spacing={1}
-												marginTop={0.1}
+												marginTop={1.5}
 												paddingBottom={1}
 												sx={{ borderBottom: "2px solid black" }}
 												key={i}

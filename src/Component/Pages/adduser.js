@@ -291,6 +291,28 @@ function AddUser() {
 				)}
 			</Drawer>
 
+			<AppBar
+				position="fixed"
+				sx={{
+					backgroundColor: "#0091FF",
+				}}
+			>
+				<Toolbar variant="dense">
+					<IconButton
+						edge="start"
+						color="inherit"
+						aria-label="menu"
+						sx={{ mr: 2 }}
+						onClick={toggleDrawer}
+					>
+						<MenuIcon color="primary" onc />
+					</IconButton>
+					<Typography variant="h6" color="primary" component="div">
+						{DisplayPage}
+					</Typography>
+				</Toolbar>
+			</AppBar>
+
 			<Box
 				sx={{
 					width: "clamp(400px, 100%, 1980px)",
@@ -305,28 +327,6 @@ function AddUser() {
 					alignItems: "center",
 				}}
 			>
-				<AppBar
-					position="static"
-					sx={{
-						backgroundColor: "#0091FF",
-					}}
-				>
-					<Toolbar variant="dense">
-						<IconButton
-							edge="start"
-							color="inherit"
-							aria-label="menu"
-							sx={{ mr: 2 }}
-							onClick={toggleDrawer}
-						>
-							<MenuIcon color="primary" onc />
-						</IconButton>
-						<Typography variant="h6" color="primary" component="div">
-							{DisplayPage}
-						</Typography>
-					</Toolbar>
-				</AppBar>
-
 				{AlertLoading ? <ShowAlert /> : null}
 
 				{Loading ? (
@@ -348,8 +348,8 @@ function AddUser() {
 				<Grid
 					container
 					paddingX={2}
-					marginTop={2}
-					marginLeft={2}
+					marginTop={8}
+					marginLeft={WindowWidth <= 750 ? 0 : 2}
 					direction="column"
 					columns={28}
 					sx={{

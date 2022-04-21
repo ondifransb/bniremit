@@ -324,6 +324,28 @@ function CodeActivation() {
 				</Grid>
 			) : null}
 
+			<AppBar
+				position="fixed"
+				sx={{
+					backgroundColor: "#0091FF",
+				}}
+			>
+				<Toolbar variant="dense">
+					<IconButton
+						edge="start"
+						color="inherit"
+						aria-label="menu"
+						sx={{ mr: 2 }}
+						onClick={toggleDrawer}
+					>
+						<MenuIcon color="primary" onc />
+					</IconButton>
+					<Typography variant="h6" color="primary" component="div">
+						{DisplayPage}
+					</Typography>
+				</Toolbar>
+			</AppBar>
+
 			<Box
 				sx={{
 					width: "clamp(400px, 100%, 1980px)",
@@ -338,28 +360,6 @@ function CodeActivation() {
 					alignItems: "center",
 				}}
 			>
-				<AppBar
-					position="static"
-					sx={{
-						backgroundColor: "#0091FF",
-					}}
-				>
-					<Toolbar variant="dense">
-						<IconButton
-							edge="start"
-							color="inherit"
-							aria-label="menu"
-							sx={{ mr: 2 }}
-							onClick={toggleDrawer}
-						>
-							<MenuIcon color="primary" onc />
-						</IconButton>
-						<Typography variant="h6" color="primary" component="div">
-							{DisplayPage}
-						</Typography>
-					</Toolbar>
-				</AppBar>
-
 				<Grid
 					container
 					paddingX={WindowWidth <= 750 ? 2 : 3}
@@ -367,7 +367,7 @@ function CodeActivation() {
 						width: WindowWidth <= 750 ? "100%" : "clamp(350px, 40%, 1000px)",
 						alignSelf: "flex-start",
 					}}
-					marginTop={5}
+					marginTop={10}
 					direction="column"
 				>
 					<Slider
@@ -380,7 +380,6 @@ function CodeActivation() {
 						value={SliderValue}
 						onChange={SliderVal}
 						step={1}
-						sx={{ marginX: "5px" }}
 					/>
 					<Typography
 						marginTop={1}
