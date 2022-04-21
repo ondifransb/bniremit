@@ -81,16 +81,16 @@ function LoginPage() {
 					Navigate("NewCustomer");
 				});
 		} catch (error) {
+			setLoading(false);
 			if (error.response) {
 				console.log(error.response.data.Status);
 				RetresStat(error.response.data.Status);
 				if (error.response.data.Status === 401) {
-					setAlertMessage(error.response.data.Message);
+					setAlertMessage(error.response.data.message);
 					ShowAlert();
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
-						setLoading(false);
 					}, 1500);
 				}
 				if (error.response.data.Status === 400) {
@@ -99,14 +99,12 @@ function LoginPage() {
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
-						setLoading(false);
 					}, 1500);
 				} else {
 					ShowAlert();
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
-						setLoading(false);
 					}, 1500);
 				}
 			}

@@ -402,11 +402,11 @@ function Newcustomer() {
 			wb,
 			`${IdNum ? IdNum : ""}${IdNum ? "_" : ""}${Name ? Name : ""} ${
 				Name ? "_" : ""
-			}${Regis ? Regis : ""}${Regis ? "_" : ""}${FromDate ? FromDate : ""} to ${
-				ToDate ? ToDate : ""
-			}${ToDate ? "_" : ""}${BirthDate ? BirthDate : ""}${
-				BirthDate ? "_" : ""
-			}${Status ? Status : ""}.xlsx`
+			}${Regis ? Regis : ""}${Regis ? "_" : ""}${FromDate ? FromDate : ""}${
+				FromDate ? " to " : ""
+			}${ToDate ? ToDate : ""}${ToDate ? "_" : ""}${
+				BirthDate ? BirthDate : ""
+			}${BirthDate ? "_" : ""}${Status ? Status : ""}.xlsx`
 		);
 	};
 
