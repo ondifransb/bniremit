@@ -354,40 +354,40 @@ function Newcustomer() {
 			{ width: 15 },
 			{ width: 15 },
 			{ width: 25 },
-			{ width: 50 },
+			{ width: 75 },
 			{ width: 25 },
 			{ width: 15 },
 			{ width: 25 },
-			{ width: 25 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
+			{ width: 75 },
 			{ width: 15 },
 			{ width: 15 },
 			{ width: 15 },
 			{ width: 15 },
 			{ width: 15 },
 			{ width: 25 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
-			{ width: 15 },
+			{ width: 25 },
+			{ width: 25 },
 			{ width: 15 },
 			{ width: 15 },
 			{ width: 15 },
 			{ width: 25 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 270 },
 			{ width: 15 },
 			{ width: 15 },
 			{ width: 15 },
@@ -400,13 +400,13 @@ function Newcustomer() {
 
 		XLSX.writeFile(
 			wb,
-			`${IdNum ? IdNum : ""} ${IdNum ? "_" : ""} ${Name ? Name : ""} ${
+			`${IdNum ? IdNum : ""}${IdNum ? "_" : ""}${Name ? Name : ""} ${
 				Name ? "_" : ""
-			} ${Regis ? Regis : ""} ${Regis ? "_" : ""} ${
-				FromDate ? FromDate : ""
-			} to ${ToDate ? ToDate : ""} ${FromDate && ToDate ? "_" : ""} ${
-				BirthDate ? BirthDate : ""
-			} ${BirthDate ? "_" : ""} ${Status ? Status : ""}.xlsx`
+			}${Regis ? Regis : ""}${Regis ? "_" : ""}${FromDate ? FromDate : ""} to ${
+				ToDate ? ToDate : ""
+			}${ToDate ? "_" : ""}${BirthDate ? BirthDate : ""}${
+				BirthDate ? "_" : ""
+			}${Status ? Status : ""}.xlsx`
 		);
 	};
 
