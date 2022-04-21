@@ -382,7 +382,11 @@ function CodeActivation() {
 						step={1}
 						sx={{ marginX: "5px" }}
 					/>
-					<Typography marginTop={1} mb={2}>
+					<Typography
+						marginTop={1}
+						mb={2}
+						sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+					>
 						Expired in day/days
 					</Typography>
 					<Button

@@ -93,7 +93,7 @@ function AddUser() {
 	};
 
 	const [username, setusername] = useState("");
-	const [password, setpassword] = useState("");
+	const [Password, setPassword] = useState("");
 	const [name, setname] = useState("");
 	const [role, setrole] = useState("");
 	const [email, setemail] = useState("");
@@ -110,7 +110,7 @@ function AddUser() {
 					"https://api-tokyo.remit.digi46.id/api/portal/register",
 					{
 						username: username,
-						password: password,
+						password: Password,
 						email: email,
 						name: name,
 						role: [Status],
@@ -133,7 +133,7 @@ function AddUser() {
 					}, 1500);
 					setLoading(false);
 					setusername("");
-					setpassword("");
+					setPassword("");
 					setname("");
 					setrole("");
 					setemail("");
@@ -361,8 +361,10 @@ function AddUser() {
 					<Typography
 						xs={4}
 						sx={{
-							// fontSize: "16",
 							marginTop: "10",
+							fontWeight: "600",
+							color: "gray",
+							fontSize: "14px",
 						}}
 					>
 						Please fill new user detail
@@ -452,9 +454,9 @@ function AddUser() {
 
 					<Grid item xs={4}>
 						<TextField
-							value={password}
+							value={Password}
 							onChange={(e) => {
-								setpassword(e.target.value);
+								setPassword(e.target.value);
 							}}
 							margin="dense"
 							required
@@ -462,7 +464,7 @@ function AddUser() {
 								width: WindowWidth <= 750 ? "100%" : "30%",
 							}}
 							size="small"
-							label="password"
+							label="Password"
 							autoFocus
 							type="password"
 							color="secondary"

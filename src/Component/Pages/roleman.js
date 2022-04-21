@@ -387,7 +387,7 @@ function RoleManagement() {
 					</Grid>
 				) : null}
 
-				{WindowWidth <= 750 ? (
+				{WindowWidth <= 900 ? (
 					<>
 						<Grid container paddingX={2}>
 							{Alldata
@@ -528,23 +528,39 @@ function RoleManagement() {
 							container
 							paddingX={WindowWidth <= 750 ? 2 : 3}
 							direction="row"
-							mt={2}
+							mt={3}
 							mb={2}
 							sx={{
 								justifyContent: "space-between",
 							}}
 						>
-							<Grid md={2}>
-								<Typography>Username</Typography>
+							<Grid sm={2}>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Username
+								</Typography>
 							</Grid>
-							<Grid md={2}>
-								<Typography>Name</Typography>
+							<Grid sm={2}>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Name
+								</Typography>
 							</Grid>
-							<Grid md={4}>
-								<Typography>Roles</Typography>
+							<Grid sm={4}>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Roles
+								</Typography>
 							</Grid>
-							<Grid md={3}>
-								<Typography>Action</Typography>
+							<Grid sm={3}>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Action
+								</Typography>
 							</Grid>
 						</Grid>
 
@@ -560,13 +576,13 @@ function RoleManagement() {
 											}}
 											key={i}
 										>
-											<Grid md={2}>
+											<Grid sm={2}>
 												<Typography>{e.username}</Typography>
 											</Grid>
-											<Grid md={2}>
+											<Grid sm={2}>
 												<Typography>{e.name}</Typography>
 											</Grid>
-											<Grid md={4} mt={-1}>
+											<Grid sm={4} mt={-1}>
 												<RadioGroup
 													row
 													defaultValue={e.roles[0].id}
@@ -593,7 +609,7 @@ function RoleManagement() {
 													/>
 												</RadioGroup>
 											</Grid>
-											<Grid md={3} mb={1}>
+											<Grid sm={3} mb={1}>
 												<Stack direction="row" spacing={1}>
 													<Button
 														disabled={e.roles[0].id === 1}
