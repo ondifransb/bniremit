@@ -35,6 +35,7 @@ export const Wrapper = styled(Container)({
 
 	display: "flex",
 	flexDirection: "column",
+	justifyContent: "center",
 	alignItems: "center",
 });
 

@@ -28,6 +28,7 @@ function LoginPage() {
 					severity={ResStat === 200 ? "success" : "error"}
 					sx={{
 						height: "100px",
+						width: "clamp(300px, 25%, 800px)",
 						position: "fixed",
 						transform: "translate(-50%,-50%)",
 						top: "50%",
@@ -35,6 +36,7 @@ function LoginPage() {
 						zIndex: "3",
 						display: "flex",
 						alignItems: "center",
+						borderRadius: "10px",
 					}}
 				>
 					<AlertTitle sx={{ lineHeight: "0" }}>
@@ -79,30 +81,32 @@ function LoginPage() {
 					Navigate("NewCustomer");
 				});
 		} catch (error) {
-			setLoading(false);
 			if (error.response) {
-				console.log(error.response.data.status);
-				RetresStat(error.response.data.status);
-				if (error.response.data.status === 401) {
-					setAlertMessage(error.response.data.message);
+				console.log(error.response.data.Status);
+				RetresStat(error.response.data.Status);
+				if (error.response.data.Status === 401) {
+					setAlertMessage(error.response.data.Message);
 					ShowAlert();
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
+						setLoading(false);
 					}, 1500);
 				}
-				if (error.response.data.status === 400) {
-					setAlertMessage(error.response.data.Errors);
+				if (error.response.data.Status === 400) {
+					setAlertMessage(error.response.data.Message);
 					ShowAlert();
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
+						setLoading(false);
 					}, 1500);
 				} else {
 					ShowAlert();
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
+						setLoading(false);
 					}, 1500);
 				}
 			}
@@ -115,16 +119,18 @@ function LoginPage() {
 				{Loading ? (
 					<Grid
 						container
-						mt={2}
-						spacing={2}
-						paddingX={2}
 						sx={{
-							justifyContent: "center",
+							width: "clamp(300px, 25%, 800px)",
+							height: "100px",
 							position: "fixed",
-							transform: "translate(-50%,-50%)",
+							transform: "translateY(-50%)",
 							top: "50%",
-							left: "50%",
+							// left: "50%",
 							zIndex: "3",
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							backgroundColor: "#fff",
 						}}
 					>
 						<CircularProgress color="secondary" />
