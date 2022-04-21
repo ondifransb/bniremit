@@ -119,7 +119,11 @@ function Newcustomer() {
 		setFromDate(e.target.value);
 	};
 
-	const [ToDate, setToDate] = useState();
+	let Today = new Date(Date.now() - new Date().getTimezoneOffset() * 75000)
+		.toISOString()
+		.substr(0, 10);
+
+	const [ToDate, setToDate] = useState(Today);
 	const ToVal = (e) => {
 		setToDate(e.target.value);
 	};
@@ -180,10 +184,6 @@ function Newcustomer() {
 	};
 
 	let [dataRemit, setdataRemit] = useState("");
-
-	let Today = new Date(Date.now() - new Date().getTimezoneOffset() * 75000)
-		.toISOString()
-		.substr(0, 10);
 
 	const FetchData = async () => {
 		await axios
@@ -293,10 +293,6 @@ function Newcustomer() {
 	};
 	//FUNCTION AREA END
 
-	useEffect(() => {
-		FetchData();
-	}, []);
-
 	// DOWNLOAD FUNCTION AREA START
 	const DownloadData = async (link) => {
 		try {
@@ -402,7 +398,16 @@ function Newcustomer() {
 
 		XLSX.utils.book_append_sheet(wb, ws, "beneficieryData");
 
-		XLSX.writeFile(wb, `${FromDate} to ${Today}.xlsx`);
+		XLSX.writeFile(
+			wb,
+			`${IdNum ? IdNum : ""} ${IdNum ? "_" : ""} ${Name ? Name : ""} ${
+				Name ? "_" : ""
+			} ${Regis ? Regis : ""} ${Regis ? "_" : ""} ${
+				FromDate ? FromDate : ""
+			} to ${ToDate ? ToDate : ""} ${FromDate && ToDate ? "_" : ""} ${
+				BirthDate ? BirthDate : ""
+			} ${BirthDate ? "_" : ""} ${Status ? Status : ""}.xlsx`
+		);
 	};
 
 	function BenItem({ k, m }) {
@@ -1938,7 +1943,7 @@ function Newcustomer() {
 							fullWidth
 							label="Date to"
 							type="date"
-							defaultValue={Today}
+							defaultValue={ToDate}
 							InputLabelProps={{
 								shrink: true,
 							}}
