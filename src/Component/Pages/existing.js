@@ -213,7 +213,9 @@ function ExistingCustomer() {
 				if (error.response) {
 					console.log(error.response.data.status);
 					if (error.response.data.status === 401) {
-						setAlertMessage(error.response.data.message);
+						setAlertMessage(
+							error.response.data.Message || error.response.data.message
+						);
 						ShowAlert();
 						setAlertLoading(true);
 						setTimeout(() => {
@@ -222,7 +224,9 @@ function ExistingCustomer() {
 						}, 1500);
 					}
 					if (error.response.data.status === 400) {
-						setAlertMessage(error.response.data.Errors);
+						setAlertMessage(
+							error.response.data.Message || error.response.data.message
+						);
 						ShowAlert();
 						setAlertLoading(true);
 						setTimeout(() => {
@@ -273,7 +277,9 @@ function ExistingCustomer() {
 				setLoading(false);
 				if (error.response) {
 					if (error.response.data.status === 401) {
-						setAlertMessage(error.response.data.Errors);
+						setAlertMessage(
+							error.response.data.Message || error.response.data.message
+						);
 						ShowAlert();
 						setAlertLoading(true);
 						setTimeout(() => {
@@ -281,7 +287,9 @@ function ExistingCustomer() {
 							logoutf();
 						}, 1500);
 					} else {
-						setAlertMessage(error.response.data.Errors);
+						setAlertMessage(
+							error.response.data.Message || error.response.data.message
+						);
 						ShowAlert();
 						setAlertLoading(true);
 						setTimeout(() => {
@@ -1794,6 +1802,24 @@ function ExistingCustomer() {
 					</List>
 				) : (
 					<List>
+						<ListItem
+							sx={{
+								paddingBottom: "30px",
+								marginBottom: "10px",
+								borderBottom: "0.5px solid grey",
+							}}
+						>
+							<ListItemIcon>
+								<PersonIcon />
+							</ListItemIcon>
+							<Typography>
+								<span style={{ fontSize: "20px", fontWeight: "600" }}>
+									{localStorage.getItem("name")}
+								</span>
+								<br />
+								<span>{localStorage.getItem("username")}</span>
+							</Typography>
+						</ListItem>
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
 								<AssignmentIndIcon />

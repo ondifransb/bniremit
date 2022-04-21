@@ -144,7 +144,9 @@ function AddUser() {
 			setLoading(false);
 			if (error.response) {
 				if (error.response.data.status === 401) {
-					setAlertMessage(error.response.data.message);
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
 					setAlertLoading(true);
 					ShowAlert();
 					setTimeout(() => {
@@ -152,7 +154,9 @@ function AddUser() {
 						logoutf();
 					}, 1500);
 				} else {
-					setAlertMessage(error.response.data.message);
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);

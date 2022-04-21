@@ -240,56 +240,61 @@ function Newcustomer() {
 	};
 
 	const PutData = async (RegisterStat) => {
-		await axios
-			.put(
-				"https://api-tokyo.remit.digi46.id/api/portal/actionPortal",
-				{
-					idOrdering: IDOrder,
-					statusRegister: RegisterStat,
-					message: PutMess,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("token")}`,
-						"Content-Type": "application/json",
+		try {
+			await axios
+				.put(
+					"https://api-tokyo.remit.digi46.id/api/portal/actionPortal",
+					{
+						idOrdering: IDOrder,
+						statusRegister: RegisterStat,
+						message: PutMess,
 					},
-				},
-				setLoading(true),
-				setOpenIt(false)
-			)
-			.then((res) => {
-				setAlertMessage(res.data.message);
-				setAlertLoading(true);
-				RetresStat(res.status);
-				ShowAlert();
-				setTimeout(() => {
-					setAlertLoading(false);
-					RetresStat("");
-				}, 1500);
-				setLoading(false);
-				FetchData();
-			})
-			.catch((error) => {
-				setLoading(false);
-				if (error.response) {
-					if (error.response.data.status === 401) {
-						setAlertMessage(error.response.data.Errors);
-						ShowAlert();
-						setAlertLoading(true);
-						setTimeout(() => {
-							setAlertLoading(false);
-							logoutf();
-						}, 1500);
-					} else {
-						setAlertMessage(error.response.data.Errors);
-						ShowAlert();
-						setAlertLoading(true);
-						setTimeout(() => {
-							setAlertLoading(false);
-						}, 1500);
-					}
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("token")}`,
+							"Content-Type": "application/json",
+						},
+					},
+					setLoading(true),
+					setOpenIt(false)
+				)
+				.then((res) => {
+					setAlertMessage(res.data.message);
+					setAlertLoading(true);
+					RetresStat(res.status);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						RetresStat("");
+					}, 1500);
+					setLoading(false);
+					FetchData();
+				});
+		} catch (error) {
+			setLoading(false);
+			if (error.response) {
+				if (error.response.data.status === 401) {
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+						logoutf();
+					}, 1500);
+				} else {
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
 				}
-			});
+			}
+		}
 	};
 	//FUNCTION AREA END
 
@@ -1794,6 +1799,24 @@ function Newcustomer() {
 					</List>
 				) : (
 					<List>
+						<ListItem
+							sx={{
+								paddingBottom: "30px",
+								marginBottom: "10px",
+								borderBottom: "0.5px solid grey",
+							}}
+						>
+							<ListItemIcon>
+								<PersonIcon />
+							</ListItemIcon>
+							<Typography>
+								<span style={{ fontSize: "20px", fontWeight: "600" }}>
+									{localStorage.getItem("name")}
+								</span>
+								<br />
+								<span>{localStorage.getItem("username")}</span>
+							</Typography>
+						</ListItem>
 						<ListItem button onClick={() => navigate("/NewCustomer")}>
 							<ListItemIcon>
 								<AssignmentIndIcon />

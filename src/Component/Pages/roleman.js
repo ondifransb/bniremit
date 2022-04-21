@@ -142,7 +142,9 @@ function RoleManagement() {
 		} catch (error) {
 			if (error.response) {
 				if (error.response.data.status === 401) {
-					setAlertMessage(error.response.data.Message);
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
 					setAlertLoading(true);
 					ShowAlert();
 					setTimeout(() => {
@@ -150,7 +152,9 @@ function RoleManagement() {
 						logoutf();
 					}, 1500);
 				} else {
-					setAlertMessage(error.response.data.Message);
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
@@ -174,6 +178,7 @@ function RoleManagement() {
 				.then((response) => {
 					setAlertMessage(response.data.message);
 					setAlertLoading(true);
+					RetresStat(response.status);
 					ShowAlert(response.data.status);
 					setTimeout(() => {
 						setAlertLoading(false);
@@ -183,7 +188,9 @@ function RoleManagement() {
 		} catch (error) {
 			if (error.response) {
 				if (error.response.data.status === 401) {
-					setAlertMessage(error.response.data.Message);
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
 					setAlertLoading(true);
 					ShowAlert();
 					setTimeout(() => {
@@ -191,7 +198,9 @@ function RoleManagement() {
 						logoutf();
 					}, 1500);
 				} else {
-					setAlertMessage(error.response.data.Message);
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);

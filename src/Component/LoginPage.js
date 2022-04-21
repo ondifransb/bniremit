@@ -82,15 +82,18 @@ function LoginPage() {
 				});
 		} catch (error) {
 			setLoading(false);
+			setusername("");
+			setPassword("");
 			if (error.response) {
 				console.log(error.response.data.Status);
 				RetresStat(error.response.data.Status);
-				if (error.response.data.Status === 401) {
+				if (error.response.data.status === 401) {
 					setAlertMessage(error.response.data.message);
 					ShowAlert();
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
+						setAlertMessage("");
 					}, 1500);
 				}
 				if (error.response.data.Status === 400) {
@@ -99,12 +102,14 @@ function LoginPage() {
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
+						setAlertMessage("");
 					}, 1500);
 				} else {
 					ShowAlert();
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
+						setAlertMessage("");
 					}, 1500);
 				}
 			}
