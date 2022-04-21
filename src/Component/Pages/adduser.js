@@ -191,8 +191,11 @@ function AddUser() {
 								<PersonIcon />
 							</ListItemIcon>
 							<Typography>
-								<h3>{localStorage.getItem("name")}</h3>
-								<p>{localStorage.getItem("username")}</p>
+								<span style={{ fontSize: "20px", fontWeight: "600" }}>
+									{localStorage.getItem("name")}
+								</span>
+								<br />
+								<span>{localStorage.getItem("username")}</span>
 							</Typography>
 						</ListItem>
 

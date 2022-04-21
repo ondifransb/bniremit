@@ -226,8 +226,11 @@ function RoleManagement() {
 								<PersonIcon />
 							</ListItemIcon>
 							<Typography>
-								<h3>{localStorage.getItem("name")}</h3>
-								<p>{localStorage.getItem("username")}</p>
+								<span style={{ fontSize: "20px", fontWeight: "600" }}>
+									{localStorage.getItem("name")}
+								</span>
+								<br />
+								<span>{localStorage.getItem("username")}</span>
 							</Typography>
 						</ListItem>
 
@@ -379,131 +382,130 @@ function RoleManagement() {
 							{Alldata
 								? Alldata.map((e, i) => {
 										return (
-											<>
-												<Grid
-													container
-													direction="column"
-													spacing={1}
-													marginTop={0.1}
-													paddingBottom={1}
-													sx={{ borderBottom: "2px solid black" }}
-												>
-													<Grid item sx={{ flexDirection: "row" }}>
-														<Grid
-															container
-															sx={{ justifyContent: "space-between" }}
-															mb={0.5}
-														>
-															<Typography>Username</Typography>
-															<Typography>{e.username}</Typography>
-														</Grid>
-													</Grid>
-
-													<Grid item sx={{ flexDirection: "row" }}>
-														<Grid
-															container
-															sx={{ justifyContent: "space-between" }}
-															mb={0.5}
-														>
-															<Typography>Name</Typography>
-															<Typography>{e.name}</Typography>
-														</Grid>
-													</Grid>
-
-													<Grid item>
-														<Grid
-															container
-															sx={{ justifyContent: "space-between" }}
-															mb={0.5}
-														>
-															<Typography
-																sx={{
-																	marginTop: "25px",
-																}}
-															>
-																Roles
-															</Typography>
-															<RadioGroup
-																defaultValue={e.roles[0].id}
-																onChange={FormValue}
-															>
-																<FormControlLabel
-																	disabled={e.roles[0].id === 1}
-																	labelPlacement="start"
-																	value={1}
-																	control={
-																		<Radio size="small" color="secondary" />
-																	}
-																	label="Administrator"
-																	sx={{
-																		marginBottom: "-15px",
-																		marginTop: "-5px",
-																	}}
-																/>
-																<FormControlLabel
-																	disabled={e.roles[0].id === 1}
-																	labelPlacement="start"
-																	value={2}
-																	control={
-																		<Radio size="small" color="secondary" />
-																	}
-																	label="Inquiry"
-																	sx={{ marginBottom: "-15px" }}
-																/>
-																<FormControlLabel
-																	disabled={e.roles[0].id === 1}
-																	labelPlacement="start"
-																	value={3}
-																	control={
-																		<Radio size="small" color="secondary" />
-																	}
-																	label="Operator"
-																/>
-															</RadioGroup>
-														</Grid>
-													</Grid>
-
-													<Grid item sx={{ flexDirection: "row" }}>
-														<Grid
-															container
-															sx={{ justifyContent: "space-between" }}
-															mb={0.5}
-														>
-															<Typography
-																sx={{
-																	marginTop: "5px",
-																	marginBottom: "10px",
-																}}
-															>
-																Actions
-															</Typography>
-															<Stack direction="row" spacing={1}>
-																<Button
-																	disabled={e.roles[0].id === 1}
-																	variant="contained"
-																	size="small"
-																	onClick={() => {
-																		HandleUpdate(e.roles[0], e.id);
-																	}}
-																>
-																	Update
-																</Button>
-
-																<Button
-																	disabled={e.roles[0].id === 1}
-																	variant="contained"
-																	size="small"
-																	onClick={() => {
-																		HandleDelete(e.id);
-																	}}
-																>
-																	Delete
-																</Button>
-															</Stack>
-														</Grid>
+											<Grid
+												container
+												direction="column"
+												spacing={1}
+												marginTop={0.1}
+												paddingBottom={1}
+												sx={{ borderBottom: "2px solid black" }}
+												key={i}
+											>
+												<Grid item sx={{ flexDirection: "row" }}>
+													<Grid
+														container
+														sx={{ justifyContent: "space-between" }}
+														mb={0.5}
+													>
+														<Typography>Username</Typography>
+														<Typography>{e.username}</Typography>
 													</Grid>
 												</Grid>
-											</>
+
+												<Grid item sx={{ flexDirection: "row" }}>
+													<Grid
+														container
+														sx={{ justifyContent: "space-between" }}
+														mb={0.5}
+													>
+														<Typography>Name</Typography>
+														<Typography>{e.name}</Typography>
+													</Grid>
+												</Grid>
+
+												<Grid item>
+													<Grid
+														container
+														sx={{ justifyContent: "space-between" }}
+														mb={0.5}
+													>
+														<Typography
+															sx={{
+																marginTop: "25px",
+															}}
+														>
+															Roles
+														</Typography>
+														<RadioGroup
+															defaultValue={e.roles[0].id}
+															onChange={FormValue}
+														>
+															<FormControlLabel
+																disabled={e.roles[0].id === 1}
+																labelPlacement="start"
+																value={1}
+																control={
+																	<Radio size="small" color="secondary" />
+																}
+																label="Administrator"
+																sx={{
+																	marginBottom: "-15px",
+																	marginTop: "-5px",
+																}}
+															/>
+															<FormControlLabel
+																disabled={e.roles[0].id === 1}
+																labelPlacement="start"
+																value={2}
+																control={
+																	<Radio size="small" color="secondary" />
+																}
+																label="Inquiry"
+																sx={{ marginBottom: "-15px" }}
+															/>
+															<FormControlLabel
+																disabled={e.roles[0].id === 1}
+																labelPlacement="start"
+																value={3}
+																control={
+																	<Radio size="small" color="secondary" />
+																}
+																label="Operator"
+															/>
+														</RadioGroup>
+													</Grid>
+												</Grid>
+
+												<Grid item sx={{ flexDirection: "row" }}>
+													<Grid
+														container
+														sx={{ justifyContent: "space-between" }}
+														mb={0.5}
+													>
+														<Typography
+															sx={{
+																marginTop: "5px",
+																marginBottom: "10px",
+															}}
+														>
+															Actions
+														</Typography>
+														<Stack direction="row" spacing={1}>
+															<Button
+																disabled={e.roles[0].id === 1}
+																variant="contained"
+																size="small"
+																onClick={() => {
+																	HandleUpdate(e.roles[0], e.id);
+																}}
+															>
+																Update
+															</Button>
+
+															<Button
+																disabled={e.roles[0].id === 1}
+																variant="contained"
+																size="small"
+																onClick={() => {
+																	HandleDelete(e.id);
+																}}
+															>
+																Delete
+															</Button>
+														</Stack>
+													</Grid>
+												</Grid>
+											</Grid>
 										);
 								  })
 								: null}
@@ -538,75 +540,74 @@ function RoleManagement() {
 						{Alldata
 							? Alldata.map((e, i) => {
 									return (
-										<>
-											<Grid
-												container
-												paddingX={WindowWidth <= 750 ? 2 : 3}
-												direction="row"
-												sx={{
-													justifyContent: "space-between",
-												}}
-											>
-												<Grid md={2}>
-													<Typography>{e.username}</Typography>
-												</Grid>
-												<Grid md={2}>
-													<Typography>{e.name}</Typography>
-												</Grid>
-												<Grid md={4} mt={-1}>
-													<RadioGroup
-														row
-														defaultValue={e.roles[0].id}
-														onChange={FormValue}
-														sx={{ alignContent: "flex-start" }}
-													>
-														<FormControlLabel
-															disabled={e.roles[0].id === 1}
-															value={1}
-															control={<Radio size="small" color="secondary" />}
-															label="Administrator"
-														/>
-														<FormControlLabel
-															disabled={e.roles[0].id === 1}
-															value={2}
-															control={<Radio size="small" color="secondary" />}
-															label="Inquiry"
-														/>
-														<FormControlLabel
-															disabled={e.roles[0].id === 1}
-															value={3}
-															control={<Radio size="small" color="secondary" />}
-															label="Operator"
-														/>
-													</RadioGroup>
-												</Grid>
-												<Grid md={3} mb={1}>
-													<Stack direction="row" spacing={1}>
-														<Button
-															disabled={e.roles[0].id === 1}
-															variant="contained"
-															size="small"
-															onClick={() => {
-																HandleUpdate(e.roles[0], e.id);
-															}}
-														>
-															Update
-														</Button>
-
-														<Button
-															disabled={e.roles[0].id === 1}
-															variant="contained"
-															size="small"
-															onClick={() => {
-																HandleDelete(e.id);
-															}}
-														>
-															Delete
-														</Button>
-													</Stack>
-												</Grid>
+										<Grid
+											container
+											paddingX={WindowWidth <= 750 ? 2 : 3}
+											direction="row"
+											sx={{
+												justifyContent: "space-between",
+											}}
+											key={i}
+										>
+											<Grid md={2}>
+												<Typography>{e.username}</Typography>
 											</Grid>
-										</>
+											<Grid md={2}>
+												<Typography>{e.name}</Typography>
+											</Grid>
+											<Grid md={4} mt={-1}>
+												<RadioGroup
+													row
+													defaultValue={e.roles[0].id}
+													onChange={FormValue}
+													sx={{ alignContent: "flex-start" }}
+												>
+													<FormControlLabel
+														disabled={e.roles[0].id === 1}
+														value={1}
+														control={<Radio size="small" color="secondary" />}
+														label="Administrator"
+													/>
+													<FormControlLabel
+														disabled={e.roles[0].id === 1}
+														value={2}
+														control={<Radio size="small" color="secondary" />}
+														label="Inquiry"
+													/>
+													<FormControlLabel
+														disabled={e.roles[0].id === 1}
+														value={3}
+														control={<Radio size="small" color="secondary" />}
+														label="Operator"
+													/>
+												</RadioGroup>
+											</Grid>
+											<Grid md={3} mb={1}>
+												<Stack direction="row" spacing={1}>
+													<Button
+														disabled={e.roles[0].id === 1}
+														variant="contained"
+														size="small"
+														onClick={() => {
+															HandleUpdate(e.roles[0], e.id);
+														}}
+													>
+														Update
+													</Button>
+
+													<Button
+														disabled={e.roles[0].id === 1}
+														variant="contained"
+														size="small"
+														onClick={() => {
+															HandleDelete(e.id);
+														}}
+													>
+														Delete
+													</Button>
+												</Stack>
+											</Grid>
+										</Grid>
 									);
 							  })
 							: null}

@@ -11,6 +11,9 @@ import {
 	Button,
 	Drawer,
 	Slider,
+	CircularProgress,
+	Alert,
+	AlertTitle,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -44,6 +47,30 @@ function CodeActivation() {
 		window.addEventListener("resize", updateDimensions);
 		return () => window.removeEventListener("resize", updateDimensions);
 	}, []);
+	const [Loading, setLoading] = useState(false);
+	const [AlertLoading, setAlertLoading] = useState(false);
+	const [AlertMessage, setAlertMessage] = useState("");
+	const [ResStat, RetresStat] = useState("");
+	const ShowAlert = (Stat) => {
+		return AlertLoading ? (
+			<>
+				<Alert
+					severity={ResStat === 200 ? "success" : "error"}
+					sx={{
+						position: "fixed",
+						transform: "translate(-50%,-50%)",
+						top: "50%",
+						left: "50%",
+						zIndex: "3",
+					}}
+				>
+					<AlertTitle>{ResStat === 200 ? "sucess" : "Error"}</AlertTitle>
+					<strong>{AlertMessage}</strong>
+				</Alert>
+			</>
+		) : null;
+	};
+
 	const navigate = useNavigate();
 	const logoutf = () => {
 		navigate("/");
@@ -54,32 +81,57 @@ function CodeActivation() {
 	};
 
 	const [open, setopen] = useState(false);
-	const [SliderValue, setSliderValue] = useState("");
-	const [ExpireDate, setExpireDate] = useState("");
+	const [SliderValue, setSliderValue] = useState(0);
+	const SliderVal = (e) => {
+		setSliderValue(e.target.value);
+	};
 
 	const toggleDrawer = (event) => {
 		setopen(!open);
 	};
 
 	const fetchdataExpire = () => {
-		axios
-			.get("https://api-tokyo.remit.digi46.id/api/portal/getParameter", {
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem("token")}`,
-				},
-			})
-			.then((res) => {
-				setExpireDate(res);
-				console.log(ExpireDate);
-			});
+		try {
+			axios
+				.get(
+					"https://api-tokyo.remit.digi46.id/api/portal/getParameter",
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("token")}`,
+						},
+					},
+					setLoading(true)
+				)
+				.then((res) => {
+					setSliderValue(0);
+					setLoading(false);
+					console.log(res);
+				});
+		} catch (error) {
+			setLoading(false);
+			if (error.response) {
+				if (error.res.data.status === 401) {
+					setAlertMessage(error.res.data.Message);
+					setAlertLoading(true);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						logoutf();
+					}, 1500);
+				} else {
+					setAlertMessage(error.res.data.Message);
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				}
+			}
+		}
 	};
 	useEffect(() => {
 		fetchdataExpire();
 	}, []);
 
-	const SliderVal = (e) => {
-		setSliderValue(e.target.value);
-	};
 	const putdataExpire = async () => {
 		try {
 			await axios
@@ -95,11 +147,35 @@ function CodeActivation() {
 					}
 				)
 				.then((res) => {
+					setAlertMessage(res.data.message);
+					setAlertLoading(true);
+					RetresStat(res.status);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						RetresStat("");
+					}, 1500);
 					fetchdataExpire();
-					// setSliderValue(Expire.value);
 				});
 		} catch (error) {
-			console.log(error);
+			setLoading(false);
+			if (error.response) {
+				if (error.res.data.status === 401) {
+					setAlertMessage(error.res.data.Message);
+					setAlertLoading(true);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						logoutf();
+					}, 1500);
+				} else {
+					setAlertMessage(error.res.data.Message);
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				}
+			}
 		}
 	};
 
@@ -128,8 +204,11 @@ function CodeActivation() {
 								<PersonIcon />
 							</ListItemIcon>
 							<Typography>
-								<h3>{localStorage.getItem("name")}</h3>
-								<p>{localStorage.getItem("username")}</p>
+								<span style={{ fontSize: "20px", fontWeight: "600" }}>
+									{localStorage.getItem("name")}
+								</span>
+								<br />
+								<span>{localStorage.getItem("username")}</span>
 							</Typography>
 						</ListItem>
 
@@ -225,6 +304,24 @@ function CodeActivation() {
 				)}
 			</Drawer>
 
+			{AlertLoading ? <ShowAlert /> : null}
+
+			{Loading ? (
+				<Grid
+					container
+					sx={{
+						justifyContent: "center",
+						position: "fixed",
+						transform: "translate(-50%,-50%)",
+						top: "100%",
+						left: "50%",
+						zIndex: "3",
+					}}
+				>
+					<CircularProgress color="secondary" />
+				</Grid>
+			) : null}
+
 			<Box
 				sx={{
 					width: "clamp(400px, 100%, 1980px)",
@@ -275,7 +372,7 @@ function CodeActivation() {
 						color="secondary"
 						size="small"
 						defaultValue={0}
-						max="30"
+						max={30}
 						aria-label="Small"
 						valueLabelDisplay="on"
 						value={SliderValue}

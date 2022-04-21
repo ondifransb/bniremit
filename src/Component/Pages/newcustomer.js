@@ -24,7 +24,7 @@ import {
 	Alert,
 	AlertTitle,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Buffer } from "buffer";
 
 import { Theme, Wrapper } from "./styles";
@@ -355,7 +355,7 @@ function Newcustomer() {
 
 	const downloadIt = async (source) => {
 		source = Buffer.from(source, "base64");
-		let blob = new Blob([source], { type: "image/png;base64" }),
+		let blob = new Blob([source], { type: "image/png   base64" }),
 			url = window.URL.createObjectURL(blob);
 		window.open(url);
 	};
@@ -374,22 +374,21 @@ function Newcustomer() {
 		return (
 			<>
 				<Grid
+					spacing={2}
 					container
 					direction="row"
 					sx={{
 						display: "flex",
-						justifyContent: "space-between",
 						marginTop: "20px",
 					}}
 					paddingX={2}
 				>
 					{k?.long_name ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
-								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -405,12 +404,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.address1 && k?.address2 && k?.address3 ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -428,12 +427,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.sourceoffund ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -450,21 +449,21 @@ function Newcustomer() {
 				</Grid>
 
 				<Grid
+					spacing={2}
 					container
 					direction="row"
 					sx={{
 						display: "flex",
-						justifyContent: "space-between",
 					}}
 					paddingX={2}
 				>
 					{k?.resident ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -480,12 +479,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.datecreate ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -501,12 +500,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.dateupdate ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -523,21 +522,21 @@ function Newcustomer() {
 				</Grid>
 
 				<Grid
+					spacing={2}
 					container
 					direction="row"
 					sx={{
 						display: "flex",
-						justifyContent: "space-between",
 					}}
 					paddingX={2}
 				>
 					{k?.remitcardno ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -553,12 +552,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.idtype ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -574,12 +573,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.idtypeno ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -596,21 +595,21 @@ function Newcustomer() {
 				</Grid>
 
 				<Grid
+					spacing={2}
 					container
 					direction="row"
 					sx={{
 						display: "flex",
-						justifyContent: "space-between",
 					}}
 					paddingX={2}
 				>
 					{k?.service_type ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -626,12 +625,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.service_type ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -647,12 +646,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.accountnum ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -669,21 +668,21 @@ function Newcustomer() {
 				</Grid>
 
 				<Grid
+					spacing={2}
 					container
 					direction="row"
 					sx={{
 						display: "flex",
-						justifyContent: "space-between",
 					}}
 					paddingX={2}
 				>
 					{k?.trxpurpose ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -699,12 +698,12 @@ function Newcustomer() {
 					) : null}
 
 					{k?.email ? (
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -726,13 +725,11 @@ function Newcustomer() {
 	function DialogItem({ e, i }) {
 		return (
 			<Dialog
-				key={i}
-				fullWidth
 				sx={{
 					"& .MuiPaper-root": {
 						height: "80%",
 						width: "100%",
-						maxWidth: "900px",
+						maxWidth: "1100px",
 						padding: "10px",
 						borderRadius: "10px",
 						"&::-webkit-scrollbar": {
@@ -743,21 +740,20 @@ function Newcustomer() {
 				open={OpenIt}
 				onClose={closeHandle}
 			>
-				<Grid key={i} container ref={componentRef}>
+				<Grid container ref={componentRef}>
 					<Grid
-						key={i}
+						spacing={2}
 						container
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
+							// backgroundColor: "#000",
 						}}
 						paddingX={2}
 					>
 						{e.referenceNumber ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
-									key={i}
 									InputProps={{
 										readOnly: true,
 										style: { fontSize: "13px" },
@@ -768,8 +764,7 @@ function Newcustomer() {
 									required
 									label="Registration Reference Number"
 									autoFocus
-									fullWidth={WindowWidth <= 750 ? true : false}
-									sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+									fullWidth
 									color="secondary"
 									defaultValue={e.referenceNumber}
 								/>
@@ -777,9 +772,8 @@ function Newcustomer() {
 						) : null}
 
 						{e.registrationDate ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
-									key={i}
 									InputProps={{
 										readOnly: true,
 										style: { fontSize: "13px" },
@@ -790,47 +784,46 @@ function Newcustomer() {
 									required
 									label="Registration Date"
 									autoFocus
-									fullWidth={WindowWidth <= 750 ? true : false}
-									sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
+									fullWidth
 									color="secondary"
 									defaultValue={e.registrationDate}
 								/>
 							</Grid>
 						) : null}
 
-						<TextField
-							key={i}
-							InputProps={{
-								readOnly: true,
-								style: { fontSize: "13px" },
-							}}
-							variant="standard"
-							margin="dense"
-							size="small"
-							required
-							label="Activation Code"
-							autoFocus
-							fullWidth={WindowWidth <= 750 ? true : false}
-							sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}
-							color="secondary"
-							defaultValue={"nanti"}
-						/>
+						{e.activationCode ? (
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
+								<TextField
+									InputProps={{
+										readOnly: true,
+										style: { fontSize: "13px", boxSizing: "border-box" },
+									}}
+									variant="standard"
+									margin="dense"
+									size="small"
+									required
+									label="Activation Code"
+									autoFocus
+									fullWidth
+									color="secondary"
+									defaultValue={e.activationCode}
+								/>
+							</Grid>
+						) : null}
 					</Grid>
 
 					<Grid
-						key={i}
+						spacing={2}
 						container
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
 						}}
 						paddingX={2}
 					>
 						{e.long_name ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
-									key={i}
 									xs={4}
 									InputProps={{
 										readOnly: true,
@@ -850,9 +843,8 @@ function Newcustomer() {
 						) : null}
 
 						{e.birthdate ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
-									key={i}
 									xs={4}
 									InputProps={{
 										readOnly: true,
@@ -872,9 +864,8 @@ function Newcustomer() {
 						) : null}
 
 						{e.sex ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
-									key={i}
 									xs={4}
 									InputProps={{
 										readOnly: true,
@@ -895,19 +886,17 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
-						key={i}
+						spacing={2}
 						container
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
 						}}
 						paddingX={2}
 					>
 						{e.nationality ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
-									key={i}
 									xs={4}
 									InputProps={{
 										readOnly: true,
@@ -927,9 +916,8 @@ function Newcustomer() {
 						) : null}
 
 						{e.email ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
-									key={i}
 									xs={4}
 									InputProps={{
 										readOnly: true,
@@ -948,17 +936,20 @@ function Newcustomer() {
 							</Grid>
 						) : null}
 
-						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
-								key={i}
 								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: {
+										fontSize: "13px",
+										boxSizing: "border-box",
+										":hover": { cursor: "pointer" },
+									},
+
 									endAdornment: (
-										<InputAdornment key={i} position="start">
+										<InputAdornment position="start">
 											<FileDownloadOutlinedIcon
-												key={i}
 												size="small"
 												onClick={() => {
 													downloadIt(e.ttd_doc);
@@ -982,16 +973,16 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
+						spacing={2}
 						container
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
 						}}
 						paddingX={2}
 					>
 						{e.idNumber1 ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1012,7 +1003,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.idType1 ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1033,7 +1024,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.idExpire1 ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1055,16 +1046,16 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
+						spacing={2}
 						container
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
 						}}
 						paddingX={2}
 					>
 						{e.idNumber2 ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1085,7 +1076,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.idType2 ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1106,7 +1097,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.idExpire2 ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1128,17 +1119,17 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
+						spacing={2}
 						container
 						direction="row"
 						marginTop={2}
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
 						}}
 						paddingX={2}
 					>
 						{e.address1 && e.address2 && e.address3 ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1161,7 +1152,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.postcode ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1182,7 +1173,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.phone_number ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1204,16 +1195,16 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
+						spacing={2}
 						container
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
 						}}
 						paddingX={2}
 					>
 						{e.mobile ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1234,7 +1225,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.fax ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									variant="standard"
@@ -1251,7 +1242,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.occupation ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1273,16 +1264,16 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
+						spacing={2}
 						container
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
 						}}
 						paddingX={2}
 					>
 						{e.company_name ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1303,7 +1294,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.company_address1 && e.company_address2 && e.company_address3 ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1330,7 +1321,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.company_phone ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1352,16 +1343,16 @@ function Newcustomer() {
 					</Grid>
 
 					<Grid
+						spacing={2}
 						container
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
 						}}
 						paddingX={2}
 					>
 						{e.company_fax ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1382,7 +1373,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.freqPerYear ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1403,7 +1394,7 @@ function Newcustomer() {
 						) : null}
 
 						{e.estimateyeartrx ? (
-							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "30%" }}>
+							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
 									InputProps={{
@@ -1428,9 +1419,9 @@ function Newcustomer() {
 					{e
 						? e.beneficiaryCustomers.map((k, m) => {
 								return (
-									<>
+									<Fragment key={m}>
 										<BenItem k={k} m={m} />
-									</>
+									</Fragment>
 								);
 						  })
 						: null}
@@ -1441,16 +1432,15 @@ function Newcustomer() {
 						direction="row"
 						sx={{
 							display: "flex",
-							justifyContent: "space-between",
+							width: WindowWidth <= 750 ? "100%" : "34%",
 						}}
 						paddingX={2}
 					>
 						{e.statusRegister ? (
 							<TextField
-								xs={4}
 								InputProps={{
 									readOnly: true,
-									style: { fontSize: "13px" },
+									style: { fontSize: "13px", boxSizing: "border-box" },
 								}}
 								variant="standard"
 								margin="dense"
@@ -1458,9 +1448,8 @@ function Newcustomer() {
 								required
 								label="Status"
 								autoFocus
-								fullWidth={WindowWidth <= 750 ? true : false}
+								fullWidth
 								sx={{
-									width: WindowWidth <= 750 ? "100%" : "30%",
 									marginTop: "20px",
 								}}
 								color="secondary"
@@ -1468,34 +1457,33 @@ function Newcustomer() {
 							/>
 						) : null}
 					</Grid>
-				</Grid>
 
-				<Grid
-					container
-					direction="row"
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-					paddingX={2}
-					mt={WindowWidth <= 750 ? 0 : 2}
-				>
-					<TextField
-						InputProps={{
-							style: { fontSize: "13px" },
+					<Grid
+						container
+						direction="row"
+						sx={{
+							display: "flex",
 						}}
-						variant="standard"
-						// margin="dense"
-						size="small"
-						required
-						label="Input Your Note Here"
-						autoFocus
-						fullWidth
-						color="secondary"
-						defaultValue={""}
-						value={PutMess}
-						onChange={PutMessVal}
-					/>
+						paddingX={2}
+						mt={WindowWidth <= 750 ? 0 : 2}
+					>
+						<TextField
+							InputProps={{
+								style: { fontSize: "13px" },
+							}}
+							variant="standard"
+							// margin="dense"
+							size="small"
+							required
+							label="Input Your Note Here"
+							autoFocus
+							sx={{ width: WindowWidth <= 750 ? "100%" : "99.9%" }}
+							color="secondary"
+							defaultValue={e.message}
+							value={PutMess}
+							onChange={PutMessVal}
+						/>
+					</Grid>
 				</Grid>
 
 				<Grid
@@ -1504,71 +1492,81 @@ function Newcustomer() {
 					paddingX={WindowWidth <= 750 ? 1 : 2}
 					mt={WindowWidth <= 750 ? 0.5 : 1.5}
 				>
-					<Stack
-						direction="row"
-						sx={{
-							display: "flex",
-							justifyContent: "space-between",
-						}}
-						spacing={WindowWidth <= 750 ? 0 : 2}
-					>
-						<Button
-							variant="contained"
-							size="small"
-							color="success"
-							sx={{ transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)" }}
-							onClick={() => {
-								PutData(1);
+					{e.statusRegister === "VERIFIED" ? null : (
+						<Stack
+							direction="row"
+							sx={{
+								display: "flex",
 							}}
+							spacing={WindowWidth <= 750 ? 0 : 2}
 						>
-							Complete
-						</Button>
+							<Button
+								variant="contained"
+								size="small"
+								color="success"
+								sx={{
+									transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)",
+								}}
+								onClick={() => {
+									PutData(1);
+								}}
+							>
+								Complete
+							</Button>
 
-						<Button
-							variant="contained"
-							size="small"
-							color="error"
-							sx={{ transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)" }}
-							onClick={() => {
-								PutData(2);
-							}}
-						>
-							Reject
-						</Button>
+							<Button
+								variant="contained"
+								size="small"
+								color="error"
+								sx={{
+									transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)",
+								}}
+								onClick={() => {
+									PutData(2);
+								}}
+							>
+								Reject
+							</Button>
 
-						<Button
-							variant="contained"
-							size="small"
-							color="info"
-							sx={{ transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)" }}
-							onClick={() => {
-								PutData(3);
-							}}
-						>
-							Verify
-						</Button>
+							<Button
+								variant="contained"
+								size="small"
+								color="info"
+								sx={{
+									transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)",
+								}}
+								onClick={() => {
+									PutData(3);
+								}}
+							>
+								Verify
+							</Button>
 
-						<Button
-							variant="contained"
-							size="small"
-							sx={{ transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)" }}
-							onClick={() => {
-								PutData(4);
-							}}
-						>
-							Cancel
-						</Button>
-					</Stack>
+							<Button
+								variant="contained"
+								size="small"
+								sx={{
+									transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)",
+								}}
+								onClick={() => {
+									PutData(4);
+								}}
+							>
+								Cancel
+							</Button>
+						</Stack>
+					)}
+
 					<ReactToPrint
 						trigger={() => (
 							<Button
 								variant="outlined"
 								size="small"
-								fullWidth
 								color="text"
 								sx={{
 									transform: WindowWidth <= 750 ? "scale(0.8)" : "scale(1)",
 									marginTop: "10px",
+									width: WindowWidth <= 750 ? "100%" : "99.9%",
 								}}
 							>
 								PRINT
@@ -1583,40 +1581,37 @@ function Newcustomer() {
 
 	function AllItem({ e, i }) {
 		return (
-			<>
-				<Grid key={i} md={1.5} marginBottom={1.5}>
-					<Typography key={i}>{e.registrationDate}</Typography>
+			<Fragment key={i}>
+				<Grid item sm={1.5} marginBottom={1.5}>
+					<Typography>{e.registrationDate}</Typography>
 				</Grid>
 
-				<Grid key={i} md={1.5} marginBottom={1.5}>
-					<Typography key={i}>
-						{e.referenceNumber ? e.referenceNumber : "-"}
-					</Typography>
+				<Grid item sm={2} marginBottom={1.5}>
+					<Typography>{e.referenceNumber ? e.referenceNumber : "-"}</Typography>
 				</Grid>
 
-				<Grid key={i} md={1} marginBottom={1.5}>
-					<Typography key={i}>{e.name}</Typography>
+				<Grid item sm={1.5} marginBottom={1.5}>
+					<Typography>{e.name}</Typography>
 				</Grid>
 
-				<Grid key={i} md={1.5} marginBottom={1.5}>
-					<Typography key={i}>{e.idNumber1}</Typography>
+				<Grid item sm={2.2} marginBottom={1.5}>
+					<Typography>{e.idNumber1}</Typography>
 				</Grid>
 
-				<Grid key={i} md={1.5} marginBottom={1.5}>
-					<Typography key={i}>{e.birthdate}</Typography>
+				<Grid item sm={1.3} marginBottom={1.5}>
+					<Typography>{e.birthdate}</Typography>
 				</Grid>
 
-				<Grid key={i} md={1.5} marginBottom={1.5}>
-					<Typography key={i}>{e.address3}</Typography>
+				<Grid item sm={1.5} marginBottom={1.5}>
+					<Typography>{e.address3}</Typography>
 				</Grid>
 
-				<Grid key={i} md={1.5} marginBottom={1.5}>
-					<Typography key={i}>{e.statusRegister}</Typography>
+				<Grid item sm={1} marginBottom={1.5}>
+					<Typography>{e.statusRegister}</Typography>
 				</Grid>
 
-				<Grid key={i} md={1} marginBottom={1.5}>
+				<Grid item sm={1} marginBottom={1.5}>
 					<MoreVert
-						key={i}
 						onClick={() => {
 							openHandle(e, i);
 						}}
@@ -1630,7 +1625,7 @@ function Newcustomer() {
 				{OpenIt === true && SelectedIndex === i ? (
 					<DialogItem e={e} i={i} />
 				) : null}
-			</>
+			</Fragment>
 		);
 	}
 
@@ -1647,9 +1642,9 @@ function Newcustomer() {
 				{dataRemit
 					? dataRemit.map((e, i) => {
 							return (
-								<>
+								<Fragment key={i}>
 									<AllItem e={e} i={i} />
-								</>
+								</Fragment>
 							);
 					  })
 					: null}
@@ -1680,8 +1675,11 @@ function Newcustomer() {
 								<PersonIcon />
 							</ListItemIcon>
 							<Typography>
-								<h3>{localStorage.getItem("name")}</h3>
-								<p>{localStorage.getItem("username")}</p>
+								<span style={{ fontSize: "20px", fontWeight: "600" }}>
+									{localStorage.getItem("name")}
+								</span>
+								<br />
+								<span>{localStorage.getItem("username")}</span>
 							</Typography>
 						</ListItem>
 
@@ -1965,115 +1963,103 @@ function Newcustomer() {
 						{dataRemit
 							? dataRemit.map((e, i) => {
 									return (
-										<>
+										<Fragment key={i}>
 											<Grid
 												container
 												direction="column"
 												spacing={1}
 												marginTop={0.1}
-												key={i}
 											>
-												<Grid key={i} item sx={{ flexDirection: "row" }}>
+												<Grid item sx={{ flexDirection: "row" }}>
 													<Grid
-														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography key={i}>Registration Date</Typography>
-														<Typography key={i}>
-															{e.registrationDate}
-														</Typography>
+														<Typography>Registration Date</Typography>
+														<Typography>{e.registrationDate}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid key={i} item sx={{ flexDirection: "row" }}>
+												<Grid item sx={{ flexDirection: "row" }}>
 													<Grid
-														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography key={i}>Reg Ref Number</Typography>
-														<Typography key={i}>
+														<Typography>Reg Ref Number</Typography>
+														<Typography>
 															{e.referenceNumber ? e.referenceNumber : "-"}
 														</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid key={i} item sx={{ flexDirection: "row" }}>
+												<Grid item sx={{ flexDirection: "row" }}>
 													<Grid
-														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography key={i}>Name</Typography>
-														<Typography key={i}>{e.name}</Typography>
+														<Typography>Name</Typography>
+														<Typography>{e.name}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid key={i} item sx={{ flexDirection: "row" }}>
+												<Grid item sx={{ flexDirection: "row" }}>
 													<Grid
-														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography key={i}>ID Number</Typography>
-														<Typography key={i}>{e.idNumber1}</Typography>
+														<Typography>ID Number</Typography>
+														<Typography>{e.idNumber1}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid key={i} item sx={{ flexDirection: "row" }}>
+												<Grid item sx={{ flexDirection: "row" }}>
 													<Grid
-														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography key={i}>Date of Birth</Typography>
-														<Typography key={i}>{e.birthdate}</Typography>
+														<Typography>Date of Birth</Typography>
+														<Typography>{e.birthdate}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid key={i} item sx={{ flexDirection: "row" }}>
+												<Grid item sx={{ flexDirection: "row" }}>
 													<Grid
-														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography key={i}>Home Address</Typography>
-														<Typography key={i}>{e.address3}</Typography>
+														<Typography>Home Address</Typography>
+														<Typography>{e.address3}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid key={i} item sx={{ flexDirection: "row" }}>
+												<Grid item sx={{ flexDirection: "row" }}>
 													<Grid
-														key={i}
 														container
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography key={i}>Status</Typography>
-														<Typography key={i}>{e.statusRegister}</Typography>
+														<Typography>Status</Typography>
+														<Typography>{e.statusRegister}</Typography>
 													</Grid>
 												</Grid>
 
-												<Grid key={i} item sx={{ flexDirection: "row" }}>
+												<Grid item sx={{ flexDirection: "row" }}>
 													<Grid
-														key={i}
 														container
 														sx={{
-															justifyContent: "space-between",
 															borderBottom: "1px solid gray",
+															justifyContent: "space-between",
 														}}
 														mb={0.5}
 													>
-														<Typography key={i}>Actions</Typography>
+														<Typography>Actions</Typography>
 														<MoreVert
-															key={i}
 															onClick={() => {
 																openHandle(e, i);
 															}}
@@ -2087,9 +2073,9 @@ function Newcustomer() {
 											</Grid>
 
 											{OpenIt === true && SelectedIndex === i ? (
-												<DialogItem e={e} key={i} />
+												<DialogItem e={e} />
 											) : null}
-										</>
+										</Fragment>
 									);
 							  })
 							: null}
@@ -2104,28 +2090,28 @@ function Newcustomer() {
 							marginTop={4}
 							sx={{ justifyContent: "space-between" }}
 						>
-							<Grid md={1.5}>
+							<Grid item sm={1.5}>
 								<Typography>Registration Date</Typography>
 							</Grid>
-							<Grid md={1.5}>
+							<Grid item sm={2}>
 								<Typography>Reg Ref Number</Typography>
 							</Grid>
-							<Grid md={1}>
+							<Grid item sm={1.5}>
 								<Typography>Name</Typography>
 							</Grid>
-							<Grid md={1.5}>
+							<Grid item sm={2.2}>
 								<Typography>ID Number</Typography>
 							</Grid>
-							<Grid md={1.5}>
+							<Grid item sm={1.3}>
 								<Typography>Date of Birth</Typography>
 							</Grid>
-							<Grid md={1.5}>
+							<Grid item sm={1.5}>
 								<Typography>Home Address</Typography>
 							</Grid>
-							<Grid md={1.5}>
+							<Grid item sm={1}>
 								<Typography>Status</Typography>
 							</Grid>
-							<Grid md={1}>
+							<Grid item sm={1}>
 								<Typography>actions</Typography>
 							</Grid>
 						</Grid>
