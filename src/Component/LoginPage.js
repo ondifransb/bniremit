@@ -6,9 +6,8 @@ import {
 	Alert,
 	Grid,
 	CircularProgress,
-	Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Theme, Wrapper } from "./styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -52,22 +51,25 @@ function LoginPage() {
 
 	const UsernameHandle = (e) => {
 		setusername(e.target.value);
-		if (e.target.value.length < 6) {
-			setuserNameValid(true);
-		} else {
+
+		if (username.length > 6) {
 			setuserNameValid(false);
+		} else {
+			setuserNameValid(true);
 		}
 
-		console.log(e.target.value.length);
+		console.log(username.length);
 	};
 
 	const PasswordHandle = (e) => {
 		setPassword(e.target.value);
-		if (e.target.value.length < 6) {
-			setPasswordValid(true);
-		} else {
+		if (password.length > 6) {
 			setPasswordValid(false);
+		} else {
+			setPasswordValid(true);
 		}
+
+		console.log(PasswordValid);
 	};
 
 	const loginHandler = async (e) => {
@@ -131,6 +133,29 @@ function LoginPage() {
 	return (
 		<ThemeProvider theme={Theme}>
 			<Wrapper maxWidth={false}>
+				{PasswordValid || userNameValid ? (
+					<Alert
+						severity={PasswordValid || userNameValid ? "error" : "success"}
+						sx={{
+							height: "40px",
+							width: "clamp(300px, 25%, 800px)",
+							position: "fixed",
+							transform: "translate(-50%,-31.5%)",
+							top: "31.5%",
+							left: "50%",
+							zIndex: "3",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+							borderRadius: "10px",
+						}}
+					>
+						<strong>
+							Username and Password should have at least six characters
+						</strong>
+					</Alert>
+				) : null}
+
 				{Loading ? (
 					<Grid
 						container
@@ -224,40 +249,6 @@ function LoginPage() {
 						>
 							Sign In
 						</Button>
-						{PasswordValid || userNameValid ? (
-							<Alert
-								severity={PasswordValid || userNameValid ? "error" : "success"}
-								sx={{
-									height: "40px",
-									width: "clamp(300px, 25%, 800px)",
-									position: "fixed",
-									transform: "translate(-50%,-31.5%)",
-									top: "31.5%",
-									left: "50%",
-									zIndex: "3",
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "center",
-									borderRadius: "10px",
-								}}
-							>
-								<strong>
-									Username and Password should have at least six characters
-								</strong>
-							</Alert>
-						) : null}
-
-						{/* <Typography
-								sx={{
-									fontWeight: "600",
-									color: "gray",
-									position: "fixed",
-									bottom: "35%",
-									transform: "translateY(-35%)",
-								}}
-							>
-								Username and Password should have at least six characters
-							</Typography> */}
 					</Box>
 				</Box>
 			</Wrapper>
