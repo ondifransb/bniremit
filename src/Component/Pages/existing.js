@@ -13,23 +13,18 @@ import {
 	Button,
 	Drawer,
 	FormControl,
-	FormControlLabel,
-	RadioGroup,
-	Radio,
 	Stack,
-	Slider,
 	CircularProgress,
 	Dialog,
-	DialogContent,
 	Alert,
 	AlertTitle,
 } from "@mui/material";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Buffer } from "buffer";
 
-import { Theme, Wrapper } from "./styles";
+import { Theme } from "./styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
 import PersonIcon from "@mui/icons-material/Person";
@@ -42,15 +37,13 @@ import TimelapseOutlinedIcon from "@mui/icons-material/TimelapseOutlined";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
+
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { spacing } from "@mui/system";
+
 import { MoreVert } from "@mui/icons-material";
 import ReactToPrint from "react-to-print";
 
@@ -101,9 +94,13 @@ function ExistingCustomer() {
 						top: "50%",
 						left: "50%",
 						zIndex: "3",
+						display: "flex",
+						alignItems: "center",
 					}}
 				>
-					<AlertTitle>{ResStat === 200 ? "sucess" : "Error"}</AlertTitle>
+					<AlertTitle sx={{ lineHeight: "0" }}>
+						{ResStat === 200 ? "sucess" : "Error"}
+					</AlertTitle>
 					<strong>{AlertMessage}</strong>
 				</Alert>
 			</>
@@ -113,10 +110,7 @@ function ExistingCustomer() {
 	//LOADING AREA END
 
 	//ACTION AREA START
-	const [ActionF, setActionF] = useState(false);
-	const fAction = () => {
-		setActionF(true);
-	};
+
 	//ACTION AREA END
 
 	//STATE AREA  START
@@ -186,13 +180,7 @@ function ExistingCustomer() {
 	};
 
 	let [dataRemit, setdataRemit] = useState("");
-	let [RegisDate, setRegisDate] = useState("");
-	let [RegNumber, setRegNumber] = useState("");
-	let [UserName, setUserName] = useState("");
-	let [IDNum, setIDNum] = useState("");
-	let [Dateob, setDateob] = useState("");
-	let [Address, setAddress] = useState("");
-	let [refNum, setrefNum] = useState("");
+
 	let Today = new Date(Date.now() - new Date().getTimezoneOffset() * 75000)
 		.toISOString()
 		.substr(0, 10);
@@ -200,7 +188,7 @@ function ExistingCustomer() {
 	const FetchData = async () => {
 		await axios
 			.post(
-				"https://api-tokyo.remit.digi46.id/api/portal/filterDataOrdering",
+				"https://api-tokyo.remit.digi46.id/api/portal/filterDataExistingOrdering",
 				{
 					idNumber: IdNum ? IdNum : null,
 					name: Name ? Name : null,
@@ -310,11 +298,11 @@ function ExistingCustomer() {
 	}, []);
 
 	// DOWNLOAD FUNCTION AREA START
-	const DownloadData = async () => {
+	const DownloadData = async (link) => {
 		try {
 			await axios
 				.get(
-					"url",
+					link,
 					{
 						responseType: "blob",
 						headers: {
@@ -364,10 +352,57 @@ function ExistingCustomer() {
 	const excelDownload = () => {
 		var wb = XLSX.utils.book_new(),
 			ws = XLSX.utils.json_to_sheet(dataRemit);
+		ws["!cols"] = [
+			{ width: 5 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 25 },
+			{ width: 50 },
+			{ width: 25 },
+			{ width: 15 },
+			{ width: 25 },
+			{ width: 25 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 25 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 25 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 15 },
+			{ width: 20 },
+			{ width: 15 },
+			{ width: 15 },
+		];
 
 		XLSX.utils.book_append_sheet(wb, ws, "beneficieryData");
 
-		XLSX.writeFile(wb, "BeneficiaryData.xlsx");
+		XLSX.writeFile(wb, `${FromDate} to ${Today}.xlsx`);
 	};
 
 	function BenItem({ k, m }) {
@@ -944,12 +979,12 @@ function ExistingCustomer() {
 									style: {
 										fontSize: "13px",
 										boxSizing: "border-box",
-										":hover": { cursor: "pointer" },
 									},
 
 									endAdornment: (
 										<InputAdornment position="start">
 											<FileDownloadOutlinedIcon
+												sx={{ ":hover": { cursor: "pointer" } }}
 												size="small"
 												onClick={() => {
 													downloadIt(e.ttd_doc);
@@ -962,7 +997,6 @@ function ExistingCustomer() {
 								margin="dense"
 								size="small"
 								required
-								label="Signature Image"
 								label="Signature Image"
 								autoFocus
 								fullWidth
@@ -1009,6 +1043,17 @@ function ExistingCustomer() {
 									InputProps={{
 										readOnly: true,
 										style: { fontSize: "13px" },
+										endAdornment: (
+											<InputAdornment position="start">
+												<FileDownloadOutlinedIcon
+													sx={{ ":hover": { cursor: "pointer" } }}
+													size="small"
+													onClick={() => {
+														DownloadData(e.idType1_doc);
+													}}
+												/>
+											</InputAdornment>
+										),
 									}}
 									variant="standard"
 									margin="dense"
@@ -1082,6 +1127,17 @@ function ExistingCustomer() {
 									InputProps={{
 										readOnly: true,
 										style: { fontSize: "13px" },
+										endAdornment: (
+											<InputAdornment position="start">
+												<FileDownloadOutlinedIcon
+													sx={{ ":hover": { cursor: "pointer" } }}
+													size="small"
+													onClick={() => {
+														DownloadData(e.idType2_doc);
+													}}
+												/>
+											</InputAdornment>
+										),
 									}}
 									variant="standard"
 									margin="dense"
@@ -1611,15 +1667,17 @@ function ExistingCustomer() {
 				</Grid>
 
 				<Grid item sm={1} marginBottom={1.5}>
-					<MoreVert
-						onClick={() => {
-							openHandle(e, i);
-						}}
-						sx={{
-							fontSize: "16px",
-							":hover": { cursor: "pointer" },
-						}}
-					/>
+					<Typography sx={{ textAlign: "center" }}>
+						<MoreVert
+							onClick={() => {
+								openHandle(e, i);
+							}}
+							sx={{
+								fontSize: "16px",
+								":hover": { cursor: "pointer" },
+							}}
+						/>
+					</Typography>
 				</Grid>
 
 				{OpenIt === true && SelectedIndex === i ? (
@@ -1635,7 +1693,7 @@ function ExistingCustomer() {
 				container
 				spacing={2}
 				// marginX={4}
-				paddingLeft={4}
+				paddingX={2}
 				marginTop={1}
 				sx={{ justifyContent: "space-between" }}
 			>
@@ -1879,7 +1937,6 @@ function ExistingCustomer() {
 							size="small"
 							fullWidth
 							label="Date to"
-							defaultValue="today"
 							type="date"
 							defaultValue={Today}
 							InputLabelProps={{
@@ -1931,7 +1988,6 @@ function ExistingCustomer() {
 								size="small"
 								variant="contained"
 								onClick={FetchData}
-								size="medium"
 								margin="10px"
 							>
 								Filter
@@ -1940,7 +1996,6 @@ function ExistingCustomer() {
 								onClick={excelDownload}
 								size="small"
 								variant="contained"
-								size="medium"
 								margin="normal"
 							>
 								Export
@@ -1948,7 +2003,6 @@ function ExistingCustomer() {
 							<Button
 								size="small"
 								variant="contained"
-								size="medium"
 								margin="normal"
 								onClick={resetit}
 							>
@@ -2086,33 +2140,70 @@ function ExistingCustomer() {
 							container
 							spacing={2}
 							// marginX={4}
-							paddingLeft={4}
-							marginTop={4}
+							paddingX={2}
+							marginTop={1}
 							sx={{ justifyContent: "space-between" }}
 						>
 							<Grid item sm={1.5}>
-								<Typography>Registration Date</Typography>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Registration Date
+								</Typography>
 							</Grid>
 							<Grid item sm={2}>
-								<Typography>Reg Ref Number</Typography>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Reg Ref Number
+								</Typography>
 							</Grid>
 							<Grid item sm={1.5}>
-								<Typography>Name</Typography>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Name
+								</Typography>
 							</Grid>
 							<Grid item sm={2.2}>
-								<Typography>ID Number</Typography>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									ID Number
+								</Typography>
 							</Grid>
 							<Grid item sm={1.3}>
-								<Typography>Date of Birth</Typography>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Date of Birth
+								</Typography>
 							</Grid>
 							<Grid item sm={1.5}>
-								<Typography>Home Address</Typography>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Home Address
+								</Typography>
 							</Grid>
 							<Grid item sm={1}>
-								<Typography>Status</Typography>
+								<Typography
+									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
+								>
+									Status
+								</Typography>
 							</Grid>
 							<Grid item sm={1}>
-								<Typography>actions</Typography>
+								<Typography
+									sx={{
+										textAlign: "right",
+										fontWeight: "600",
+										color: "gray",
+										fontSize: "14px",
+									}}
+								>
+									actions
+								</Typography>
 							</Grid>
 						</Grid>
 

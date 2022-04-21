@@ -1,4 +1,13 @@
-import { ThemeProvider, Button, Box, TextField } from "@mui/material";
+import {
+	ThemeProvider,
+	Button,
+	Box,
+	TextField,
+	Alert,
+	AlertTitle,
+	Grid,
+	CircularProgress,
+} from "@mui/material";
 import React, { useState } from "react";
 import { Theme, Wrapper } from "./styles";
 import axios from "axios";
@@ -8,6 +17,34 @@ import Logo from "../assets/BNILOGO.svg";
 function LoginPage() {
 	const [username, setusername] = useState("");
 	const [password, setPassword] = useState("");
+	const [Loading, setLoading] = useState(false);
+	const [AlertMessage, setAlertMessage] = useState("");
+	const [ResStat, RetresStat] = useState("");
+	const [AlertLoading, setAlertLoading] = useState(false);
+	const ShowAlert = () => {
+		return AlertLoading ? (
+			<>
+				<Alert
+					severity={ResStat === 200 ? "success" : "error"}
+					sx={{
+						height: "100px",
+						position: "fixed",
+						transform: "translate(-50%,-50%)",
+						top: "50%",
+						left: "50%",
+						zIndex: "3",
+						display: "flex",
+						alignItems: "center",
+					}}
+				>
+					<AlertTitle sx={{ lineHeight: "0" }}>
+						{ResStat === 200 ? "sucess" : "Error"}
+					</AlertTitle>
+					<strong>{AlertMessage}</strong>
+				</Alert>
+			</>
+		) : null;
+	};
 
 	const Navigate = useNavigate();
 
@@ -24,33 +61,77 @@ function LoginPage() {
 
 		try {
 			await axios
-				.post("https://api-tokyo.remit.digi46.id/api/portal/login", {
-					username: username,
-					password: password,
-				})
+				.post(
+					"https://api-tokyo.remit.digi46.id/api/portal/login",
+					{
+						username: username,
+						password: password,
+					},
+					setLoading(true)
+				)
 				.then((response) => {
-					if (response.status === 200 && response.data.token != null) {
-						localStorage.setItem("token", response.data.token);
-						localStorage.setItem("name", response.data.name);
-						localStorage.setItem("username", response.data.username);
-						localStorage.setItem("role", response.data.roles);
+					setLoading(false);
 
-						//keep user data on device => if needed
-						// localStorage.setItem("user", JSON.stringify(response.data));
-
-						Navigate("NewCustomer");
-					} else {
-						alert(response.data.message);
-					}
+					localStorage.setItem("token", response.data.token);
+					localStorage.setItem("name", response.data.name);
+					localStorage.setItem("username", response.data.username);
+					localStorage.setItem("role", response.data.roles);
+					Navigate("NewCustomer");
 				});
 		} catch (error) {
-			alert("looks like you typed wrong password/username");
+			setLoading(false);
+			if (error.response) {
+				console.log(error.response.data.status);
+				RetresStat(error.response.data.status);
+				if (error.response.data.status === 401) {
+					setAlertMessage(error.response.data.message);
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				}
+				if (error.response.data.status === 400) {
+					setAlertMessage(error.response.data.Errors);
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				} else {
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
+				}
+			}
 		}
 	};
 
 	return (
 		<ThemeProvider theme={Theme}>
 			<Wrapper maxWidth={false}>
+				{Loading ? (
+					<Grid
+						container
+						mt={2}
+						spacing={2}
+						paddingX={2}
+						sx={{
+							justifyContent: "center",
+							position: "fixed",
+							transform: "translate(-50%,-50%)",
+							top: "50%",
+							left: "50%",
+							zIndex: "3",
+						}}
+					>
+						<CircularProgress color="secondary" />
+					</Grid>
+				) : null}
+
+				{AlertLoading ? <ShowAlert /> : null}
 				<Box
 					sx={{
 						width: "clamp(300px, 30%, 800px)",
@@ -73,7 +154,7 @@ function LoginPage() {
 							alignItems: "center",
 						}}
 					>
-						<img src={Logo} sx={{ width: "100%", height: "auto" }} />
+						<img src={Logo} sx={{ width: "100%", height: "auto" }} alt="" />
 					</Box>
 
 					<Box

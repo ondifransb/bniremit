@@ -15,18 +15,13 @@ import {
 	Button,
 	Drawer,
 	FormControl,
-	FormControlLabel,
-	RadioGroup,
-	Radio,
-	Stack,
-	Slider,
 	CircularProgress,
 	Alert,
 	AlertTitle,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import { Theme, Wrapper } from "./styles";
+import { Theme } from "./styles";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
@@ -41,9 +36,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -72,9 +65,13 @@ function AddUser() {
 						top: "100%",
 						left: "50%",
 						zIndex: "3",
+						display: "flex",
+						alignItems: "center",
 					}}
 				>
-					<AlertTitle>{ResStat === 200 ? "sucess" : "Error"}</AlertTitle>
+					<AlertTitle sx={{ lineHeight: "0" }}>
+						{ResStat === 200 ? "sucess" : "Error"}
+					</AlertTitle>
 					<strong>{AlertMessage}</strong>
 				</Alert>
 			</>
@@ -147,7 +144,7 @@ function AddUser() {
 			setLoading(false);
 			if (error.response) {
 				if (error.response.data.status === 401) {
-					setAlertMessage(error.response.data.Message);
+					setAlertMessage(error.response.data.message);
 					setAlertLoading(true);
 					ShowAlert();
 					setTimeout(() => {
@@ -155,7 +152,7 @@ function AddUser() {
 						logoutf();
 					}, 1500);
 				} else {
-					setAlertMessage(error.response.data.Message);
+					setAlertMessage(error.response.data.message);
 					setAlertLoading(true);
 					setTimeout(() => {
 						setAlertLoading(false);
@@ -165,8 +162,7 @@ function AddUser() {
 		}
 	};
 
-	const [status, setstatus] = useState(null);
-	const [DisplayPage, setDisplayPage] = useState("Add User");
+	const DisplayPage = "Add User";
 
 	return (
 		<ThemeProvider theme={Theme}>
