@@ -64,9 +64,6 @@ function CodeActivation() {
 						alignItems: "center",
 					}}
 				>
-					<AlertTitle sx={{ lineHeight: "0" }}>
-						{ResStat === 200 ? "sucess" : "Error"}
-					</AlertTitle>
 					<strong>{AlertMessage}</strong>
 				</Alert>
 			</>

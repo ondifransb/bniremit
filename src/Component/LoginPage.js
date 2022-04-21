@@ -4,9 +4,9 @@ import {
 	Box,
 	TextField,
 	Alert,
-	AlertTitle,
 	Grid,
 	CircularProgress,
+	Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import { Theme, Wrapper } from "./styles";
@@ -15,8 +15,6 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../assets/BNILOGO.svg";
 
 function LoginPage() {
-	const [username, setusername] = useState("");
-	const [password, setPassword] = useState("");
 	const [Loading, setLoading] = useState(false);
 	const [AlertMessage, setAlertMessage] = useState("");
 	const [ResStat, RetresStat] = useState("");
@@ -27,7 +25,7 @@ function LoginPage() {
 				<Alert
 					severity={ResStat === 200 ? "success" : "error"}
 					sx={{
-						height: "100px",
+						height: "120px",
 						width: "clamp(300px, 25%, 800px)",
 						position: "fixed",
 						transform: "translate(-50%,-50%)",
@@ -39,9 +37,6 @@ function LoginPage() {
 						borderRadius: "10px",
 					}}
 				>
-					<AlertTitle sx={{ lineHeight: "0" }}>
-						{ResStat === 200 ? "sucess" : "Error"}
-					</AlertTitle>
 					<strong>{AlertMessage}</strong>
 				</Alert>
 			</>
@@ -50,12 +45,29 @@ function LoginPage() {
 
 	const Navigate = useNavigate();
 
+	const [username, setusername] = useState("");
+	const [userNameValid, setuserNameValid] = useState(false);
+	const [password, setPassword] = useState("");
+	const [PasswordValid, setPasswordValid] = useState(false);
+
 	const UsernameHandle = (e) => {
 		setusername(e.target.value);
+		if (e.target.value.length < 6) {
+			setuserNameValid(true);
+		} else {
+			setuserNameValid(false);
+		}
+
+		console.log(e.target.value.length);
 	};
 
 	const PasswordHandle = (e) => {
 		setPassword(e.target.value);
+		if (e.target.value.length < 6) {
+			setPasswordValid(true);
+		} else {
+			setPasswordValid(false);
+		}
 	};
 
 	const loginHandler = async (e) => {
@@ -124,7 +136,7 @@ function LoginPage() {
 						container
 						sx={{
 							width: "clamp(300px, 25%, 800px)",
-							height: "100px",
+							height: "120px",
 							position: "fixed",
 							transform: "translateY(-50%)",
 							top: "50%",
@@ -177,19 +189,19 @@ function LoginPage() {
 						}}
 					>
 						<TextField
+							error={userNameValid}
 							value={username}
 							size="small"
 							onChange={UsernameHandle}
 							margin="normal"
 							required
 							fullWidth
-							id="email"
-							label="Email Address"
-							autoComplete="email"
+							label="Username"
 							autoFocus
 							color="secondary"
 						/>
 						<TextField
+							error={PasswordValid}
 							value={password}
 							size="small"
 							onChange={PasswordHandle}
@@ -202,6 +214,7 @@ function LoginPage() {
 							color="secondary"
 						/>
 						<Button
+							disabled={PasswordValid}
 							onClick={loginHandler}
 							color="secondary"
 							type="submit"
@@ -211,6 +224,40 @@ function LoginPage() {
 						>
 							Sign In
 						</Button>
+						{PasswordValid || userNameValid ? (
+							<Alert
+								severity={PasswordValid || userNameValid ? "error" : "success"}
+								sx={{
+									height: "40px",
+									width: "clamp(300px, 25%, 800px)",
+									position: "fixed",
+									transform: "translate(-50%,-31.5%)",
+									top: "31.5%",
+									left: "50%",
+									zIndex: "3",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+									borderRadius: "10px",
+								}}
+							>
+								<strong>
+									Username and Password should have at least six characters
+								</strong>
+							</Alert>
+						) : null}
+
+						{/* <Typography
+								sx={{
+									fontWeight: "600",
+									color: "gray",
+									position: "fixed",
+									bottom: "35%",
+									transform: "translateY(-35%)",
+								}}
+							>
+								Username and Password should have at least six characters
+							</Typography> */}
 					</Box>
 				</Box>
 			</Wrapper>
