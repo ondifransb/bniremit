@@ -6,7 +6,11 @@ import {
 	Alert,
 	Grid,
 	CircularProgress,
+	InputAdornment,
 } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 import React, { useEffect, useState } from "react";
 import { Theme, Wrapper } from "./styles";
 import axios from "axios";
@@ -48,6 +52,11 @@ function LoginPage() {
 	const [userNameValid, setuserNameValid] = useState(false);
 	const [password, setPassword] = useState("");
 	const [PasswordValid, setPasswordValid] = useState(false);
+	const [VisibilityValue, setVisibilityValue] = useState(false);
+
+	const VisibilityHandler = () => {
+		setVisibilityValue(!VisibilityValue);
+	};
 
 	const UsernameHandle = (e) => {
 		setusername(e.target.value);
@@ -234,11 +243,29 @@ function LoginPage() {
 							required
 							fullWidth
 							label="Password"
-							type="password"
-							id="password"
+							type={VisibilityValue ? "text" : "password"}
 							autoComplete="current-password"
 							color="secondary"
 							defaultValue={password}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="start">
+										{VisibilityValue ? (
+											<VisibilityIcon
+												sx={{ ":hover": { cursor: "pointer" } }}
+												size="small"
+												onClick={VisibilityHandler}
+											/>
+										) : (
+											<VisibilityOffIcon
+												sx={{ ":hover": { cursor: "pointer" } }}
+												size="small"
+												onClick={VisibilityHandler}
+											/>
+										)}
+									</InputAdornment>
+								),
+							}}
 						/>
 						<Button
 							disabled={PasswordValid}
