@@ -1742,7 +1742,7 @@ function ExistingCustomer() {
 					<Typography>{e.dateofbirth}</Typography>
 				</Grid>
 
-				<Grid item sm={3.1} marginBottom={1.5}>
+				<Grid item sm={3.5} marginBottom={1.5}>
 					<Typography>{e.address1}</Typography>
 				</Grid>
 
@@ -1750,7 +1750,7 @@ function ExistingCustomer() {
 					<Typography>{e.status}</Typography>
 				</Grid>
 
-				<Grid item sm={1} marginBottom={1.5}>
+				<Grid item sm={0.6} marginBottom={1.5}>
 					<Typography sx={{ textAlign: "center" }}>
 						<MoreVert
 							onClick={() => {
@@ -2285,7 +2285,7 @@ function ExistingCustomer() {
 									Date of Birth
 								</Typography>
 							</Grid>
-							<Grid item sm={3.1}>
+							<Grid item sm={3.5}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
@@ -2299,10 +2299,10 @@ function ExistingCustomer() {
 									Status
 								</Typography>
 							</Grid>
-							<Grid item sm={1}>
+							<Grid item sm={0.6}>
 								<Typography
 									sx={{
-										textAlign: "right",
+										// textAlign: "right",
 										fontWeight: "600",
 										color: "gray",
 										fontSize: "14px",
