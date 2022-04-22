@@ -101,9 +101,9 @@ function CodeActivation() {
 					setLoading(true)
 				)
 				.then((res) => {
-					setSliderValue(0);
+					setSliderValue(res.data.value);
 					setLoading(false);
-					console.log(res.data);
+					console.log(res.data.value);
 				});
 		} catch (error) {
 			setLoading(false);

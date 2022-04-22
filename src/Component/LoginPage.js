@@ -224,6 +224,7 @@ function LoginPage() {
 							label="Username"
 							autoFocus
 							color="secondary"
+							defaultValue={username}
 						/>
 						<TextField
 							error={PasswordValid}
@@ -237,6 +238,7 @@ function LoginPage() {
 							id="password"
 							autoComplete="current-password"
 							color="secondary"
+							defaultValue={password}
 						/>
 						<Button
 							disabled={PasswordValid}
