@@ -1726,15 +1726,15 @@ function ExistingCustomer() {
 					<Typography>{e.createDate}</Typography>
 				</Grid>
 
-				<Grid item sm={1.2} marginBottom={1.5}>
+				<Grid item sm={1.4} marginBottom={1.5}>
 					<Typography>{e.referenceNumber ? e.referenceNumber : "-"}</Typography>
 				</Grid>
 
-				<Grid item sm={1.2} marginBottom={1.5}>
+				<Grid item sm={1.4} marginBottom={1.5}>
 					<Typography>{e.name}</Typography>
 				</Grid>
 
-				<Grid item sm={1.2} marginBottom={1.5}>
+				<Grid item sm={1.4} marginBottom={1.5}>
 					<Typography>{e.idNumber1}</Typography>
 				</Grid>
 
@@ -2257,21 +2257,21 @@ function ExistingCustomer() {
 									Registration Date
 								</Typography>
 							</Grid>
-							<Grid item sm={1.2}>
+							<Grid item sm={1.4}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Reg Ref Number
 								</Typography>
 							</Grid>
-							<Grid item sm={1.2}>
+							<Grid item sm={1.4}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Name
 								</Typography>
 							</Grid>
-							<Grid item sm={1.2}>
+							<Grid item sm={1.4}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
