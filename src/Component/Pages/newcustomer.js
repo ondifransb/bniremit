@@ -1651,35 +1651,35 @@ function Newcustomer() {
 	function AllItem({ e, i }) {
 		return (
 			<Fragment key={i}>
-				<Grid item sm={1.5} marginBottom={1.5}>
+				<Grid item marginBottom={1.5} sm={1.2}>
 					<Typography>{e.registrationDate}</Typography>
 				</Grid>
 
-				<Grid item sm={2} marginBottom={1.5}>
-					<Typography>{e.referenceNumber ? e.referenceNumber : "-"}</Typography>
+				<Grid item marginBottom={1.5} sm={1.3}>
+					<Typography>{e.referenceNumber}</Typography>
 				</Grid>
 
-				<Grid item sm={1.5} marginBottom={1.5}>
+				<Grid item marginBottom={1.5} sm={1.5}>
 					<Typography>{e.name}</Typography>
 				</Grid>
 
-				<Grid item sm={2.2} marginBottom={1.5}>
+				<Grid item marginBottom={1.5} sm={2.7}>
 					<Typography>{e.idNumber1}</Typography>
 				</Grid>
 
-				<Grid item sm={1.3} marginBottom={1.5}>
+				<Grid item marginBottom={1.5} sm={1.3}>
 					<Typography>{e.birthdate}</Typography>
 				</Grid>
 
-				<Grid item sm={1.5} marginBottom={1.5}>
+				<Grid item marginBottom={1.5} sm={1.5}>
 					<Typography>{e.address3}</Typography>
 				</Grid>
 
-				<Grid item sm={1} marginBottom={1.5}>
+				<Grid item marginBottom={1.5} sm={1}>
 					<Typography>{e.statusRegister}</Typography>
 				</Grid>
 
-				<Grid item sm={1} marginBottom={1.5}>
+				<Grid item marginBottom={1.5} sm={0.5}>
 					<Typography sx={{ textAlign: "center" }}>
 						<MoreVert
 							onClick={() => {
@@ -1705,7 +1705,7 @@ function Newcustomer() {
 			<Grid
 				container
 				spacing={2}
-				// marginX={4}
+				sm={12}
 				paddingX={2}
 				marginTop={1}
 				sx={{ justifyContent: "space-between" }}
@@ -2170,19 +2170,19 @@ function Newcustomer() {
 						<Grid
 							container
 							spacing={2}
-							// marginX={4}
+							sm={12}
 							paddingX={2}
 							marginTop={1}
 							sx={{ justifyContent: "space-between" }}
 						>
-							<Grid item sm={1.5}>
+							<Grid item sm={1.2}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Registration Date
 								</Typography>
 							</Grid>
-							<Grid item sm={2}>
+							<Grid item sm={1.3}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
@@ -2196,7 +2196,7 @@ function Newcustomer() {
 									Name
 								</Typography>
 							</Grid>
-							<Grid item sm={2.2}>
+							<Grid item sm={2.7}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
@@ -2224,16 +2224,16 @@ function Newcustomer() {
 									Status
 								</Typography>
 							</Grid>
-							<Grid item sm={1}>
+							<Grid item sm={0.5}>
 								<Typography
 									sx={{
-										textAlign: "right",
+										// textAlign: "right",
 										fontWeight: "600",
 										color: "gray",
 										fontSize: "14px",
 									}}
 								>
-									actions
+									Actions
 								</Typography>
 							</Grid>
 						</Grid>
