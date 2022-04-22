@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Button, Container, responsiveFontSizes } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 
 const Colors = {
@@ -34,6 +34,7 @@ export const Wrapper = styled(Container)({
 	width: "100vw",
 	backgroundColor: "#e1e1e1",
 	display: "flex",
+	flexDirection: "column",
 	justifyContent: "center",
 	alignItems: "center",
 });

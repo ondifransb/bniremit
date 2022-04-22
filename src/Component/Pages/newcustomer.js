@@ -157,10 +157,7 @@ function Newcustomer() {
 	const DisplayPage = "New Customer";
 
 	let [IDOrder, setIDOrder] = useState("");
-	var PutMess;
-	const PutMessVal = (e) => {
-		PutMess = e.target.value;
-	};
+	let PutMess;
 
 	const [OpenIt, setOpenIt] = useState(false);
 	const [SelectedIndex, setSelectedIndex] = useState(undefined);
@@ -169,6 +166,7 @@ function Newcustomer() {
 		setSelectedIndex(i);
 		setIDOrder(e.idOrdering);
 	};
+
 	const closeHandle = () => {
 		setOpenIt(false);
 	};
@@ -764,6 +762,14 @@ function Newcustomer() {
 	}
 
 	function DialogItem({ e, i }) {
+		let [PutMesslength, setPutMesslength] = useState(null);
+		let [messValid, setmessValid] = useState(false);
+		const PutMessVal = (e) => {
+			PutMess = e.target.value;
+
+			setPutMesslength(PutMess.length);
+		};
+
 		return (
 			<Dialog
 				sx={{
@@ -1534,7 +1540,7 @@ function Newcustomer() {
 								style: { fontSize: "13px" },
 							}}
 							variant="standard"
-							// margin="dense"
+							error={PutMesslength === 0 ? true : false}
 							size="small"
 							required
 							label="Input Your Note Here"
@@ -1542,8 +1548,9 @@ function Newcustomer() {
 							sx={{ width: WindowWidth <= 750 ? "100%" : "99.9%" }}
 							color="secondary"
 							defaultValue={e.message}
-							value={PutMess}
-							onChange={PutMessVal}
+							onChange={(e) => {
+								PutMessVal(e);
+							}}
 						/>
 					</Grid>
 				</Grid>
@@ -1554,7 +1561,7 @@ function Newcustomer() {
 					paddingX={WindowWidth <= 750 ? 1 : 2}
 					mt={WindowWidth <= 750 ? 0.5 : 1.5}
 				>
-					{e.statusRegister === "VERIFIED" ? null : (
+					{e.statusRegister === "VERIFIED" || PutMesslength === 0 ? null : (
 						<Stack
 							direction="row"
 							sx={{

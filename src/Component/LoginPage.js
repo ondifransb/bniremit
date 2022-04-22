@@ -11,7 +11,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Theme, Wrapper } from "./styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -149,8 +149,8 @@ function LoginPage() {
 							height: "40px",
 							width: "clamp(300px, 25%, 800px)",
 							position: "fixed",
-							transform: "translate(-50%,-31.5%)",
-							top: "31.5%",
+							transform: "translate(-50%,-50%)",
+							top: "28%",
 							left: "50%",
 							zIndex: "3",
 							display: "flex",
@@ -190,12 +190,12 @@ function LoginPage() {
 				<Box
 					sx={{
 						width: "clamp(300px, 30%, 800px)",
-						height: "clamp(280px, 30%, 900px)",
+						height: "clamp(250px, 30%, 900px)",
 						backgroundColor: "#fff",
 						borderRadius: "20px",
 						display: "flex",
 						flexDirection: "column",
-						justifyContent: "space-between",
+						justifyContent: "space-evenly",
 						alignItems: "center",
 						padding: "20px",
 					}}
@@ -223,6 +223,7 @@ function LoginPage() {
 						}}
 					>
 						<TextField
+							variant="standard"
 							error={userNameValid}
 							value={username}
 							size="small"
@@ -236,6 +237,7 @@ function LoginPage() {
 							defaultValue={username}
 						/>
 						<TextField
+							variant="standard"
 							error={PasswordValid}
 							value={password}
 							size="small"
@@ -251,19 +253,23 @@ function LoginPage() {
 								endAdornment: (
 									<InputAdornment
 										position="start"
-										sx={{ transform: "translateX(60%)" }}
+										sx={{ transform: "translateX(30%)" }}
 									>
 										{VisibilityValue ? (
 											<VisibilityIcon
 												sx={{
 													":hover": { cursor: "pointer" },
+													backgroundColor: "transparent",
 												}}
 												size="small"
 												onClick={VisibilityHandler}
 											/>
 										) : (
 											<VisibilityOffIcon
-												sx={{ ":hover": { cursor: "pointer" } }}
+												sx={{
+													":hover": { cursor: "pointer" },
+													backgroundColor: "transparent",
+												}}
 												size="small"
 												onClick={VisibilityHandler}
 											/>
@@ -273,7 +279,7 @@ function LoginPage() {
 							}}
 						/>
 						<Button
-							disabled={PasswordValid}
+							disabled={PasswordValid && userNameValid}
 							onClick={loginHandler}
 							color="secondary"
 							type="submit"
