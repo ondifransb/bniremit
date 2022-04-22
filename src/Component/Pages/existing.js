@@ -157,10 +157,7 @@ function ExistingCustomer() {
 	const DisplayPage = "Existing Customer";
 
 	let [IDOrder, setIDOrder] = useState("");
-	var PutMess;
-	const PutMessVal = (e) => {
-		PutMess = e.target.value;
-	};
+	let PutMess;
 
 	const [OpenIt, setOpenIt] = useState(false);
 	const [SelectedIndex, setSelectedIndex] = useState(undefined);
@@ -169,6 +166,7 @@ function ExistingCustomer() {
 		setSelectedIndex(i);
 		setIDOrder(e.idOrdering);
 	};
+
 	const closeHandle = () => {
 		setOpenIt(false);
 	};
@@ -209,9 +207,7 @@ function ExistingCustomer() {
 				if (error.response) {
 					// console.log(error.response.data.status);
 					if (error.response.data.status === 401) {
-						setAlertMessage(
-							error.response.data.Message || error.response.data.message
-						);
+						setAlertMessage(error.response.data.message);
 						ShowAlert();
 						setAlertLoading(true);
 						setTimeout(() => {
@@ -220,9 +216,7 @@ function ExistingCustomer() {
 						}, 1500);
 					}
 					if (error.response.data.status === 400) {
-						setAlertMessage(
-							error.response.data.Message || error.response.data.message
-						);
+						setAlertMessage(error.response.data.Errors);
 						ShowAlert();
 						setAlertLoading(true);
 						setTimeout(() => {
@@ -240,60 +234,61 @@ function ExistingCustomer() {
 	};
 
 	const PutData = async (RegisterStat) => {
-		await axios
-			.put(
-				"https://api-tokyo.remit.digi46.id/api/portal/actionPortal",
-				{
-					idOrdering: IDOrder,
-					statusRegister: RegisterStat,
-					message: PutMess,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("token")}`,
-						"Content-Type": "application/json",
+		try {
+			await axios
+				.put(
+					"https://api-tokyo.remit.digi46.id/api/portal/actionPortal",
+					{
+						idOrdering: IDOrder,
+						statusRegister: RegisterStat,
+						message: PutMess,
 					},
-				},
-				setLoading(true),
-				setOpenIt(false)
-			)
-			.then((res) => {
-				setAlertMessage(res.data.message);
-				setAlertLoading(true);
-				RetresStat(res.status);
-				ShowAlert();
-				setTimeout(() => {
-					setAlertLoading(false);
-					RetresStat("");
-				}, 1500);
-				setLoading(false);
-				FetchData();
-			})
-			.catch((error) => {
-				setLoading(false);
-				if (error.response) {
-					if (error.response.data.status === 401) {
-						setAlertMessage(
-							error.response.data.Message || error.response.data.message
-						);
-						ShowAlert();
-						setAlertLoading(true);
-						setTimeout(() => {
-							setAlertLoading(false);
-							logoutf();
-						}, 1500);
-					} else {
-						setAlertMessage(
-							error.response.data.Message || error.response.data.message
-						);
-						ShowAlert();
-						setAlertLoading(true);
-						setTimeout(() => {
-							setAlertLoading(false);
-						}, 1500);
-					}
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("token")}`,
+							"Content-Type": "application/json",
+						},
+					},
+					setLoading(true),
+					setOpenIt(false)
+				)
+				.then((res) => {
+					setAlertMessage(res.data.message);
+					setAlertLoading(true);
+					RetresStat(res.status);
+					ShowAlert();
+					setTimeout(() => {
+						setAlertLoading(false);
+						RetresStat("");
+					}, 1500);
+					setLoading(false);
+					FetchData();
+				});
+		} catch (error) {
+			setLoading(false);
+			if (error.response) {
+				if (error.response.data.status === 401) {
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+						logoutf();
+					}, 1500);
+				} else {
+					setAlertMessage(
+						error.response.data.Message || error.response.data.message
+					);
+					ShowAlert();
+					setAlertLoading(true);
+					setTimeout(() => {
+						setAlertLoading(false);
+					}, 1500);
 				}
-			});
+			}
+		}
 	};
 	//FUNCTION AREA END
 
@@ -767,6 +762,14 @@ function ExistingCustomer() {
 	}
 
 	function DialogItem({ e, i }) {
+		let [PutMesslength, setPutMesslength] = useState(null);
+		let [messValid, setmessValid] = useState(false);
+		const PutMessVal = (e) => {
+			PutMess = e.target.value;
+
+			setPutMesslength(PutMess.length);
+		};
+
 		return (
 			<Dialog
 				sx={{
@@ -1537,7 +1540,7 @@ function ExistingCustomer() {
 								style: { fontSize: "13px" },
 							}}
 							variant="standard"
-							// margin="dense"
+							error={PutMesslength === 0 ? true : false}
 							size="small"
 							required
 							label="Input Your Note Here"
@@ -1545,8 +1548,9 @@ function ExistingCustomer() {
 							sx={{ width: WindowWidth <= 750 ? "100%" : "99.9%" }}
 							color="secondary"
 							defaultValue={e.message}
-							value={PutMess}
-							onChange={PutMessVal}
+							onChange={(e) => {
+								PutMessVal(e);
+							}}
 						/>
 					</Grid>
 				</Grid>
@@ -1557,7 +1561,7 @@ function ExistingCustomer() {
 					paddingX={WindowWidth <= 750 ? 1 : 2}
 					mt={WindowWidth <= 750 ? 0.5 : 1.5}
 				>
-					{e.statusRegister === "VERIFIED" ? null : (
+					{e.statusRegister === "VERIFIED" || PutMesslength === 0 ? null : (
 						<Stack
 							direction="row"
 							sx={{
