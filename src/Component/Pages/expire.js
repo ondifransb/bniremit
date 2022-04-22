@@ -103,7 +103,7 @@ function CodeActivation() {
 				.then((res) => {
 					setSliderValue(res.data.value);
 					setLoading(false);
-					console.log(res.data.value);
+					// console.log(res.data.value);
 				});
 		} catch (error) {
 			setLoading(false);

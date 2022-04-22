@@ -67,7 +67,7 @@ function LoginPage() {
 			setuserNameValid(true);
 		}
 
-		console.log(username.length);
+		// console.log(username.length);
 	};
 
 	const PasswordHandle = (e) => {
@@ -78,7 +78,7 @@ function LoginPage() {
 			setPasswordValid(true);
 		}
 
-		console.log(PasswordValid);
+		// console.log(PasswordValid);
 	};
 
 	const loginHandler = async (e) => {
@@ -108,7 +108,7 @@ function LoginPage() {
 			setusername("");
 			setPassword("");
 			if (error.response) {
-				console.log(error.response.data.Status);
+				// console.log(error.response.data.Status);
 				RetresStat(error.response.data.Status);
 				if (error.response.data.status === 401) {
 					setAlertMessage(error.response.data.message);
@@ -249,10 +249,15 @@ function LoginPage() {
 							defaultValue={password}
 							InputProps={{
 								endAdornment: (
-									<InputAdornment position="start">
+									<InputAdornment
+										position="start"
+										sx={{ transform: "translateX(60%)" }}
+									>
 										{VisibilityValue ? (
 											<VisibilityIcon
-												sx={{ ":hover": { cursor: "pointer" } }}
+												sx={{
+													":hover": { cursor: "pointer" },
+												}}
 												size="small"
 												onClick={VisibilityHandler}
 											/>

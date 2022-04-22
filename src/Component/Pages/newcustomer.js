@@ -207,7 +207,7 @@ function Newcustomer() {
 			})
 			.catch((error) => {
 				if (error.response) {
-					console.log(error.response.data.status);
+					// console.log(error.response.data.status);
 					if (error.response.data.status === 401) {
 						setAlertMessage(error.response.data.message);
 						ShowAlert();
@@ -309,7 +309,7 @@ function Newcustomer() {
 					{}
 				)
 				.then((response) => {
-					console.log(response.data);
+					// console.log(response.data);
 					let blob = new Blob([response.data], {
 							type: "image/png, image/jpg",
 						}),
