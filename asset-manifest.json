@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/bniremit/static/css/main.8ecd8c40.css",
-    "main.js": "/bniremit/static/js/main.9b7ba3e2.js",
+    "main.js": "/bniremit/static/js/main.50cb659e.js",
     "static/js/787.c346f492.chunk.js": "/bniremit/static/js/787.c346f492.chunk.js",
     "static/media/BNILOGO.svg": "/bniremit/static/media/BNILOGO.17cb722cd9f3172ea3aa918a183b56ef.svg",
     "index.html": "/bniremit/index.html",
     "main.8ecd8c40.css.map": "/bniremit/static/css/main.8ecd8c40.css.map",
-    "main.9b7ba3e2.js.map": "/bniremit/static/js/main.9b7ba3e2.js.map",
+    "main.50cb659e.js.map": "/bniremit/static/js/main.50cb659e.js.map",
     "787.c346f492.chunk.js.map": "/bniremit/static/js/787.c346f492.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8ecd8c40.css",
-    "static/js/main.9b7ba3e2.js"
+    "static/js/main.50cb659e.js"
   ]
 }
