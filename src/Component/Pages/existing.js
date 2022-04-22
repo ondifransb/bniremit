@@ -124,9 +124,9 @@ function ExistingCustomer() {
 		setToDate(e.target.value);
 	};
 
-	const [BirthDate, setBirthDate] = useState();
+	const [dateofbirth, setdateofbirth] = useState();
 	const BirthVal = (e) => {
-		setBirthDate(e.target.value);
+		setdateofbirth(e.target.value);
 	};
 
 	const [IdNum, setIdNum] = useState();
@@ -186,7 +186,7 @@ function ExistingCustomer() {
 				{
 					idNumber: IdNum ? IdNum : null,
 					name: Name ? Name : null,
-					birthDate: BirthDate ? BirthDate : null,
+					dateofbirth: dateofbirth ? dateofbirth : null,
 					dateForm: FromDate ? FromDate : null,
 					dateTo: ToDate ? ToDate : null,
 					status: Status ? Status : null,
@@ -404,8 +404,8 @@ function ExistingCustomer() {
 			}${Regis ? Regis : ""}${Regis ? "_" : ""}${FromDate ? FromDate : ""}${
 				FromDate ? " to " : ""
 			}${ToDate ? ToDate : ""}${ToDate ? "_" : ""}${
-				BirthDate ? BirthDate : ""
-			}${BirthDate ? "_" : ""}${Status ? Status : ""}.xlsx`
+				dateofbirth ? dateofbirth : ""
+			}${dateofbirth ? "_" : ""}${Status ? Status : ""}.xlsx`
 		);
 	};
 
@@ -422,7 +422,7 @@ function ExistingCustomer() {
 					}}
 					paddingX={2}
 				>
-					{k?.long_name ? (
+					{k?.name ? (
 						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								InputProps={{
@@ -437,7 +437,7 @@ function ExistingCustomer() {
 								autoFocus
 								fullWidth
 								color="secondary"
-								defaultValue={k?.long_name}
+								defaultValue={k?.name}
 							/>
 						</Grid>
 					) : null}
@@ -611,7 +611,7 @@ function ExistingCustomer() {
 						</Grid>
 					) : null}
 
-					{k?.idtypeno ? (
+					{k?.accountnum ? (
 						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
@@ -627,7 +627,7 @@ function ExistingCustomer() {
 								autoFocus
 								fullWidth
 								color="secondary"
-								defaultValue={k?.idtypeno}
+								defaultValue={k?.accountnum}
 							/>
 						</Grid>
 					) : null}
@@ -642,7 +642,80 @@ function ExistingCustomer() {
 					}}
 					paddingX={2}
 				>
-					{k?.service_type ? (
+					{k?.outgoingCcy ? (
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px", boxSizing: "border-box" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiery Outgoing Currency"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.outgoingCcy}
+							/>
+						</Grid>
+					) : null}
+
+					{k?.relationship ? (
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px", boxSizing: "border-box" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiary Relationship"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.relationship}
+							/>
+						</Grid>
+					) : null}
+
+					{k?.phonenum ? (
+						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
+							<TextField
+								xs={4}
+								InputProps={{
+									readOnly: true,
+									style: { fontSize: "13px", boxSizing: "border-box" },
+								}}
+								variant="standard"
+								margin="dense"
+								size="small"
+								required
+								label="Beneficiary Phone Number"
+								autoFocus
+								fullWidth
+								color="secondary"
+								defaultValue={k?.phonenum}
+							/>
+						</Grid>
+					) : null}
+				</Grid>
+
+				<Grid
+					spacing={2}
+					container
+					direction="row"
+					sx={{
+						display: "flex",
+					}}
+					paddingX={2}
+				>
+					{k?.serviceTypeIs ? (
 						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
@@ -658,12 +731,12 @@ function ExistingCustomer() {
 								autoFocus
 								fullWidth
 								color="secondary"
-								defaultValue={k?.service_type}
+								defaultValue={k?.serviceTypeIs}
 							/>
 						</Grid>
 					) : null}
 
-					{k?.service_type ? (
+					{k?.serviceType ? (
 						<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 							<TextField
 								xs={4}
@@ -679,7 +752,7 @@ function ExistingCustomer() {
 								autoFocus
 								fullWidth
 								color="secondary"
-								defaultValue={k?.service_type}
+								defaultValue={k?.serviceType}
 							/>
 						</Grid>
 					) : null}
@@ -818,7 +891,7 @@ function ExistingCustomer() {
 							</Grid>
 						) : null}
 
-						{e.registrationDate ? (
+						{e.createDate ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									InputProps={{
@@ -833,7 +906,7 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.registrationDate}
+									defaultValue={e.createDate}
 								/>
 							</Grid>
 						) : null}
@@ -853,7 +926,7 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.activationCode}
+									defaultValue={e.activationCode.activation_code}
 								/>
 							</Grid>
 						) : null}
@@ -868,7 +941,7 @@ function ExistingCustomer() {
 						}}
 						paddingX={2}
 					>
-						{e.long_name ? (
+						{e.longname ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -884,12 +957,12 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.long_name}
+									defaultValue={e.longname}
 								/>
 							</Grid>
 						) : null}
 
-						{e.birthdate ? (
+						{e.dateofbirth ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -905,7 +978,7 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.birthdate}
+									defaultValue={e.dateofbirth}
 								/>
 							</Grid>
 						) : null}
@@ -1080,7 +1153,7 @@ function ExistingCustomer() {
 							</Grid>
 						) : null}
 
-						{e.idExpire1 ? (
+						{e.id_expire_1 ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -1096,7 +1169,7 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.idExpire1}
+									defaultValue={e.id_expire_1}
 								/>
 							</Grid>
 						) : null}
@@ -1111,7 +1184,7 @@ function ExistingCustomer() {
 						}}
 						paddingX={2}
 					>
-						{e.idNumber2 ? (
+						{e.id_number_2 ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -1127,12 +1200,12 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.idNumber2}
+									defaultValue={e.id_number_2}
 								/>
 							</Grid>
 						) : null}
 
-						{e.idType2 ? (
+						{e.id_type_2 ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -1159,12 +1232,12 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.idType2}
+									defaultValue={e.id_type_2}
 								/>
 							</Grid>
 						) : null}
 
-						{e.idExpire2 ? (
+						{e.id_expire_2 ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -1180,7 +1253,7 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.idExpire2}
+									defaultValue={e.id_expire_2}
 								/>
 							</Grid>
 						) : null}
@@ -1196,7 +1269,7 @@ function ExistingCustomer() {
 						}}
 						paddingX={2}
 					>
-						{e.address1 && e.address2 && e.address3 ? (
+						{e.address1 || e.address2 || e.address3 ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -1212,9 +1285,7 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={
-										e.address1 + " " + e.address2 + " " + e.address3
-									}
+									defaultValue={e.address1}
 								/>
 							</Grid>
 						) : null}
@@ -1361,7 +1432,7 @@ function ExistingCustomer() {
 							</Grid>
 						) : null}
 
-						{e.company_address1 && e.company_address2 && e.company_address3 ? (
+						{e.company_address1 || e.company_address2 || e.company_address3 ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -1440,7 +1511,7 @@ function ExistingCustomer() {
 							</Grid>
 						) : null}
 
-						{e.freqPerYear ? (
+						{e.estimateyeartrx ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -1456,12 +1527,12 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.freqPerYear}
+									defaultValue={e.estimateyeartrx}
 								/>
 							</Grid>
 						) : null}
 
-						{e.estimateyeartrx ? (
+						{e.estimateyearamt ? (
 							<Grid item sx={{ width: WindowWidth <= 750 ? "100%" : "33.3%" }}>
 								<TextField
 									xs={4}
@@ -1477,7 +1548,7 @@ function ExistingCustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.estimateyeartrx}
+									defaultValue={e.estimateyearamt}
 								/>
 							</Grid>
 						) : null}
@@ -1485,7 +1556,7 @@ function ExistingCustomer() {
 
 					{/* BENEFICIARY START */}
 					{e
-						? e.beneficiaryCustomers.map((k, m) => {
+						? e.existingBeneficiaries.map((k, m) => {
 								return (
 									<Fragment key={m}>
 										<BenItem k={k} m={m} />
@@ -1504,7 +1575,7 @@ function ExistingCustomer() {
 						}}
 						paddingX={2}
 					>
-						{e.statusRegister ? (
+						{e.status ? (
 							<TextField
 								InputProps={{
 									readOnly: true,
@@ -1521,7 +1592,7 @@ function ExistingCustomer() {
 									marginTop: "20px",
 								}}
 								color="secondary"
-								defaultValue={e.statusRegister}
+								defaultValue={e.status}
 							/>
 						) : null}
 					</Grid>
@@ -1561,7 +1632,7 @@ function ExistingCustomer() {
 					paddingX={WindowWidth <= 750 ? 1 : 2}
 					mt={WindowWidth <= 750 ? 0.5 : 1.5}
 				>
-					{e.statusRegister === "VERIFIED" || PutMesslength === 0 ? null : (
+					{e.status === "VERIFIED" || PutMesslength === 0 ? null : (
 						<Stack
 							direction="row"
 							sx={{
@@ -1668,7 +1739,7 @@ function ExistingCustomer() {
 				</Grid>
 
 				<Grid item sm={1.3} marginBottom={1.5}>
-					<Typography>{e.birthdate}</Typography>
+					<Typography>{e.dateofbirth}</Typography>
 				</Grid>
 
 				<Grid item sm={1.5} marginBottom={1.5}>
@@ -2062,7 +2133,7 @@ function ExistingCustomer() {
 														mb={0.5}
 													>
 														<Typography>Registration Date</Typography>
-														<Typography>{e.registrationDate}</Typography>
+														<Typography>{e.createDate}</Typography>
 													</Grid>
 												</Grid>
 
@@ -2073,9 +2144,7 @@ function ExistingCustomer() {
 														mb={0.5}
 													>
 														<Typography>Reg Ref Number</Typography>
-														<Typography>
-															{e.referenceNumber ? e.referenceNumber : "-"}
-														</Typography>
+														<Typography>{e.referenceNumber}</Typography>
 													</Grid>
 												</Grid>
 
@@ -2108,7 +2177,7 @@ function ExistingCustomer() {
 														mb={0.5}
 													>
 														<Typography>Date of Birth</Typography>
-														<Typography>{e.birthdate}</Typography>
+														<Typography>{e.dateofbirth}</Typography>
 													</Grid>
 												</Grid>
 
@@ -2119,7 +2188,7 @@ function ExistingCustomer() {
 														mb={0.5}
 													>
 														<Typography>Home Address</Typography>
-														<Typography>{e.address3}</Typography>
+														<Typography>{e.address1}</Typography>
 													</Grid>
 												</Grid>
 
@@ -2130,7 +2199,7 @@ function ExistingCustomer() {
 														mb={0.5}
 													>
 														<Typography>Status</Typography>
-														<Typography>{e.statusRegister}</Typography>
+														<Typography>{e.status}</Typography>
 													</Grid>
 												</Grid>
 
