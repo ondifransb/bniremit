@@ -1722,32 +1722,32 @@ function ExistingCustomer() {
 	function AllItem({ e, i }) {
 		return (
 			<Fragment key={i}>
-				<Grid item sm={1.5} marginBottom={1.5}>
-					<Typography>{e.registrationDate}</Typography>
+				<Grid item sm={1.2} marginBottom={1}>
+					<Typography>{e.createDate}</Typography>
 				</Grid>
 
-				<Grid item sm={2} marginBottom={1.5}>
+				<Grid item sm={1.2} marginBottom={1.5}>
 					<Typography>{e.referenceNumber ? e.referenceNumber : "-"}</Typography>
 				</Grid>
 
-				<Grid item sm={1.5} marginBottom={1.5}>
+				<Grid item sm={1.2} marginBottom={1.5}>
 					<Typography>{e.name}</Typography>
 				</Grid>
 
-				<Grid item sm={2.2} marginBottom={1.5}>
+				<Grid item sm={1.2} marginBottom={1.5}>
 					<Typography>{e.idNumber1}</Typography>
 				</Grid>
 
-				<Grid item sm={1.3} marginBottom={1.5}>
+				<Grid item sm={1.1} marginBottom={1.5}>
 					<Typography>{e.dateofbirth}</Typography>
 				</Grid>
 
-				<Grid item sm={1.5} marginBottom={1.5}>
-					<Typography>{e.address3}</Typography>
+				<Grid item sm={3.1} marginBottom={1.5}>
+					<Typography>{e.address1}</Typography>
 				</Grid>
 
 				<Grid item sm={1} marginBottom={1.5}>
-					<Typography>{e.statusRegister}</Typography>
+					<Typography>{e.status}</Typography>
 				</Grid>
 
 				<Grid item sm={1} marginBottom={1.5}>
@@ -2187,8 +2187,14 @@ function ExistingCustomer() {
 														sx={{ justifyContent: "space-between" }}
 														mb={0.5}
 													>
-														<Typography>Home Address</Typography>
-														<Typography>{e.address1}</Typography>
+														<Typography sx={{ width: "10%" }}>
+															Home Address
+														</Typography>
+														<Typography
+															sx={{ width: "60%", textAlign: "right" }}
+														>
+															{e.address1}
+														</Typography>
 													</Grid>
 												</Grid>
 
@@ -2244,42 +2250,42 @@ function ExistingCustomer() {
 							marginTop={1}
 							sx={{ justifyContent: "space-between" }}
 						>
-							<Grid item sm={1.5}>
+							<Grid item sm={1.2}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Registration Date
 								</Typography>
 							</Grid>
-							<Grid item sm={2}>
+							<Grid item sm={1.2}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Reg Ref Number
 								</Typography>
 							</Grid>
-							<Grid item sm={1.5}>
+							<Grid item sm={1.2}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Name
 								</Typography>
 							</Grid>
-							<Grid item sm={2.2}>
+							<Grid item sm={1.2}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									ID Number
 								</Typography>
 							</Grid>
-							<Grid item sm={1.3}>
+							<Grid item sm={1.1}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Date of Birth
 								</Typography>
 							</Grid>
-							<Grid item sm={1.5}>
+							<Grid item sm={3.1}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
