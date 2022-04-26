@@ -232,7 +232,6 @@ function LoginPage() {
 							required
 							fullWidth
 							label="Username"
-							autoFocus
 							color="secondary"
 							defaultValue={username}
 						/>
@@ -246,7 +245,6 @@ function LoginPage() {
 							fullWidth
 							label="Password"
 							type={VisibilityValue ? "text" : "password"}
-							autoComplete="current-password"
 							color="secondary"
 							defaultValue={password}
 							InputProps={{

@@ -835,8 +835,8 @@ function ExistingCustomer() {
 	}
 
 	function DialogItem({ e, i }) {
-		let [PutMesslength, setPutMesslength] = useState(null);
-		let [messValid, setmessValid] = useState(false);
+		let [PutMesslength, setPutMesslength] = useState(e.notes === null ? 0 : 1);
+
 		const PutMessVal = (e) => {
 			PutMess = e.target.value;
 
@@ -1618,7 +1618,7 @@ function ExistingCustomer() {
 							autoFocus
 							sx={{ width: WindowWidth <= 750 ? "100%" : "99.9%" }}
 							color="secondary"
-							defaultValue={e.message}
+							defaultValue={e.notes}
 							onChange={(e) => {
 								PutMessVal(e);
 							}}

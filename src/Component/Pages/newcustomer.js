@@ -762,8 +762,8 @@ function Newcustomer() {
 	}
 
 	function DialogItem({ e, i }) {
-		let [PutMesslength, setPutMesslength] = useState(null);
-		let [messValid, setmessValid] = useState(false);
+		let [PutMesslength, setPutMesslength] = useState(e.message === "" ? 0 : 1);
+
 		const PutMessVal = (e) => {
 			PutMess = e.target.value;
 
@@ -1655,15 +1655,15 @@ function Newcustomer() {
 					<Typography>{e.registrationDate}</Typography>
 				</Grid>
 
-				<Grid item marginBottom={1.5} sm={1.3}>
+				<Grid item marginBottom={1.5} sm={1.4}>
 					<Typography>{e.referenceNumber}</Typography>
 				</Grid>
 
-				<Grid item marginBottom={1.5} sm={1.5}>
+				<Grid item marginBottom={1.5} sm={1.4}>
 					<Typography>{e.name}</Typography>
 				</Grid>
 
-				<Grid item marginBottom={1.5} sm={2.7}>
+				<Grid item marginBottom={1.5} sm={3}>
 					<Typography>{e.idNumber1}</Typography>
 				</Grid>
 
@@ -1705,7 +1705,6 @@ function Newcustomer() {
 			<Grid
 				container
 				spacing={2}
-				sm={12}
 				paddingX={2}
 				marginTop={1}
 				sx={{ justifyContent: "space-between" }}
@@ -2170,7 +2169,6 @@ function Newcustomer() {
 						<Grid
 							container
 							spacing={2}
-							sm={12}
 							paddingX={2}
 							marginTop={1}
 							sx={{ justifyContent: "space-between" }}
@@ -2182,21 +2180,21 @@ function Newcustomer() {
 									Registration Date
 								</Typography>
 							</Grid>
-							<Grid item sm={1.3}>
+							<Grid item sm={1.4}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Reg Ref Number
 								</Typography>
 							</Grid>
-							<Grid item sm={1.5}>
+							<Grid item sm={1.4}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
 									Name
 								</Typography>
 							</Grid>
-							<Grid item sm={2.7}>
+							<Grid item sm={3}>
 								<Typography
 									sx={{ fontWeight: "600", color: "gray", fontSize: "14px" }}
 								>
