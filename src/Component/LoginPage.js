@@ -49,9 +49,9 @@ function LoginPage() {
 	const Navigate = useNavigate();
 
 	const [username, setusername] = useState("");
-	const [userNameValid, setuserNameValid] = useState(false);
+	const [userNameValid, setuserNameValid] = useState(true);
 	const [password, setPassword] = useState("");
-	const [PasswordValid, setPasswordValid] = useState(false);
+	const [PasswordValid, setPasswordValid] = useState(true);
 	const [VisibilityValue, setVisibilityValue] = useState(false);
 
 	const VisibilityHandler = () => {
@@ -60,11 +60,11 @@ function LoginPage() {
 
 	const UsernameHandle = (e) => {
 		setusername(e.target.value);
-
-		if (username.length > 6) {
-			setuserNameValid(false);
-		} else {
+		console.log(username.length);
+		if (username.length < 6) {
 			setuserNameValid(true);
+		} else {
+			setuserNameValid(false);
 		}
 
 		// console.log(username.length);
@@ -72,10 +72,10 @@ function LoginPage() {
 
 	const PasswordHandle = (e) => {
 		setPassword(e.target.value);
-		if (password.length > 6) {
-			setPasswordValid(false);
-		} else {
+		if (password.length < 6) {
 			setPasswordValid(true);
+		} else {
+			setPasswordValid(false);
 		}
 
 		// console.log(PasswordValid);
@@ -277,7 +277,7 @@ function LoginPage() {
 							}}
 						/>
 						<Button
-							disabled={PasswordValid && userNameValid}
+							disabled={PasswordValid || userNameValid}
 							onClick={loginHandler}
 							color="secondary"
 							type="submit"
