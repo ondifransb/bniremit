@@ -15,7 +15,8 @@ import React, { useState } from "react";
 import { Theme, Wrapper } from "./styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/BNILOGO.svg";
+import Logo from "../assets/BNILOGO.png";
+import "./Login.css";
 
 function LoginPage() {
 	const [Loading, setLoading] = useState(false);
@@ -28,16 +29,16 @@ function LoginPage() {
 				<Alert
 					severity={ResStat === 200 ? "success" : "error"}
 					sx={{
-						height: "120px",
-						width: "clamp(300px, 25%, 800px)",
+						height: "108px",
+						width: "clamp(300px, 24.5%, 800px)",
 						position: "fixed",
 						transform: "translate(-50%,-50%)",
-						top: "50%",
+						top: "51.3%",
 						left: "50%",
-						zIndex: "3",
+						zIndex: "11",
 						display: "flex",
+						justifyContent: "center",
 						alignItems: "center",
-						borderRadius: "10px",
 					}}
 				>
 					<strong>{AlertMessage}</strong>
@@ -49,9 +50,9 @@ function LoginPage() {
 	const Navigate = useNavigate();
 
 	const [username, setusername] = useState("");
-	const [userNameValid, setuserNameValid] = useState(true);
+	const [userNameValid, setuserNameValid] = useState(false);
 	const [password, setPassword] = useState("");
-	const [PasswordValid, setPasswordValid] = useState(true);
+	const [PasswordValid, setPasswordValid] = useState(false);
 	const [VisibilityValue, setVisibilityValue] = useState(false);
 
 	const VisibilityHandler = () => {
@@ -142,40 +143,17 @@ function LoginPage() {
 	return (
 		<ThemeProvider theme={Theme}>
 			<Wrapper maxWidth={false}>
-				{PasswordValid || userNameValid ? (
-					<Alert
-						severity={PasswordValid || userNameValid ? "error" : "success"}
-						sx={{
-							height: "40px",
-							width: "clamp(300px, 25%, 800px)",
-							position: "fixed",
-							transform: "translate(-50%,-50%)",
-							top: "28%",
-							left: "50%",
-							zIndex: "3",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-							borderRadius: "10px",
-						}}
-					>
-						<strong>
-							Username and Password should have at least six characters
-						</strong>
-					</Alert>
-				) : null}
-
 				{Loading ? (
 					<Grid
 						container
 						sx={{
-							width: "clamp(300px, 25%, 800px)",
-							height: "120px",
+							height: "108px",
+							width: "clamp(300px, 24.5%, 800px)",
 							position: "fixed",
-							transform: "translateY(-50%)",
-							top: "50%",
-							// left: "50%",
-							zIndex: "3",
+							transform: "translate(-50%,-50%)",
+							top: "51.3%",
+							left: "50%",
+							zIndex: "11",
 							display: "flex",
 							justifyContent: "center",
 							alignItems: "center",
@@ -187,30 +165,45 @@ function LoginPage() {
 				) : null}
 
 				{AlertLoading ? <ShowAlert /> : null}
+
 				<Box
 					sx={{
-						width: "clamp(300px, 30%, 800px)",
-						height: "clamp(250px, 30%, 900px)",
+						width: "clamp(300px, 25%, 800px)",
+						height: "clamp(250px, 25%, 900px)",
 						backgroundColor: "#fff",
-						borderRadius: "20px",
+						borderRadius: "40px 0 ",
 						display: "flex",
 						flexDirection: "column",
 						justifyContent: "space-evenly",
 						alignItems: "center",
 						padding: "20px",
+						zIndex: "10",
+						position: "relative",
 					}}
 				>
-					<Box
-						sx={{
-							boxSizing: "border-box",
-							borderRadius: "50px",
-							width: "clamp(250px,60%, 400px)",
-							display: "flex",
-							alignItems: "center",
-						}}
-					>
-						<img src={Logo} sx={{ width: "100%", height: "auto" }} alt="" />
-					</Box>
+					<img src={Logo} alt="BNI-REMITANCE LOGO" />
+
+					{PasswordValid || userNameValid ? (
+						<Alert
+							severity={PasswordValid || userNameValid ? "error" : "success"}
+							sx={{
+								height: "40px",
+								width: "100%",
+								position: "absolute",
+								transform: "translate(-50%,0%)",
+								bottom: "clamp(20px,1vw,2vw)",
+								left: "50%",
+								zIndex: "3",
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+							}}
+						>
+							<strong>
+								Username and Password should have at least six characters
+							</strong>
+						</Alert>
+					) : null}
 
 					<Box
 						component="form"
@@ -218,8 +211,10 @@ function LoginPage() {
 						sx={{
 							display: "flex",
 							flexDirection: "column",
-							justifyContent: "space-between",
+							justifyContent: "space-around",
 							alignItems: "center",
+							width: "clamp(250px, 70%, 900px)",
+							mt: -3,
 						}}
 					>
 						<TextField
@@ -233,7 +228,7 @@ function LoginPage() {
 							fullWidth
 							label="Username"
 							color="secondary"
-							defaultValue={username}
+							// defaultValue={username}
 						/>
 						<TextField
 							variant="standard"
@@ -246,7 +241,7 @@ function LoginPage() {
 							label="Password"
 							type={VisibilityValue ? "text" : "password"}
 							color="secondary"
-							defaultValue={password}
+							// defaultValue={password}
 							InputProps={{
 								endAdornment: (
 									<InputAdornment
@@ -283,7 +278,7 @@ function LoginPage() {
 							type="submit"
 							variant="contained"
 							size="small"
-							sx={{ width: "50%", mt: 3, mb: 2, color: "white" }}
+							sx={{ width: "50%", mt: 1, color: "white" }}
 						>
 							Sign In
 						</Button>

@@ -1,0 +1,4 @@
+img {
+	width: clamp(250px, 70%, 900px);
+	height: auto;
+}

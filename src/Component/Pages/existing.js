@@ -1850,7 +1850,7 @@ function ExistingCustomer() {
 							<ListItemIcon>
 								<ManageAccountsIcon />
 							</ListItemIcon>
-							<Typography>Role Magement</Typography>
+							<Typography>Role Management</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/CodeActivation")}>
@@ -1973,7 +1973,7 @@ function ExistingCustomer() {
 					alignItems: "center",
 				}}
 			>
-				<Grid container spacing={2} paddingX={2} sx={{ marginTop: "-30px" }}>
+				<Grid container spacing={2} paddingX={3} sx={{ marginTop: "-30px" }}>
 					<Grid item xs={4}>
 						<TextField
 							margin="normal"
@@ -2087,10 +2087,15 @@ function ExistingCustomer() {
 					<Grid item xs={4}>
 						<Stack direction="row" spacing={2}>
 							<Button
+								onClick={FetchData}
 								size="small"
 								variant="contained"
-								onClick={FetchData}
 								margin="10px"
+								sx={{
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
 							>
 								Filter
 							</Button>
@@ -2099,14 +2104,24 @@ function ExistingCustomer() {
 								size="small"
 								variant="contained"
 								margin="normal"
+								sx={{
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
 							>
 								Export
 							</Button>
 							<Button
+								onClick={resetit}
 								size="small"
 								variant="contained"
 								margin="normal"
-								onClick={resetit}
+								sx={{
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
 							>
 								Reset
 							</Button>
@@ -2114,7 +2129,7 @@ function ExistingCustomer() {
 					</Grid>
 				</Grid>
 
-				{WindowWidth <= 750 ? (
+				{WindowWidth <= 1000 ? (
 					<Grid container spacing={1} paddingX={3} marginTop={1}>
 						{dataRemit
 							? dataRemit.map((e, i) => {
@@ -2246,7 +2261,7 @@ function ExistingCustomer() {
 							container
 							spacing={2}
 							// marginX={4}
-							paddingX={2}
+							paddingX={3}
 							marginTop={1}
 							sx={{ justifyContent: "space-between" }}
 						>

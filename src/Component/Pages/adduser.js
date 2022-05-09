@@ -220,7 +220,7 @@ function AddUser() {
 							<ListItemIcon>
 								<ManageAccountsIcon />
 							</ListItemIcon>
-							<Typography>Role Magement</Typography>
+							<Typography>Role Management</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/CodeActivation")}>

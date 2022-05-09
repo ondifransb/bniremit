@@ -853,7 +853,7 @@ function Newcustomer() {
 									autoFocus
 									fullWidth
 									color="secondary"
-									defaultValue={e.activationCode}
+									defaultValue={e.activationCode["activation_code"]}
 								/>
 							</Grid>
 						) : null}
@@ -1778,7 +1778,7 @@ function Newcustomer() {
 							<ListItemIcon>
 								<ManageAccountsIcon />
 							</ListItemIcon>
-							<Typography>Role Magement</Typography>
+							<Typography>Role Management</Typography>
 						</ListItem>
 
 						<ListItem button onClick={() => navigate("/CodeActivation")}>
@@ -1901,7 +1901,7 @@ function Newcustomer() {
 					alignItems: "center",
 				}}
 			>
-				<Grid container spacing={2} paddingX={2} sx={{ marginTop: "-30px" }}>
+				<Grid container spacing={2} paddingX={3} sx={{ marginTop: "-30px" }}>
 					<Grid item xs={4}>
 						<TextField
 							margin="normal"
@@ -2042,7 +2042,7 @@ function Newcustomer() {
 					</Grid>
 				</Grid>
 
-				{WindowWidth <= 750 ? (
+				{WindowWidth <= 1000 ? (
 					<Grid container spacing={1} paddingX={3} marginTop={1}>
 						{dataRemit
 							? dataRemit.map((e, i) => {
@@ -2169,7 +2169,7 @@ function Newcustomer() {
 						<Grid
 							container
 							spacing={2}
-							paddingX={2}
+							paddingX={3}
 							marginTop={1}
 							sx={{ justifyContent: "space-between" }}
 						>
