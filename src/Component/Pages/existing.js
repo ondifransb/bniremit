@@ -1777,7 +1777,7 @@ function ExistingCustomer() {
 				container
 				spacing={2}
 				// marginX={4}
-				paddingX={2}
+				paddingX={3}
 				marginTop={1}
 				sx={{ justifyContent: "space-between" }}
 			>
@@ -2321,6 +2321,7 @@ function ExistingCustomer() {
 										fontWeight: "600",
 										color: "gray",
 										fontSize: "14px",
+										textAlign: "center",
 									}}
 								>
 									actions

@@ -1705,7 +1705,7 @@ function Newcustomer() {
 			<Grid
 				container
 				spacing={2}
-				paddingX={2}
+				paddingX={3}
 				marginTop={1}
 				sx={{ justifyContent: "space-between" }}
 			>
@@ -2225,7 +2225,7 @@ function Newcustomer() {
 							<Grid item sm={0.5}>
 								<Typography
 									sx={{
-										// textAlign: "right",
+										textAlign: "center",
 										fontWeight: "600",
 										color: "gray",
 										fontSize: "14px",
